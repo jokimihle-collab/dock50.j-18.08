@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOCK50</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
@@ -37,6 +40,11 @@
           <span class="pl-name">Info</span>
         </div>
       </div>
+    </div>
+
+    <!-- ─── Page Label Progress Bar ─────────────────────────────────────────── -->
+    <div id="pageLabelBar" aria-hidden="true">
+      <div id="pageLabelBarFill"></div>
     </div>
 
     <!-- ─── Burger ──────────────────────────────────────────────────────────── -->
@@ -127,8 +135,8 @@
           </div>
         </div>
         <div class="nav-footer-info">
-          <span>info@dock50.de</span>
-          <span>+49 1767 1957983</span>
+          <span>{Infos}</span>
+          <span>{Infos}</span>
         </div>
       </div>
     </nav>
@@ -245,7 +253,6 @@
         <div class="project-name-item spotlight-extra" data-index="15" data-location="Skylounge" data-extra="true"><span class="proj-num">16</span><p>Event</p></div>
       </div>
 
-      <!-- ─── Event More Button ─────────────────────────────────────────────── -->
       <button id="eventMoreBtn" class="event-more-btn" aria-hidden="true">
         <span class="emb-label">Mehr</span>
         <span class="emb-arrow">↓</span>
@@ -280,7 +287,7 @@
           <div class="lt-photo-img lt-photo-img--sky">
             <div class="lt-slider" id="sliderSky">
               <div class="lt-slides-track">
-                <div class="lt-slide"><img src="/loc-skylounge.jpg"   alt="Skylounge" /></div>
+                <div class="lt-slide"><img src="/loc-skylounge.jpg" alt="Skylounge" /></div>
                 <div class="lt-slide"><img src="/doc50-concert-1.jpg" alt="Skylounge" /></div>
                 <div class="lt-slide"><img src="/doc50-concert-2.jpg" alt="Skylounge" /></div>
                 <div class="lt-slide"><img src="/doc50-concert-3.jpg" alt="Skylounge" /></div>
@@ -327,7 +334,7 @@
 
           <!-- Skylounge View -->
           <div class="lt-view lt-view--sky">
-            <span class="lt-ghost-num" aria-hidden="true">01</span>
+            <span class="lt-ghost-num" aria-hidden="true">02</span>
             <div class="lt-view-head">
               <span class="lt-eyebrow">Location 01 · Flensburg Hafen</span>
               <img src="/logo-skylounge.png" alt="Skylounge" class="lt-name-logo lt-name-logo--sky" />
@@ -346,7 +353,7 @@
 
           <!-- Deck1 View -->
           <div class="lt-view lt-view--deck1">
-            <span class="lt-ghost-num" aria-hidden="true">02</span>
+            <span class="lt-ghost-num" aria-hidden="true">01</span>
             <div class="lt-view-head">
               <span class="lt-eyebrow">Location 02 · Flensburg Hafen</span>
               <img src="/logo-deck1.png" alt="Deck 1" class="lt-name-logo lt-name-logo--deck1" />
@@ -374,7 +381,7 @@
       <div class="cs-body">
         <div class="cs-left">
           <p class="cs-eyebrow">DOCK50 · KONTAKT</p>
-          <p class="cs-name">DOCK50</p>
+          <img src="/logo-dock50.png" alt="DOCK50" class="cs-name-logo" />
           <div class="cs-coords">54°46′N · 9°26′E</div>
           <div class="cs-divider"></div>
           <div class="cs-grid">
@@ -385,9 +392,9 @@
             </div>
             <div class="cs-col">
               <span class="cs-col-label">Ansprechpartner</span>
-              <p class="cs-col-val">Max Mustermann</p>
-              <p class="cs-col-val"><a href="mailto:info@dock50.de" class="cs-link">info@dock50.de</a></p>
-              <p class="cs-col-val">+49 1767 1957983</p>
+              <p class="cs-col-val">{Infos}</p>
+              <p class="cs-col-val"><a href="mailto:info@dock50.de" class="cs-link">{Infos}</a></p>
+              <p class="cs-col-val">{Infos}</p>
             </div>
           </div>
           <div class="cs-bottom-row">
@@ -418,7 +425,7 @@
       <div class="footer-bg-text">DOCK50</div>
       <div class="footer-grid">
         <div class="footer-col footer-brand">
-          <p class="footer-logo">DOCK50</p>
+          <img src="/logo-dock50.png" alt="DOCK50" class="footer-logo-img" />
           <p class="footer-tagline">Event Location &amp; Management<br/>Live Productions · Flensburg</p>
         </div>
         <div class="footer-col">
@@ -431,19 +438,19 @@
         </div>
         <div class="footer-col">
           <p class="footer-col-title">Kontakt</p>
-          <p class="footer-detail">Max Mustermann</p>
+          <p class="footer-detail">{Infos}</p>
           <p class="footer-detail">Schiffbrücke 50</p>
           <p class="footer-detail">24939 Flensburg</p>
           <p class="footer-detail">info@doc50.de</p>
-          <p class="footer-detail">+49 1767 1957983</p>
+          <p class="footer-detail">{Infos}</p>
         </div>
         <div class="footer-col">
           <p class="footer-col-title">Impressum</p>
           <p class="footer-detail">Angaben gemäß §5 TMG</p>
-          <p class="footer-detail">Max Mustermann</p>
+          <p class="footer-detail">{Infos}</p>
           <p class="footer-detail">Schiffbrücke 50, 24939 Flensburg</p>
           <div class="footer-divider"></div>
-          <p class="foooter-detail">Verantwortlich i.S.d. §55 Abs. 2 RStV:<br/>Max Mustermann</p>
+          <p class="foooter-detail">Verantwortlich i.S.d. §55 Abs. 2 RStV:<br/>{Infos}</p>
         </div>
       </div>
 
@@ -488,12 +495,6 @@
       </div>
     </div>
 
-    <!-- ─── Event Info Button rechts ────────────────────────────────────────── -->
-    <div id="eventInfoBtn" class="event-info-btn" aria-hidden="true">
-      <div class="eib-line"></div>
-      <span class="eib-label">Info</span>
-      <span class="eib-arrow">↗</span>
-    </div>
 
     <!-- ─── Event Side Panel ──────────────────────────────────────────────── -->
     <div id="eventSidePanel" class="esp" aria-hidden="true">

@@ -42,6 +42,9 @@ const pastEventsPlugin = {
 
 export default defineConfig({
   plugins: [pastEventsPlugin],
+  server: {
+    port: 5174,
+  },
   build: {
     rollupOptions: {
       input: {

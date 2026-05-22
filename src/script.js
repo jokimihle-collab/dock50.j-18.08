@@ -36,43 +36,43 @@ const eventLibrary = {
     { artist: "DJ Collective",   title: "Sixteen Beats",      date: "11.04.26", past: true,  location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[2], desc: "Das DJ Collective bringt sechzehn Beats, die die Nacht zum Leben erwecken." },
     { artist: "Various DJs",     title: "Strictly Oldschool", date: "18.04.26", past: true,  location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[3], desc: "Eine Nacht ganz im Zeichen der klassischen Sounds – Strictly Oldschool." },
     { artist: "Kuult",           title: "Kuult",              date: "09.05.26", past: true, location: "Skylounge", category: "Live Music", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[4], desc: "Kuult live – emotionale Songs und kraftvolle Bühnenperformance." },
-    { artist: "TBA",             title: "Nachtschicht Vol.3", date: "23.05.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[5], desc: "Details folgen – ein besonderer Club-Abend in der Skylounge. Stay tuned." },
-    { artist: "TBA",             title: "Sommernacht Open",   date: "06.06.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",              image: _IMGS[6], desc: "Die Sommernacht Open Air Session – Flensburger Hafen trifft Live-Musik." },
-    { artist: "TBA",             title: "Hafenklang",         date: "20.06.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[7], desc: "Hafenklang – Beats direkt am Wasser, Skylounge at its best." },
-    { artist: "TBA",             title: "Club Nacht",         date: "04.07.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[8], desc: "Die monatliche Club Nacht in der Skylounge. Details folgen." },
-    { artist: "TBA",             title: "Live Session I",     date: "18.07.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",              image: _IMGS[9], desc: "Sommersession live in der Skylounge – Künstler TBA." },
-    { artist: "TBA",             title: "Flensburger Nächte", date: "01.08.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[0], desc: "Flensburger Nächte – die Sommerserie geht weiter." },
-    { artist: "TBA",             title: "Sunset Sessions",    date: "15.08.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[1], desc: "Sunset Sessions – Sonnenuntergang trifft Electronic Music." },
-    { artist: "TBA",             title: "Herbst Festival",    date: "12.09.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",              image: _IMGS[2], desc: "Das Herbst Festival eröffnet die neue Saison in der Skylounge." },
-    { artist: "TBA",             title: "Oktober Beats",      date: "03.10.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[3], desc: "Oktober Beats – die Clubnacht im goldenen Herbst." },
-    { artist: "TBA",             title: "Winter Opening",     date: "14.11.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",              image: _IMGS[4], desc: "Das Winter Opening läutet die neue Saison in der Skylounge ein." },
-    { artist: "TBA",             title: "Silvester Spezial",  date: "31.12.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[5], desc: "Silvester Spezial – ins neue Jahr feiern in der Skylounge." },
-    { artist: "TBA",             title: "Neujahrsparty",      date: "10.01.27", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[6], desc: "Das neue Jahr beginnt mit einer großen Feier in der Skylounge." },
-    { artist: "TBA",             title: "Valentine's Night",  date: "14.02.27", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",              image: _IMGS[7], desc: "Valentine's Night – ein romantischer Abend mit Live-Musik." },
-    { artist: "TBA",             title: "Frühlings Festival", date: "20.03.27", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",              image: _IMGS[8], desc: "Das Frühlings Festival begrüßt die neue Saison in der Skylounge." },
-    { artist: "TBA",             title: "Easter Special",     date: "03.04.27", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[9], desc: "Easter Special – das Osterfest in der Skylounge." },
+    { artist: "{Infos}", title: "{Infos}", date: "23.05.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[5], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "06.06.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[6], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "20.06.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[7], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "04.07.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[8], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "18.07.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[9], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "01.08.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[0], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "15.08.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[1], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "12.09.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[2], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "03.10.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[3], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "14.11.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[4], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "31.12.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[5], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "10.01.27", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "14.02.27", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[7], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "20.03.27", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[8], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "03.04.27", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[9], desc: "{Infos}" },
   ],
   deck1: [
-    { artist: "Various DJs",     title: "Deck1 Opening",      date: "07.03.26", past: true,  location: "Deck1",     category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[5], desc: "Die Eröffnungsnacht von Deck1 – das Unterdeck öffnet seine Tore." },
-    { artist: "TBA",             title: "Deep House Night",   date: "21.03.26", past: true,  location: "Deck1",     category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "Deep House Night im Deck1 – Sounds aus der Tiefe des Hafens." },
-    { artist: "TBA",             title: "Techno Special",     date: "04.04.26", past: true,  location: "Deck1",     category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[7], desc: "Techno Special – harter Sound im rohen Unterdeck von Dock50." },
-    { artist: "TBA",             title: "Bassline Vol.2",     date: "19.04.26", past: true,  location: "Deck1",     category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[8], desc: "Bassline Vol.2 – die Bass-Serie kehrt zurück ins Deck1." },
-    { artist: "TBA",             title: "Underground Session",date: "02.05.26", past: true,  location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[9], desc: "Underground Session – rohe Energie, dunkle Räume, starke Beats." },
-    { artist: "TBA",             title: "Deck1 Club Night",   date: "16.05.26", past: true, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[0], desc: "Die monatliche Club Night im Deck1. Lineup TBA." },
-    { artist: "TBA",             title: "After Hours",        date: "30.05.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[1], desc: "After Hours – wenn die Skylounge schließt, geht es weiter im Deck1." },
-    { artist: "TBA",             title: "Summer Beats",       date: "13.06.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[2], desc: "Summer Beats – der Sommer zieht ins Deck1 ein." },
-    { artist: "TBA",             title: "Dark Room",          date: "27.06.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[3], desc: "Dark Room – die dunkelste Nacht im Deck1. Minimale Lichter, maximale Energie." },
-    { artist: "TBA",             title: "Deck1 Sessions",     date: "11.07.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[4], desc: "Deck1 Sessions – die Sommer-Clubnacht geht weiter." },
-    { artist: "TBA",             title: "Late Night Club",    date: "25.07.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[5], desc: "Late Night Club – für alle Nachtschwärmer im Deck1." },
-    { artist: "TBA",             title: "Warehouse Party",    date: "08.08.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[6], desc: "Warehouse Party – roher Industriesound im Unterdeck." },
-    { artist: "TBA",             title: "Herbst Vibes",       date: "19.09.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[7], desc: "Herbst Vibes – die neue Saison startet im Deck1." },
-    { artist: "TBA",             title: "Oktober Sessions",   date: "10.10.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[8], desc: "Oktober Sessions – dunkle Nächte, starke Musik im Deck1." },
-    { artist: "TBA",             title: "November Beats",     date: "21.11.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[9], desc: "November Beats – die Wintersaison ist da. Deck1 heizt ein." },
-    { artist: "TBA",             title: "Deck1 Silvester",    date: "31.12.26", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[0], desc: "Deck1 Silvester – die härteste Neujahrsnacht im Unterdeck." },
-    { artist: "TBA",             title: "Winter Sessions",    date: "17.01.27", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[1], desc: "Winter Sessions – das neue Jahr startet dunkel und stark." },
-    { artist: "TBA",             title: "Deep Winter",        date: "21.02.27", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[2], desc: "Deep Winter – der kälteste Abend des Jahres, der heißeste Club." },
-    { artist: "TBA",             title: "Spring Opener",      date: "27.03.27", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[3], desc: "Spring Opener – das Deck1 begrüßt den Frühling." },
-    { artist: "TBA",             title: "Frühlings Beats",    date: "10.04.27", past: false, location: "Deck1",     category: "Club Night", hasTicket: false, ticketUrl: "",              image: _IMGS[4], desc: "Frühlings Beats – die neue Saison beginnt im Unterdeck." },
+    { artist: "{Infos}", title: "{Infos}", date: "07.03.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[5], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "21.03.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "04.04.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[7], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "19.04.26", past: true, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[8], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "02.05.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[9], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "16.05.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[0], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "30.05.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[1], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "13.06.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[2], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "27.06.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[3], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "11.07.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[4], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "25.07.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[5], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "08.08.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "19.09.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[7], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "10.10.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[8], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "21.11.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[9], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "31.12.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[0], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "17.01.27", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[1], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "21.02.27", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[2], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "27.03.27", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[3], desc: "{Infos}" },
+    { artist: "{Infos}", title: "{Infos}", date: "10.04.27", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[4], desc: "{Infos}" },
   ],
 };
 
@@ -108,6 +108,18 @@ function renderEvents(events) {
       const img = imgEls[i].querySelector("img");
       if (img) img.src = ev.image;
       imgEls[i].dataset.location = ev.location;
+      let badge = imgEls[i].querySelector(".proj-ticket-badge");
+      if (ev.hasTicket) {
+        if (!badge) {
+          badge = document.createElement("a");
+          badge.className = "proj-ticket-badge";
+          imgEls[i].appendChild(badge);
+        }
+        badge.href = ev.ticketUrl || "/anfrage.html";
+        badge.textContent = "Tickets ↗";
+      } else {
+        if (badge) badge.remove();
+      }
     }
     if (nameEls[i]) {
       const p = nameEls[i].querySelector("p");
@@ -118,7 +130,8 @@ function renderEvents(events) {
     }
     if (divNums[i]) {
       const venueAbbr = ev.location === "Skylounge" ? "SL" : "D1";
-      divNums[i].textContent = `${String(i + 1).padStart(2, "0")} — ${venueAbbr} · 20${ev.date.slice(-2)}`;
+      const dateStr   = ev.artist === "{Infos}" ? "{Infos}" : `20${ev.date.slice(-2)}`;
+      divNums[i].textContent = `${String(i + 1).padStart(2, "0")} — ${venueAbbr} · ${dateStr}`;
     }
     if (dividerTitleEls[i]) {
       dividerTitleEls[i].textContent = ev.title;
@@ -220,7 +233,7 @@ function initSpotlight() {
 
   gsap.set(projectNameItems, { top: SLOTS.PARK, opacity: 0, yPercent: -50 });
   gsap.set(projectIndex,     { opacity: 0 });
-  projectIndex.textContent = eventData[0]?.date ?? "01.01.26";
+  projectIndex.textContent = eventData[0]?.artist === "{Infos}" ? "{Infos}" : (eventData[0]?.date ?? "01.01.26");
   if (connector) gsap.set(connector, { display: "none", opacity: 0 });
 
   // ─── Linker Connector (Datum ↔ Bild) ─────────────────────────────────
@@ -293,7 +306,8 @@ function initSpotlight() {
 
     if (changed) {
       gsap.to(projectIndex, { opacity: 0, duration: 0.12, ease: "power2.in", onComplete: () => {
-        projectIndex.textContent = eventData[displayN]?.date ?? `${String(displayN + 1).padStart(2, "0")}.01.26`;
+        const evN = eventData[displayN];
+        projectIndex.textContent = evN?.artist === "{Infos}" ? "{Infos}" : (evN?.date ?? `${String(displayN + 1).padStart(2, "0")}.01.26`);
         gsap.to(projectIndex, { opacity: 1, duration: 0.2, ease: "power2.out" });
       }});
     }
@@ -457,6 +471,30 @@ window.addEventListener("load", () => {
   const pageLabel    = document.getElementById("pageLabel");
   let currentSection = 0;
 
+  const progressFill = document.getElementById("pageLabelBarFill");
+  const SPOTLIGHT_I  = 1;
+  const SEC_IDS      = sections.map(s => s.id);
+
+  if (progressFill) {
+    lenis.on("scroll", () => {
+      const vh  = window.innerHeight;
+      const idx = currentSection;
+      if (idx === SPOTLIGHT_I) {
+        if (spST) progressFill.style.width = (spST.progress * 100) + "%";
+        return;
+      }
+      if (idx >= SEC_IDS.length - 1) {
+        progressFill.style.width = "100%";
+        return;
+      }
+      const nextEl = document.getElementById(SEC_IDS[idx + 1]);
+      if (!nextEl) return;
+      const top  = nextEl.getBoundingClientRect().top;
+      const pct  = Math.max(0, Math.min(1, 1 - top / vh));
+      progressFill.style.width = (pct * 100) + "%";
+    });
+  }
+
   if (labelItems.length) {
     function switchLabel(newIndex) {
       if (newIndex === currentSection) return;
@@ -492,6 +530,12 @@ window.addEventListener("load", () => {
     });
   }
 
+  // Spotlight-Section: Leiste 1:1 an spST.progress koppeln
+  lenis.on("scroll", () => {
+    if (currentSection !== SPOTLIGHT_I || !spST || !progressFill) return;
+    progressFill.style.width = (spST.progress * 100) + "%";
+  });
+
   // ─── Spotlight ─────────────────────────────────────────────────────────
   initSpotlight();
 
@@ -507,8 +551,8 @@ window.addEventListener("load", () => {
     const num        = String(idx + 1).padStart(2, "0");
     const imgSrc     = document.querySelector(`.project-img[data-index="${idx}"] img`)?.src || "";
     const dateParts  = ev.date.split(".");
-    const dateDisplay = dateParts.length === 3
-      ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
+    const dateDisplay = ev.artist === "{Infos}" ? "{Infos}"
+      : dateParts.length === 3 ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
       : ev.date;
     const ticketBtn = ev.hasTicket
       ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank"><span>Tickets anfragen</span><span class="esp-ticket-arrow">↗</span></a>`
@@ -529,7 +573,6 @@ window.addEventListener("load", () => {
         <p class="esp-desc">${ev.desc}</p>
         <div class="esp-actions">
           ${ticketBtn}
-          <a href="/anfrage.html" class="esp-info">↗ weitere Infos</a>
         </div>
       </div>`;
   }
@@ -619,16 +662,9 @@ window.addEventListener("load", () => {
   const filterItems = filterBar.querySelectorAll(".ef-item");
   const indicator   = filterBar.querySelector(".ef-indicator");
   const moreBtn     = document.getElementById("eventMoreBtn");
+  let moreBtnFadeTimer = null;
 
-  function positionMoreBtn() {
-    const btn = document.getElementById("eventMoreBtn");
-    if (!btn) return;
-    const img = document.querySelector(".project-img");
-    if (!img) return;
-    btn.style.top = (window.innerHeight / 2 + img.offsetHeight / 2 + 30) + "px";
-  }
-  positionMoreBtn();
-  window.addEventListener("resize", positionMoreBtn);
+
 
   function moveIndicator(activeEl) {
     if (!indicator || !activeEl) return;
@@ -660,8 +696,7 @@ window.addEventListener("load", () => {
       }
       renderEvents(getNearestN(loc, currentCount));
       initSpotlight();
-      positionMoreBtn();
-      // More-Button: zeigen wenn Pool > 8
+      const slotIdx = currentCount === 16 ? 15 : 7;
       if (moreBtn) {
         const poolSize = getNearestN(loc, 100).length;
         moreBtn.style.display = poolSize > currentCount ? "" : "none";
@@ -675,10 +710,10 @@ window.addEventListener("load", () => {
     trigger: ".spotlight",
     start: "top top",
     end: () => `+=${window.innerHeight * (currentCount === 16 ? 10 : 5)}px`,
-    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); if (moreBtn) moreBtn.classList.add("visible"); },
-    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); if (moreBtn) moreBtn.classList.remove("visible"); },
-    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); if (moreBtn) moreBtn.classList.add("visible"); },
-    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); if (moreBtn) moreBtn.classList.remove("visible"); },
+    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); if (moreBtn) { moreBtn.style.opacity = "1"; moreBtn.style.pointerEvents = "auto"; } },
+    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); if (moreBtn) { moreBtn.style.opacity = "0"; moreBtn.style.pointerEvents = "none"; } },
+    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); if (moreBtn) { moreBtn.style.opacity = "1"; moreBtn.style.pointerEvents = "auto"; } },
+    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); if (moreBtn) { moreBtn.style.opacity = "0"; moreBtn.style.pointerEvents = "none"; } },
   });
 
   // More-Button: Initial-Sichtbarkeit prüfen
@@ -686,26 +721,29 @@ window.addEventListener("load", () => {
     const initPool = getNearestN(currentFilter, 100).length;
     if (initPool <= 8) moreBtn.style.display = "none";
     moreBtn.addEventListener("click", () => {
-      if (currentCount === 8) {
-        currentCount = 16;
-        document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.remove("spotlight-extra"));
-        renderEvents(getNearestN(currentFilter, 16));
-        initSpotlight();
-        positionMoreBtn();
-        moreBtn.querySelector(".emb-label").textContent = "Weniger";
-        moreBtn.querySelector(".emb-arrow").textContent = "↑";
-      } else {
-        currentCount = 8;
-        const spotlightTop = document.querySelector(".spotlight").offsetTop;
-        lenis.scrollTo(spotlightTop + window.innerHeight * 5, { immediate: true });
-        document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.add("spotlight-extra"));
-        renderEvents(getNearestN(currentFilter, 8));
-        initSpotlight();
-        positionMoreBtn();
-        moreBtn.querySelector(".emb-label").textContent = "Mehr";
-        moreBtn.querySelector(".emb-arrow").textContent = "↓";
-      }
-      ScrollTrigger.refresh();
+      gsap.to(moreBtn, { opacity: 0, duration: 0.18, ease: "power2.in",
+        onComplete: () => {
+          if (currentCount === 8) {
+            currentCount = 16;
+            document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.remove("spotlight-extra"));
+            renderEvents(getNearestN(currentFilter, 16));
+            initSpotlight();
+            ScrollTrigger.refresh();
+            moreBtn.querySelector(".emb-label").textContent = "Weniger";
+            moreBtn.querySelector(".emb-arrow").textContent = "↑";
+          } else {
+            currentCount = 8;
+            lenis.scrollTo(document.querySelector(".spotlight").offsetTop + window.innerHeight * 5, { immediate: true });
+            document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.add("spotlight-extra"));
+            renderEvents(getNearestN(currentFilter, 8));
+            initSpotlight();
+            ScrollTrigger.refresh();
+            moreBtn.querySelector(".emb-label").textContent = "Mehr";
+            moreBtn.querySelector(".emb-arrow").textContent = "↓";
+          }
+          gsap.to(moreBtn, { opacity: 1, duration: 0.25, ease: "power2.out" });
+        }
+      });
     });
   }
 
