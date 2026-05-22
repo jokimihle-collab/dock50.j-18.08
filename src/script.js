@@ -354,6 +354,8 @@ function initSpotlight() {
       const scrollDir = self.direction;
 
       gsap.set(projectImagesContainer, { y: progress * moveDistImages });
+      const moreBtn = document.getElementById("eventMoreBtn");
+      if (moreBtn) gsap.set(moreBtn, { y: progress * moveDistImages, xPercent: -50 });
 
       const dateOpacity = Math.min(1, progress / 0.04) * Math.min(1, (1 - progress) / 0.02);
       gsap.set(projectIndex, { opacity: dateOpacity });
@@ -408,8 +410,17 @@ function initSpotlight() {
           gsap.set(connectorLeft, { opacity: 0 });
         }
       }
+
     },
   });
+
+  // Button initial unter dem letzten Bild positionieren
+  const moreBtnEl  = document.getElementById("eventMoreBtn");
+  const lastImg    = projectImgs[projectImgs.length - 1];
+  if (moreBtnEl && lastImg) {
+    const btnInitialTop = lastImg.offsetTop + lastImg.offsetHeight + 24;
+    gsap.set(moreBtnEl, { top: btnInitialTop, y: 0, xPercent: -50 });
+  }
 
   ScrollTrigger.refresh();
 }
@@ -664,8 +675,6 @@ window.addEventListener("load", () => {
   const moreBtn     = document.getElementById("eventMoreBtn");
   let moreBtnFadeTimer = null;
 
-
-
   function moveIndicator(activeEl) {
     if (!indicator || !activeEl) return;
     const trackRect  = filterBar.querySelector(".ef-track").getBoundingClientRect();
@@ -710,10 +719,10 @@ window.addEventListener("load", () => {
     trigger: ".spotlight",
     start: "top top",
     end: () => `+=${window.innerHeight * (currentCount === 16 ? 10 : 5)}px`,
-    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); if (moreBtn) { moreBtn.style.opacity = "1"; moreBtn.style.pointerEvents = "auto"; } },
-    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); if (moreBtn) { moreBtn.style.opacity = "0"; moreBtn.style.pointerEvents = "none"; } },
-    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); if (moreBtn) { moreBtn.style.opacity = "1"; moreBtn.style.pointerEvents = "auto"; } },
-    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); if (moreBtn) { moreBtn.style.opacity = "0"; moreBtn.style.pointerEvents = "none"; } },
+    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
+    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
+    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
+    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
   });
 
   // More-Button: Initial-Sichtbarkeit prüfen
