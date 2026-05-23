@@ -501,7 +501,7 @@ window.addEventListener("load", () => {
       const nextEl = document.getElementById(SEC_IDS[idx + 1]);
       if (!nextEl) return;
       const top  = nextEl.getBoundingClientRect().top;
-      const pct  = Math.max(0, Math.min(1, 1 - top / vh));
+      const pct  = Math.max(0, Math.min(1, 2 * (1 - top / vh)));
       progressFill.style.width = (pct * 100) + "%";
     });
   }
@@ -517,10 +517,10 @@ window.addEventListener("load", () => {
 
       gsap.set(nextItem, { display: "flex", y: "100%", opacity: 1 });
       gsap.to(prevItem, {
-        y: "-100%", opacity: 0, duration: 0.42, ease: "power3.in",
+        y: "-100%", duration: 0.52, ease: "power2.inOut",
         onComplete: () => gsap.set(prevItem, { display: "none", y: 0 }),
       });
-      gsap.to(nextItem, { y: 0, duration: 0.42, ease: "power3.out" });
+      gsap.to(nextItem, { y: 0, duration: 0.52, ease: "power2.inOut" });
     }
 
     gsap.set(labelItems,    { display: "none", opacity: 0, y: 0 });
@@ -741,14 +741,22 @@ window.addEventListener("load", () => {
             moreBtn.querySelector(".emb-label").textContent = "Weniger";
             moreBtn.querySelector(".emb-arrow").textContent = "↑";
           } else {
-            currentCount = 8;
-            lenis.scrollTo(document.querySelector(".spotlight").offsetTop + window.innerHeight * 5, { immediate: true });
-            document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.add("spotlight-extra"));
-            renderEvents(getNearestN(currentFilter, 8));
-            initSpotlight();
-            ScrollTrigger.refresh();
-            moreBtn.querySelector(".emb-label").textContent = "Mehr";
-            moreBtn.querySelector(".emb-arrow").textContent = "↓";
+            const target = document.querySelector(".spotlight").offsetTop + window.innerHeight * 5;
+            lenis.scrollTo(target, {
+              duration: 1.4,
+              easing: t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+              onComplete: () => {
+                currentCount = 8;
+                document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.add("spotlight-extra"));
+                renderEvents(getNearestN(currentFilter, 8));
+                initSpotlight();
+                ScrollTrigger.refresh();
+                moreBtn.querySelector(".emb-label").textContent = "Mehr";
+                moreBtn.querySelector(".emb-arrow").textContent = "↓";
+                gsap.to(moreBtn, { opacity: 1, duration: 0.25, ease: "power2.out" });
+              }
+            });
+            return;
           }
           gsap.to(moreBtn, { opacity: 1, duration: 0.25, ease: "power2.out" });
         }
