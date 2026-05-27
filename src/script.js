@@ -847,6 +847,28 @@ window.addEventListener("load", () => {
     });
     const panel = document.querySelector(".lt-panel");
     if (panel) panel.classList.add("is-deck1");
+
+    // ─── Hero Location Buttons ────────────────────────────────────────────
+    function activateLocation(locTo, filterName) {
+      switchLocation(locTo);
+      const efItem = document.querySelector(`.ef-item[data-filter="${filterName}"]`);
+      if (efItem) efItem.click();
+      const mecItem = document.querySelector(`.mec-filter-item[data-filter="${filterName}"]`);
+      if (mecItem) {
+        document.querySelectorAll(".mec-filter-item").forEach(i =>
+          i.classList.toggle("active", i.dataset.filter === filterName)
+        );
+      }
+    }
+    const heroLocBtns = document.querySelectorAll(".hero-loc-btn");
+    function setHeroActive(btn) {
+      heroLocBtns.forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+    }
+    document.querySelector(".hero-loc-btn--deck1")
+      ?.addEventListener("click", (e) => { activateLocation("deck1", "Deck1"); setHeroActive(e.currentTarget); });
+    document.querySelector(".hero-loc-btn--sky")
+      ?.addEventListener("click", (e) => { activateLocation("sky", "Skylounge"); setHeroActive(e.currentTarget); });
   }
 
   // ─── Section Snap ────────────────────────────────────────────────────────

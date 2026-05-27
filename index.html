@@ -149,16 +149,20 @@
 
       <div class="hero-title">
         <div class="hero-top">
-          <img src="/logo-dock50.png" alt="DOCK50" class="hero-logo" />
+          <picture>
+            <source media="(max-width: 500px)" srcset="/logo-dock50-hochkant.png" />
+            <img src="/logo-dock50.png" alt="DOCK50" class="hero-logo" />
+          </picture>
           <div class="hero-title-rule"></div>
           <span class="hero-since">EST. 2025</span>
         </div>
         <div class="hero-bottom">
-          <img src="/logo-deck1.png" alt="Deck 1" class="hero-subloc-logo" />
-          <span class="hero-subloc-sep">·</span>
-          <div class="hero-subloc-sky-card">
+          <button class="hero-loc-btn hero-loc-btn--deck1">
+            <img src="/logo-deck1.png" alt="Deck 1" class="hero-subloc-logo" />
+          </button>
+          <button class="hero-loc-btn hero-loc-btn--sky">
             <img src="/logo-skylounge.png" alt="Skylounge" class="hero-subloc-logo hero-subloc-logo--sky" />
-          </div>
+          </button>
         </div>
       </div>
 
