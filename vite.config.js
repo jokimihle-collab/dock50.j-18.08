@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import { readFileSync, writeFileSync } from "fs";
+import viteImagemin from "vite-plugin-imagemin";
 
 function updatePastEvents() {
   const FILE = "src/events.js";
@@ -41,7 +42,16 @@ const pastEventsPlugin = {
 };
 
 export default defineConfig({
-  plugins: [pastEventsPlugin],
+  plugins: [
+    pastEventsPlugin,
+    viteImagemin({
+      gifsicle: { optimizationLevel: 3 },
+      mozjpeg: { quality: 75 },
+      pngquant: { quality: [0.65, 0.8] },
+      svgo: { plugins: [{ name: "removeViewBox", active: false }] },
+      webp: { quality: 75 },
+    }),
+  ],
   server: {
     port: 5174,
   },
@@ -51,6 +61,7 @@ export default defineConfig({
         main:    resolve(__dirname, "index.html"),
         anfrage: resolve(__dirname, "anfrage.html"),
         event:   resolve(__dirname, "event.html"),
+        "404":   resolve(__dirname, "404.html"),
       },
     },
   },

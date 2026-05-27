@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — DOCK50</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:   #0e0e0e;
+      --text: #ffffff;
+      --dim:  rgba(255,255,255,0.35);
+      --line: rgba(255,255,255,0.10);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Geist Mono", monospace;
+      height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .logo img {
+      height: clamp(14px, 2.2vh, 20px);
+      width: auto;
+      opacity: 0.6;
+    }
+
+    .num {
+      font-family: "Special Gothic Expanded One", sans-serif;
+      font-size: clamp(6rem, 20vw, 14rem);
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+      user-select: none;
+    }
+
+    .message {
+      font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+      font-size: clamp(0.65rem, 1.3vw, 0.76rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 0.8em 1.8em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .back:hover {
+      border-color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="logo">
+    <img src="/logo-dock50.png" alt="DOCK50" />
+  </a>
+
+  <p class="num">404</p>
+
+  <p class="message">Diese Seite existiert nicht</p>
+
+  <a href="/" class="back">← Zurück zur Startseite</a>
+
+</body>
+</html>

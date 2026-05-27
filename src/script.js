@@ -7,7 +7,8 @@ import { eventLibrary, parseEventDate, getNearestN } from "./events.js";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 // ─── Lenis ───────────────────────────────────────────────────────────────────
-const lenis = new Lenis({ smoothWheel: true, syncTouch: false });
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const lenis = new Lenis({ smoothWheel: !prefersReducedMotion, syncTouch: false });
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
@@ -922,6 +923,7 @@ window.addEventListener("load", () => {
     function openNav() {
       navbar.classList.add("nav-open");
       menuBtn.classList.add("active");
+      menuBtn.setAttribute("aria-expanded", "true");
       lenis.stop();
       if (pageLabel) gsap.to(pageLabel, { opacity: 0, duration: 0.2 });
       gsap.to(navTexts, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out", stagger: 0.08, delay: 0.25 });
@@ -936,6 +938,7 @@ window.addEventListener("load", () => {
       setTimeout(() => {
         navbar.classList.remove("nav-open");
         menuBtn.classList.remove("active");
+        menuBtn.setAttribute("aria-expanded", "false");
         lenis.start();
       }, 200);
     }
@@ -1038,5 +1041,12 @@ window.addEventListener("load", () => {
   }
   initSlider(document.getElementById("sliderSky"));
   initSlider(document.getElementById("sliderDeck1"));
+
+  // ─── Resize: ScrollTrigger neu berechnen ─────────────────────────────────
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+  });
 
 }); // end window.load

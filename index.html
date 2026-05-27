@@ -1,13 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DOCK50</title>
+    <title>DOCK50 — Eventlocation Flensburg</title>
+    <meta name="description" content="DOCK50 ist Flensburgs führende Eventlocation direkt am Hafen. Zwei exklusive Locations: Skylounge & Deck1. Konzerte, Club-Nächte und private Events." />
+    <meta property="og:title" content="DOCK50 — Eventlocation Flensburg" />
+    <meta property="og:description" content="Flensburgs führende Eventlocation direkt am Hafen. Skylounge & Deck1." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:image" content="https://doc50.de/og-image.png" />
+    <meta property="og:url" content="https://doc50.de" />
+    <link rel="canonical" href="https://doc50.de/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/styles.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EventVenue",
+      "name": "DOCK50",
+      "description": "Eventlocation direkt am Flensburger Hafen mit zwei Locations: Skylounge und Deck1.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schiffbrücke 50",
+        "addressLocality": "Flensburg",
+        "postalCode": "24939",
+        "addressCountry": "DE"
+      },
+      "url": "https://doc50.de",
+      "email": "info@doc50.de"
+    }
+    </script>
   </head>
   <body>
 
@@ -49,7 +75,7 @@
 
     <!-- ─── Burger ──────────────────────────────────────────────────────────── -->
     <div class="item">
-      <button class="menu-trigger" id="menu04">
+      <button class="menu-trigger" id="menu04" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -141,6 +167,7 @@
       </div>
     </nav>
 
+    <main>
     <!-- ─── Hero ────────────────────────────────────────────────────────────── -->
     <section class="intro snap-section" id="intro">
       <div class="section-1-img">
@@ -157,10 +184,10 @@
           <span class="hero-since">EST. 2025</span>
         </div>
         <div class="hero-bottom">
-          <button class="hero-loc-btn hero-loc-btn--deck1">
+          <button class="hero-loc-btn hero-loc-btn--deck1" aria-label="Deck 1 auswählen">
             <img src="/logo-deck1.png" alt="Deck 1" class="hero-subloc-logo" />
           </button>
-          <button class="hero-loc-btn hero-loc-btn--sky">
+          <button class="hero-loc-btn hero-loc-btn--sky" aria-label="Skylounge auswählen">
             <img src="/logo-skylounge.png" alt="Skylounge" class="hero-subloc-logo hero-subloc-logo--sky" />
           </button>
         </div>
@@ -204,37 +231,37 @@
       </div>
 
       <div class="project-images">
-        <div class="project-img" data-index="0" data-location="Flensburg"><img src="/event-back2dock.jpg" alt="" /></div>
+        <div class="project-img" data-index="0" data-location="Flensburg"><img src="/event-back2dock.jpg" alt="Back2Dock Event" /></div>
         <div class="project-divider"><span class="project-divider-num">01 — FLN · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="1" data-location="Hamburg"><img src="/event-jerome.jpg" alt="" /></div>
+        <div class="project-img" data-index="1" data-location="Hamburg"><img src="/event-jerome.jpg" alt="Jerome Live" loading="lazy" /></div>
         <div class="project-divider"><span class="project-divider-num">02 — HH · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="2" data-location="Flensburg"><img src="/event-sixteenbeats.jpg" alt="" /></div>
+        <div class="project-img" data-index="2" data-location="Flensburg"><img src="/event-sixteenbeats.jpg" alt="Sixteen Beats" loading="lazy" /></div>
         <div class="project-divider"><span class="project-divider-num">03 — FLN · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="3" data-location="Kiel"><img src="/event-strictlyoldschool.jpg" alt="" /></div>
+        <div class="project-img" data-index="3" data-location="Kiel"><img src="/event-strictlyoldschool.jpg" alt="Strictly Oldschool" loading="lazy" /></div>
         <div class="project-divider"><span class="project-divider-num">04 — KI · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="4" data-location="Flensburg"><img src="/event-kuult.jpg" alt="" /></div>
+        <div class="project-img" data-index="4" data-location="Flensburg"><img src="/event-kuult.jpg" alt="Kuult Live" loading="lazy" /></div>
         <div class="project-divider"><span class="project-divider-num">05 — FLN · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="5" data-location="Hamburg"><img src="/doc50-concert-1.jpg" alt="" /></div>
+        <div class="project-img" data-index="5" data-location="Hamburg"><img src="/doc50-concert-1.jpg" alt="Live @ DOCK50" loading="lazy" /></div>
         <div class="project-divider"><span class="project-divider-num">06 — HH · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="6" data-location="Kiel"><img src="/doc50-concert-2.jpg" alt="" /></div>
+        <div class="project-img" data-index="6" data-location="Kiel"><img src="/doc50-concert-2.jpg" alt="Live @ DOCK50" loading="lazy" /></div>
         <div class="project-divider"><span class="project-divider-num">07 — KI · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img" data-index="7" data-location="Flensburg"><img src="/doc50-concert-3.jpg" alt="" /></div>
+        <div class="project-img" data-index="7" data-location="Flensburg"><img src="/doc50-concert-3.jpg" alt="Live @ DOCK50" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">08 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="8" data-location="Skylounge" data-extra="true"><img src="/event-back2dock.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="8" data-location="Skylounge" data-extra="true"><img src="/event-back2dock.jpg" alt="Back2Dock Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">09 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="9" data-location="Skylounge" data-extra="true"><img src="/event-jerome.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="9" data-location="Skylounge" data-extra="true"><img src="/event-jerome.jpg" alt="Jerome Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">10 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="10" data-location="Skylounge" data-extra="true"><img src="/event-sixteenbeats.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="10" data-location="Skylounge" data-extra="true"><img src="/event-sixteenbeats.jpg" alt="Sixteen Beats Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">11 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="11" data-location="Skylounge" data-extra="true"><img src="/event-strictlyoldschool.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="11" data-location="Skylounge" data-extra="true"><img src="/event-strictlyoldschool.jpg" alt="Strictly Oldschool Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">12 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="12" data-location="Skylounge" data-extra="true"><img src="/event-kuult.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="12" data-location="Skylounge" data-extra="true"><img src="/event-kuult.jpg" alt="Kuult Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">13 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="13" data-location="Skylounge" data-extra="true"><img src="/doc50-concert-1.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="13" data-location="Skylounge" data-extra="true"><img src="/doc50-concert-1.jpg" alt="Live @ DOCK50 Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">14 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="14" data-location="Skylounge" data-extra="true"><img src="/doc50-concert-2.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="14" data-location="Skylounge" data-extra="true"><img src="/doc50-concert-2.jpg" alt="Live @ DOCK50 Skylounge" loading="lazy" /></div>
         <div class="project-divider spotlight-extra" data-extra="true"><span class="project-divider-num">15 — SL · 2026</span><span class="project-divider-mark">✦</span></div>
-        <div class="project-img spotlight-extra" data-index="15" data-location="Skylounge" data-extra="true"><img src="/doc50-concert-3.jpg" alt="" /></div>
+        <div class="project-img spotlight-extra" data-index="15" data-location="Skylounge" data-extra="true"><img src="/doc50-concert-3.jpg" alt="Live @ DOCK50 Skylounge" loading="lazy" /></div>
       </div>
 
       <!-- Titel: sicherer Abstand zum Burger oben -->
@@ -302,10 +329,10 @@
           <div class="lt-photo-img lt-photo-img--sky">
             <div class="lt-slider" id="sliderSky">
               <div class="lt-slides-track">
-                <div class="lt-slide"><img src="/loc-skylounge.jpg" alt="Skylounge" /></div>
-                <div class="lt-slide"><img src="/doc50-concert-1.jpg" alt="Skylounge" /></div>
-                <div class="lt-slide"><img src="/doc50-concert-2.jpg" alt="Skylounge" /></div>
-                <div class="lt-slide"><img src="/doc50-concert-3.jpg" alt="Skylounge" /></div>
+                <div class="lt-slide"><img src="/loc-skylounge.jpg" alt="Skylounge Eventlocation Flensburg" loading="lazy" /></div>
+                <div class="lt-slide"><img src="/doc50-concert-1.jpg" alt="Konzert in der Skylounge DOCK50" loading="lazy" /></div>
+                <div class="lt-slide"><img src="/doc50-concert-2.jpg" alt="Konzert in der Skylounge DOCK50" loading="lazy" /></div>
+                <div class="lt-slide"><img src="/doc50-concert-3.jpg" alt="Konzert in der Skylounge DOCK50" loading="lazy" /></div>
               </div>
               <button class="lt-arrow lt-arrow--prev" aria-label="Zurück">←</button>
               <button class="lt-arrow lt-arrow--next" aria-label="Weiter">→</button>
@@ -322,10 +349,10 @@
           <div class="lt-photo-img lt-photo-img--deck1">
             <div class="lt-slider" id="sliderDeck1">
               <div class="lt-slides-track">
-                <div class="lt-slide"><img src="/loc-deck1-1.jpg"     alt="Deck 1" /></div>
-                <div class="lt-slide"><img src="/loc-deck1-2.jpg"     alt="Deck 1" /></div>
-                <div class="lt-slide"><img src="/doc50-concert-4.jpg" alt="Deck 1" /></div>
-                <div class="lt-slide"><img src="/doc50-concert-5.jpg" alt="Deck 1" /></div>
+                <div class="lt-slide"><img src="/loc-deck1-1.jpg"     alt="Deck 1 Eventlocation Flensburg" loading="lazy" /></div>
+                <div class="lt-slide"><img src="/loc-deck1-2.jpg"     alt="Deck 1 Eventlocation Flensburg" loading="lazy" /></div>
+                <div class="lt-slide"><img src="/doc50-concert-4.jpg" alt="Konzert im Deck 1 DOCK50" loading="lazy" /></div>
+                <div class="lt-slide"><img src="/doc50-concert-5.jpg" alt="Konzert im Deck 1 DOCK50" loading="lazy" /></div>
               </div>
               <button class="lt-arrow lt-arrow--prev" aria-label="Zurück">←</button>
               <button class="lt-arrow lt-arrow--next" aria-label="Weiter">→</button>
@@ -470,6 +497,7 @@
     </section>
 
     <!-- ─── Footer ───────────────────────────────────────────────────────────── -->
+    </main>
     <footer class="site-footer snap-section" id="footer">
       <div class="footer-bg-text">DOCK50</div>
       <div class="footer-grid">
@@ -524,11 +552,15 @@
       <div class="footer-bottom">
         <p>© 2025 DOCK50 Eventlocation · Alle Rechte vorbehalten</p>
         <div class="footer-bottom-social">
-          <a href="#" class="footer-social-link">Instagram</a>
-          <span class="footer-social-sep">·</span>
-          <a href="#" class="footer-social-link">Facebook</a>
-          <span class="footer-social-sep">·</span>
-          <a href="mailto:info@doc50.de" class="footer-social-link">E-Mail</a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" onclick="window.location.href='mailto:info@doc50.de';return false;" class="footer-social-link" aria-label="E-Mail">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          </a>
         </div>
         <p>Datenschutz · Impressum</p>
       </div>
@@ -546,9 +578,9 @@
 
 
     <!-- ─── Event Side Panel ──────────────────────────────────────────────── -->
-    <div id="eventSidePanel" class="esp" aria-hidden="true">
+    <div id="eventSidePanel" class="esp" role="dialog" aria-label="Event Details" aria-hidden="true">
       <div class="esp-inner">
-        <button class="esp-close" id="espClose">✕</button>
+        <button class="esp-close" id="espClose" aria-label="Panel schließen">✕</button>
         <div class="esp-content" id="espContent"></div>
       </div>
     </div>
