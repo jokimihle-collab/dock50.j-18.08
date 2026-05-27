@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
+import { eventLibrary, parseEventDate, getNearestN } from "./events.js";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -22,78 +23,7 @@ ScrollTrigger.scrollerProxy(document.documentElement, {
   pinType: document.documentElement.style.transform ? "transform" : "fixed",
 });
 
-// ─── Event Library ───────────────────────────────────────────────────────────
-const _IMGS = [
-  "/event-back2dock.jpg", "/event-jerome.jpg", "/event-sixteenbeats.jpg",
-  "/event-strictlyoldschool.jpg", "/event-kuult.jpg", "/doc50-concert-1.jpg",
-  "/doc50-concert-2.jpg", "/doc50-concert-3.jpg", "/doc50-concert-5.jpg", "/doc50-concert-6.jpg",
-];
-
-const eventLibrary = {
-  skylounge: [
-    { artist: "Various Artists", title: "Back2Dock",          date: "14.03.26", past: true,  location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[0], desc: "Die traditionelle Back2Dock Nacht kehrt zurück in die DOCK50 Skylounge." },
-    { artist: "Jerome",          title: "Jerome",             date: "28.03.26", past: true,  location: "Skylounge", category: "Live Music", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[1], desc: "Jerome bringt seinen unverwechselbaren Sound live auf die Skylounge-Bühne." },
-    { artist: "DJ Collective",   title: "Sixteen Beats",      date: "11.04.26", past: true,  location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[2], desc: "Das DJ Collective bringt sechzehn Beats, die die Nacht zum Leben erwecken." },
-    { artist: "Various DJs",     title: "Strictly Oldschool", date: "18.04.26", past: true,  location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[3], desc: "Eine Nacht ganz im Zeichen der klassischen Sounds – Strictly Oldschool." },
-    { artist: "Kuult",           title: "Kuult",              date: "09.05.26", past: true, location: "Skylounge", category: "Live Music", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[4], desc: "Kuult live – emotionale Songs und kraftvolle Bühnenperformance." },
-    { artist: "{Infos}", title: "{Infos}", date: "23.05.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[5], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "06.06.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[6], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "20.06.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[7], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "04.07.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[8], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "18.07.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[9], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "01.08.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[0], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "15.08.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[1], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "12.09.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[2], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "03.10.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[3], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "14.11.26", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[4], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "31.12.26", past: false, location: "Skylounge", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[5], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "10.01.27", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "14.02.27", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[7], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "20.03.27", past: false, location: "Skylounge", category: "Live Music", hasTicket: false, ticketUrl: "",               image: _IMGS[8], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "03.04.27", past: false, location: "Skylounge", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[9], desc: "{Infos}" },
-  ],
-  deck1: [
-    { artist: "{Infos}", title: "{Infos}", date: "07.03.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[5], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "21.03.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "04.04.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[7], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "19.04.26", past: true, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[8], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "02.05.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[9], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "16.05.26", past: true,  location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[0], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "30.05.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[1], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "13.06.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[2], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "27.06.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[3], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "11.07.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[4], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "25.07.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[5], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "08.08.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[6], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "19.09.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[7], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "10.10.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[8], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "21.11.26", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[9], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "31.12.26", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[0], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "17.01.27", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[1], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "21.02.27", past: false, location: "Deck1", category: "Club Night", hasTicket: true,  ticketUrl: "/anfrage.html", image: _IMGS[2], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "27.03.27", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[3], desc: "{Infos}" },
-    { artist: "{Infos}", title: "{Infos}", date: "10.04.27", past: false, location: "Deck1", category: "Club Night", hasTicket: false, ticketUrl: "",               image: _IMGS[4], desc: "{Infos}" },
-  ],
-};
-
 let eventData = [];
-
-function parseEventDate(str) {
-  const [d, m, y] = str.split(".").map(Number);
-  return new Date(2000 + y, m - 1, d);
-}
-
-function getNearestN(filter, n = 8) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const pool = filter === "all"
-    ? [...eventLibrary.skylounge, ...eventLibrary.deck1]
-    : (eventLibrary[filter.toLowerCase()] || [...eventLibrary.skylounge, ...eventLibrary.deck1]);
-  return pool
-    .filter(ev => !ev.past && parseEventDate(ev.date) >= today)
-    .sort((a, b) => parseEventDate(a.date) - parseEventDate(b.date))
-    .slice(0, n);
-}
 
 let dividerTitleEls = [];
 
@@ -162,8 +92,53 @@ let openCardIdx   = -1;     // index of currently open side panel (-1 = closed)
 let currentCount  = 8;      // how many events are currently shown (8 or 16)
 let currentFilter = "all";  // active filter key
 
+// ─── Mobile Event List ───────────────────────────────────────────────────────
+function renderMobileEvents(events) {
+  const list = document.getElementById("mobileEventList");
+  if (!list) return;
+  const MONTHS = ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
+  const DAYS   = ["So","Mo","Di","Mi","Do","Fr","Sa"];
+  list.onclick = (e) => {
+    const ticket = e.target.closest(".mec-ticket");
+    if (ticket) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.location.href = ticket.dataset.ticketUrl;
+    }
+  };
+  list.innerHTML = events.map((ev, i) => {
+    const d       = parseEventDate(ev.date);
+    const dayNum  = ev.date.split(".")[0];
+    const dayName = DAYS[d.getDay()];
+    const month   = MONTHS[d.getMonth()];
+    const isInfo  = ev.artist === "{Infos}";
+    const ticket  = ev.hasTicket
+      ? `<span class="mec-ticket" data-ticket-url="${ev.ticketUrl}" data-location="${ev.location}">Tickets <span class="mec-arrow">↗</span></span>`
+      : ``;
+    const locSlug = ev.location.toLowerCase();
+    return `<a href="/event.html?loc=${locSlug}&date=${encodeURIComponent(ev.date)}" class="mobile-event-card" data-index="${i}">
+      <div class="mec-date">
+        <span class="mec-day-name">${dayName}</span>
+        <span class="mec-day-num">${dayNum}</span>
+        <span class="mec-month">${month}</span>
+      </div>
+      <div class="mec-img"><img src="${ev.image}" alt="" /></div>
+      <div class="mec-info">
+        <span class="mec-category">${ev.category}</span>
+        <span class="mec-title">${isInfo ? "{Infos}" : ev.title}</span>
+        <span class="mec-meta">${ev.location}</span>
+      </div>
+      <div class="mec-right">${ticket}</div>
+    </a>`;
+  }).join("");
+}
+
 // ─── Spotlight Init (aufrufbar bei Expansion + Filter-Wechsel) ───────────────
 function initSpotlight() {
+  if (window.innerWidth <= 1000) {
+    renderMobileEvents(eventData);
+    return;
+  }
   // Cleanup vorheriger Instanz
   if (spST) { spST.kill(); spST = null; }
   const oldConnLeft = document.getElementById("connectorLeftDyn");
@@ -714,6 +689,64 @@ window.addEventListener("load", () => {
     });
   });
 
+  // Mobile mehr/weniger Button (0 = 5 sichtbar, 1 = 8, 2 = 16)
+  const mecMoreBtn = document.getElementById("mecMoreBtn");
+  const mobileList = document.getElementById("mobileEventList");
+  let mobileExpandState = 0;
+
+  function updateMecMoreBtn() {
+    if (!mecMoreBtn) return;
+    const poolSize = getNearestN(currentFilter, 100).length;
+    if (poolSize <= 5) { mecMoreBtn.style.display = "none"; return; }
+    mecMoreBtn.style.display = "";
+    if (mobileExpandState === 2) {
+      mecMoreBtn.textContent = "Weniger anzeigen";
+    } else {
+      mecMoreBtn.textContent = "Mehr anzeigen";
+    }
+  }
+
+  function resetMobileExpand() {
+    mobileExpandState = 0;
+    if (mobileList) mobileList.classList.remove("mec-expanded");
+    renderMobileEvents(getNearestN(currentFilter, 8));
+    updateMecMoreBtn();
+    // Nach dem Collapse zum Ende der sichtbaren 5 Cards scrollen
+    requestAnimationFrame(() => {
+      const fifthCard = mobileList?.querySelectorAll(".mobile-event-card")[4];
+      const target = fifthCard ?? mecMoreBtn;
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "end" });
+    });
+  }
+
+  if (mecMoreBtn && mobileList) {
+    mecMoreBtn.addEventListener("click", () => {
+      if (mobileExpandState === 0) {
+        // 5 → 16
+        mobileExpandState = 2;
+        renderMobileEvents(getNearestN(currentFilter, 16));
+        mobileList.classList.add("mec-expanded");
+      } else {
+        // 16 → 5
+        resetMobileExpand();
+      }
+      updateMecMoreBtn();
+    });
+    updateMecMoreBtn();
+  }
+
+  // Mobile Filter Buttons (delegieren an Desktop-Filter)
+  document.querySelectorAll(".mec-filter-item").forEach(mItem => {
+    mItem.addEventListener("click", () => {
+      resetMobileExpand();
+      const desktopItem = filterBar.querySelector(`.ef-item[data-filter="${mItem.dataset.filter}"]`);
+      if (desktopItem) desktopItem.click();
+      document.querySelectorAll(".mec-filter-item").forEach(i =>
+        i.classList.toggle("active", i.dataset.filter === mItem.dataset.filter)
+      );
+    });
+  });
+
   // Filter + Info + More-Button visibility via ScrollTrigger
   ScrollTrigger.create({
     trigger: ".spotlight",
@@ -818,14 +851,18 @@ window.addEventListener("load", () => {
 
   // ─── Section Snap ────────────────────────────────────────────────────────
   const snapSections = Array.from(document.querySelectorAll(".snap-section"));
-  let snapTimer  = null;
-  let isSnapping = false;
+  let snapTimer    = null;
+  let isSnapping   = false;
+  let snapSafetyTimer = null;
+  const isTouch    = navigator.maxTouchPoints > 0;
 
   lenis.on("scroll", () => {
     if (isSnapping) return;
     clearTimeout(snapTimer);
     snapTimer = setTimeout(() => {
-      const threshold = window.innerHeight * 0.20;
+      // Touch: größere Toleranz, kein aggressives Snap
+      if (isTouch && window.innerWidth <= 1000) return;
+      const threshold = window.innerHeight * (isTouch ? 0.15 : 0.20);
       let snapTarget = null, minDist = Infinity;
       snapSections.forEach((section) => {
         const rect = section.getBoundingClientRect();
@@ -834,14 +871,16 @@ window.addEventListener("load", () => {
       });
       if (snapTarget && minDist > 2) {
         isSnapping = true;
+        clearTimeout(snapSafetyTimer);
+        snapSafetyTimer = setTimeout(() => { isSnapping = false; }, 1200);
         const exactTop = snapTarget.getBoundingClientRect().top + window.scrollY;
         lenis.scrollTo(exactTop, {
-          duration: 0.55,
+          duration: isTouch ? 0.4 : 0.55,
           easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
-          onComplete: () => { isSnapping = false; },
+          onComplete: () => { isSnapping = false; clearTimeout(snapSafetyTimer); },
         });
       }
-    }, 80);
+    }, isTouch ? 200 : 80);
   });
 
   // ─── Navbar (overlay – tablet / mobile) ────────────────────────────────

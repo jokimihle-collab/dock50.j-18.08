@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { readFileSync, writeFileSync } from "fs";
 
 function updatePastEvents() {
-  const FILE = "src/script.js";
+  const FILE = "src/events.js";
   const content = readFileSync(FILE, "utf-8");
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -50,6 +50,7 @@ export default defineConfig({
       input: {
         main:    resolve(__dirname, "index.html"),
         anfrage: resolve(__dirname, "anfrage.html"),
+        event:   resolve(__dirname, "event.html"),
       },
     },
   },

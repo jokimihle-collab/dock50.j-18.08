@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event — DOCK50</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:   #0e0e0e;
+      --text: #ffffff;
+      --dim:  rgba(255,255,255,0.45);
+      --line: rgba(255,255,255,0.10);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Geist Mono", monospace;
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Top Bar ── */
+    .ev-topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: clamp(52px, 7vh, 68px);
+      background: rgba(14,14,14,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .ev-topbar-inner {
+      margin: 0 3%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      border: 1px solid var(--line);
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .ev-topbar-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .ev-topbar-logo img {
+      height: clamp(15px, 2.45vh, 22px);
+      width: auto;
+      display: block;
+    }
+
+    .ev-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: clamp(0.65rem, 1.4vw, 0.78rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .ev-back:hover { color: var(--dim); }
+    .ev-back-arrow { font-size: 1em; }
+
+    /* ── Hero Image ── */
+    .ev-hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-top: clamp(52px, 7vh, 68px);
+      overflow: hidden;
+    }
+
+    .ev-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .ev-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(14,14,14,0.75) 100%);
+    }
+
+    /* ── Content ── */
+    .ev-content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 10vh clamp(1.25rem, 6vw, 3rem) clamp(4rem, 10vh, 6rem);
+    }
+
+    .ev-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .ev-category {
+      font-size: clamp(0.6rem, 1.3vw, 0.72rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--line);
+      padding: 0.25em 0.7em;
+    }
+
+    .ev-location-tag {
+      font-size: clamp(0.6rem, 1.3vw, 0.72rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .ev-title {
+      font-family: "Special Gothic Expanded One", sans-serif;
+      font-size: clamp(1.8rem, 6vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
+    }
+
+    .ev-artist {
+      font-size: clamp(0.8rem, 1.8vw, 1rem);
+      color: var(--dim);
+      margin-bottom: 2rem;
+      letter-spacing: 0.06em;
+    }
+
+    .ev-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+      opacity: 0.2;
+    }
+    .ev-divider-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--text);
+      flex-shrink: 0;
+    }
+    .ev-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--text);
+    }
+
+    .ev-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .ev-detail-item {}
+    .ev-detail-label {
+      font-size: clamp(0.58rem, 1.1vw, 0.66rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.35rem;
+    }
+    .ev-detail-value {
+      font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+      letter-spacing: 0.04em;
+    }
+
+    .ev-desc {
+      font-size: clamp(0.78rem, 1.6vw, 0.92rem);
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    /* ── CTA ── */
+    .ev-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9em 2em;
+      background: var(--text);
+      color: var(--bg);
+      font-family: "Geist Mono", monospace;
+      font-size: clamp(0.7rem, 1.4vw, 0.82rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .ev-cta:hover { opacity: 0.85; }
+    .ev-cta-arrow { font-size: 1.1em; }
+
+    .ev-cta-placeholder {
+      font-size: clamp(0.68rem, 1.3vw, 0.78rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border: 1px solid var(--line);
+      padding: 0.9em 2em;
+      display: inline-block;
+    }
+
+    /* ── Not Found ── */
+    .ev-not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .ev-not-found-title {
+      font-family: "Special Gothic Expanded One", sans-serif;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      opacity: 0.3;
+    }
+    .ev-not-found-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+    }
+    .ev-not-found-link:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .ev-details {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="ev-topbar">
+    <div class="ev-topbar-inner">
+      <a href="/" class="ev-topbar-logo"><img src="/logo-dock50.png" alt="DOCK50" /></a>
+      <a href="/" class="ev-back"><span class="ev-back-arrow">←</span> Alle Events</a>
+    </div>
+  </header>
+
+  <div class="ev-hero">
+    <img id="evHeroImg" class="ev-hero-img" src="" alt="" />
+    <div class="ev-hero-overlay"></div>
+  </div>
+
+  <main class="ev-content" id="evContent">
+    <div class="ev-not-found" id="evNotFound" style="display:none;">
+      <p class="ev-not-found-title">Event nicht gefunden</p>
+      <a href="/" class="ev-not-found-link">← Zurück zur Startseite</a>
+    </div>
+
+    <div id="evMain">
+      <div class="ev-meta-row">
+        <span class="ev-category" id="evCategory"></span>
+        <span class="ev-location-tag" id="evLocationTag"></span>
+      </div>
+
+      <h1 class="ev-title" id="evTitle"></h1>
+      <p class="ev-artist" id="evArtist"></p>
+
+      <div class="ev-divider">
+        <span class="ev-divider-dot"></span>
+        <span class="ev-divider-line"></span>
+        <span class="ev-divider-dot"></span>
+      </div>
+
+      <div class="ev-details">
+        <div class="ev-detail-item">
+          <p class="ev-detail-label">Datum</p>
+          <p class="ev-detail-value" id="evDate"></p>
+        </div>
+        <div class="ev-detail-item">
+          <p class="ev-detail-label">Location</p>
+          <p class="ev-detail-value" id="evLocation"></p>
+        </div>
+        <div class="ev-detail-item">
+          <p class="ev-detail-label">Kategorie</p>
+          <p class="ev-detail-value" id="evCategoryDetail"></p>
+        </div>
+      </div>
+
+      <p class="ev-desc" id="evDesc"></p>
+
+      <div id="evCtaWrapper"></div>
+    </div>
+  </main>
+
+  <script type="module" src="/src/event.js"></script>
+</body>
+</html>

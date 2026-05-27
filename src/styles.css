@@ -64,7 +64,11 @@
   --sc-brightness: 1.6;
 }
 
-html { overflow-x: hidden; }
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: "Bebas Neue", sans-serif;
@@ -73,6 +77,8 @@ body {
   color: #fff;
   overflow-x: hidden;
 }
+
+button, a { touch-action: manipulation; }
 
 /* schrift */
 h1 {
@@ -1173,7 +1179,7 @@ section {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: #0d0d0d;
   z-index: 100;
   overflow: hidden;
@@ -1788,11 +1794,52 @@ section {
    RESPONSIVE
    ============================================ */
 
+/* ── Navbar breakpoint (≤1000px) ── */
+@media (max-width: 1000px) {
+  .navH:first-child a.nav-link { border-top: none; }
+  .navH:last-child a.nav-link  { border-bottom: none; }
+
+  #navWrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    overflow-y: auto;
+  }
+  .nav-items {
+    grid-column: 1;
+    grid-row: 2;
+    border-left: none;
+    border-right: none;
+    padding: 0 2rem;
+    height: 70dvh;
+    margin: auto 0;
+    justify-content: space-between;
+  }
+  .nav-meta       { grid-column: 1; grid-row: 1; padding: 1.5rem 0 0 1.5rem; }
+  .nav-time       { grid-column: 1; grid-row: 3; padding: 0 0 0 1.5rem; justify-content: flex-start; }
+  .nav-footer-info{ grid-column: 1; grid-row: 4; align-items: flex-start; padding: 0 0 1.5rem 1.5rem; }
+  .navImgWrapper  { display: none !important; }
+}
+
 /* ── Tablet landscape (≤1024px) ── */
 @media (max-width: 1024px) {
   .project-connector { display: none !important; }
   .nav-item-text { font-size: clamp(3.5rem, 7.5vw, 8rem); }
   .contact-sec { padding: 0 4vw; }
+}
+
+/* ── Footer breakpoint (≤900px) ── */
+@media (max-width: 900px) {
+  .footer-logo-img {
+    height: auto;
+    width: 100%;
+    max-width: 180px;
+  }
+
+  .cs-name-logo {
+    height: auto;
+    width: 100%;
+    max-width: 180px;
+  }
 }
 
 /* ── Tablet portrait (≤768px) ── */
@@ -1834,7 +1881,7 @@ section {
   .nav-time { grid-column: 1; grid-row: 3; padding: 0 0 0 1.5rem; justify-content: flex-start; }
   .nav-footer-info { grid-column: 1; grid-row: 4; align-items: flex-start; padding: 0 0 1.5rem 1.5rem; }
   .navImgWrapper { display: none !important; }
-  .navH a.nav-link { padding: 1.2rem 0; }
+  .navH a.nav-link { padding: 1.8rem 0; }
   .nav-item-text { font-size: clamp(2.8rem, 9vw, 6rem); }
 }
 
@@ -2397,6 +2444,8 @@ section {
   align-items: center;
 }
 
+.cs-body--mobile { display: none; }
+
 /* ── Left column ── */
 .cs-left {
   display: flex;
@@ -2416,7 +2465,11 @@ section {
 .cs-name-logo {
   display: block;
   width: auto;
+  max-width: 100%;
   height: clamp(2.2rem, 4vw, 4rem);
+  max-height: clamp(2.2rem, 4vw, 4rem);
+  object-fit: contain;
+  object-position: left center;
   margin-bottom: 0.6rem;
   opacity: 0.95;
 }
@@ -2432,7 +2485,7 @@ section {
 
 /* Divider */
 .cs-divider {
-  width: 100%;
+  align-self: stretch;
   height: 1px;
   background: linear-gradient(90deg,
     rgba(255,255,255,0.18) 0%,
@@ -2669,6 +2722,326 @@ section {
   width: 12px;
   height: 1px;
   background: rgba(255,255,255,0.24);
+}
+
+/* ============================================
+   MOBILE EVENT LIST  (≤ 1000px)
+   ============================================ */
+.mobile-event-list { display: none; }
+.mec-header-box    { display: none; }
+
+@media (max-width: 1000px) {
+
+  /* ── Contact ── */
+  .cs-body--desktop { display: none; }
+  .cs-body--mobile  { display: flex; flex-direction: column; gap: 2rem; }
+  .cs-img-wrap--mobile { width: 100%; height: 40vw; }
+  .cs-sc-corner-tr, .cs-sc-brace, .cs-sc-vline-r, .cs-sc-vline-l { display: none; }
+
+  /* ── Section: natürliche Höhe, kein Clip ── */
+  .spotlight {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+    padding: 0;
+    padding-top: 3rem; /* Abstand zur Filterleiste */
+    background: #0e0e0e;
+  }
+
+  /* ── Desktop-Elemente ausblenden ── */
+  .spotlight .project-images,
+  .spotlight .project-names,
+  .spotlight .project-index,
+  .spotlight .project-connector,
+  .spotlight .event-more-btn,
+  .spotlight::after {
+    display: none !important;
+  }
+
+  /* ── Desktop-Filter auf Mobile verstecken ── */
+  #eventFilter { display: none !important; }
+
+  /* ── Header-Box ── */
+  .mec-header-box {
+    width: 100%;
+    height: 15vh;
+    min-height: 76px;
+    background: #0e0e0e;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Mobile Filter ── */
+  .mec-filter-track {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .mec-filter-item {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.55);
+    font-family: var(--font-paragraph);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .mec-filter-item.active {
+    color: #fff;
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  .mec-filter-item[data-filter="Skylounge"].active {
+    color: rgb(212,170,40);
+    border-color: rgba(212,170,40,0.6);
+  }
+
+  .mec-filter-item[data-filter="Deck1"].active {
+    color: rgb(87,191,196);
+    border-color: rgba(87,191,196,0.6);
+  }
+
+  /* ── Mobile Liste einblenden ── */
+  .mobile-event-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    padding-bottom: 2rem;
+  }
+
+  /* ── Event-Card ── */
+  .mobile-event-card {
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    min-height: 76px;
+    width: 95%;
+    align-self: center;
+    gap: clamp(0.4rem, 1.5vw, 0.75rem);
+    padding: 0 clamp(0.6rem, 2vw, 1rem);
+    background: #1a1a1a;
+    border-bottom: 1px solid var(--border-dim);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.18s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .mobile-event-card:active {
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* ── Datum-Spalte ── */
+  .mec-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(15vh * 0.38);
+    flex-shrink: 0;
+    gap: 0;
+  }
+
+  .mec-day-name {
+    font-family: var(--font-paragraph);
+    font-size: clamp(0.38rem, 1.1vh, 0.52rem);
+    color: #fff;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .mec-day-num {
+    font-family: var(--font-header);
+    font-size: clamp(0.75rem, 2.4vh, 1.1rem);
+    color: #fff;
+    line-height: 1;
+  }
+
+  .mec-month {
+    font-family: var(--font-paragraph);
+    font-size: clamp(0.38rem, 1.1vh, 0.52rem);
+    color: #fff;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  /* ── Bild ── */
+  .mec-img {
+    height: calc(15vh * 0.68);
+    min-height: 44px;
+    aspect-ratio: 16 / 9;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 2px;
+    background: #1a1a1a;
+  }
+
+  .mec-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ── Info-Block ── */
+  .mec-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(0.05rem, 0.4vh, 0.15rem);
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .mec-category {
+    font-family: var(--font-paragraph);
+    font-size: clamp(0.48rem, 1.3vh, 0.62rem);
+    color: #fff;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .mec-title {
+    font-family: var(--font-paragraph);
+    font-size: clamp(1rem, 3.2vh, 1.5rem);
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mec-meta {
+    font-family: var(--font-paragraph);
+    font-size: clamp(0.52rem, 1.5vh, 0.68rem);
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+
+  /* ── Rechte Spalte (Ticket) ── */
+  .mec-right {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .mec-ticket {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background: var(--accent-pink);
+    color: #fff;
+    font-family: var(--font-paragraph);
+    font-size: clamp(0.52rem, 1.5vh, 0.68rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: clamp(0.28rem, 0.9vh, 0.42rem) clamp(0.45rem, 1.5vw, 0.72rem);
+    border-radius: 2px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.18s ease;
+    cursor: pointer;
+  }
+
+  .mec-ticket:hover { background: #f03d97; }
+
+  /* ── Mobile mehr/weniger ── */
+  .mobile-event-list .mobile-event-card:nth-child(n+6) { display: none; }
+  .mobile-event-list.mec-expanded .mobile-event-card   { display: flex; }
+
+  .mec-more-btn {
+    display: block;
+    width: 33%;
+    margin: 0.5rem auto 2rem;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.55);
+    font-family: var(--font-paragraph);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .mec-more-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+  .mec-ticket[data-location="Skylounge"]       { background: rgb(212,170,40); color: #fff; }
+  .mec-ticket[data-location="Skylounge"]:hover { background: rgb(232,190,60); }
+  .mec-ticket[data-location="Deck1"]           { background: #E63289; color: #fff; }
+  .mec-ticket[data-location="Deck1"]:hover     { background: #f03d97; }
+
+
+  .mec-ticket--none {
+    display: block;
+    font-family: var(--font-paragraph);
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.10);
+    padding: 0.45rem 0.75rem;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* ── Filter Bar auf Mobile ── */
+  .event-filter.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Page-Counter & Navbar auf Mobile anpassen ── */
+  #pageLabel { font-size: 0.8rem; }
+
+  /* ── Touch: Tap-Highlight entfernen ── */
+  .mobile-event-card,
+  .mec-ticket,
+  .mec-header-box .ef-item,
+  .mec-header-box button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* ── Touch: Hover-Effekte nur auf Hover-Geräten ── */
+  @media (hover: none) {
+    .mobile-event-card:hover { background: #1a1a1a; }
+    .mec-ticket:hover       { background: var(--accent-pink); text-decoration: none; }
+  }
+
+  /* ── Touch: aktives Feedback ── */
+  .mobile-event-card:active { background: rgba(255,255,255,0.07); }
+
+  /* ── Safe Area (Notch / Home Bar) ── */
+  .mobile-event-list {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+
+  .spotlight {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    overscroll-behavior-y: none;
+  }
 }
 .cs-sc-vline-l::before { top: 0; }
 .cs-sc-vline-l::after  { bottom: 0; }

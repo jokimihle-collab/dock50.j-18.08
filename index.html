@@ -258,6 +258,17 @@
         <span class="emb-arrow">↓</span>
       </button>
 
+      <!-- Mobile Event List -->
+      <div class="mec-header-box" id="mecHeaderBox">
+        <div class="mec-filter-track">
+          <button class="mec-filter-item active" data-filter="all">Alle</button>
+          <button class="mec-filter-item" data-filter="Skylounge">Skylounge</button>
+          <button class="mec-filter-item" data-filter="Deck1">Deck1</button>
+        </div>
+      </div>
+      <div class="mobile-event-list" id="mobileEventList"></div>
+      <button class="mec-more-btn" id="mecMoreBtn">Mehr anzeigen</button>
+
     </section>
 
     <!-- ─── Location ─────────────────────────────────────────────────────────── -->
@@ -378,7 +389,8 @@
     <!-- ─── Contact ────────────────────────────────────────────────────────────── -->
     <section class="contact-sec snap-section" id="contact">
       <div class="cs-city-bg" aria-hidden="true">Flensburg</div>
-      <div class="cs-body">
+      <!-- Desktop (>1000px) -->
+      <div class="cs-body cs-body--desktop">
         <div class="cs-left">
           <p class="cs-eyebrow">DOCK50 · KONTAKT</p>
           <img src="/logo-dock50.png" alt="DOCK50" class="cs-name-logo" />
@@ -407,6 +419,39 @@
         </div>
         <div class="cs-img-wrap">
           <img src="/doc50-concert-4.jpg" alt="DOCK50 Venue" />
+        </div>
+      </div>
+
+      <!-- Mobile/Tablet (≤1000px) -->
+      <div class="cs-body cs-body--mobile">
+        <div class="cs-img-wrap cs-img-wrap--mobile">
+          <img src="/doc50-concert-4.jpg" alt="DOCK50 Venue" />
+        </div>
+        <div class="cs-left">
+          <p class="cs-eyebrow">DOCK50 · KONTAKT</p>
+          <img src="/logo-dock50.png" alt="DOCK50" class="cs-name-logo" />
+          <div class="cs-coords">54°46′N · 9°26′E</div>
+          <div class="cs-divider"></div>
+          <div class="cs-grid">
+            <div class="cs-col">
+              <span class="cs-col-label">Adresse</span>
+              <p class="cs-col-val">Schiffbrücke 50</p>
+              <p class="cs-col-val">24939 Flensburg</p>
+            </div>
+            <div class="cs-col">
+              <span class="cs-col-label">Ansprechpartner</span>
+              <p class="cs-col-val">{Infos}</p>
+              <p class="cs-col-val"><a href="mailto:info@dock50.de" class="cs-link">{Infos}</a></p>
+              <p class="cs-col-val">{Infos}</p>
+            </div>
+          </div>
+          <div class="cs-bottom-row">
+            <div class="cs-status-row">
+              <span class="cs-status-dot"></span>
+              <span class="cs-status-text">Offen für Buchungen</span>
+            </div>
+            <a href="/anfrage.html" class="cs-cta-main">Verfügbarkeit anfragen ↗</a>
+          </div>
         </div>
       </div>
       <!-- scaffold accents -->
