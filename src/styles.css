@@ -243,13 +243,6 @@ section {
   display: block;
 }
 
-.hero-subloc-sky-card {
-  background: transparent;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-
 .hero-loc-btn {
   display: flex;
   align-items: center;
@@ -280,43 +273,6 @@ section {
   height: 80%;
   opacity: 1;
   filter: invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92);
-}
-
-.hero-subloc {
-  font-family: "Abnes", sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.55);
-  letter-spacing: 0.06em;
-  line-height: 1;
-  pointer-events: none;
-}
-
-.hero-subloc-sep {
-  font-family: var(--font-paragraph);
-  font-size: 1.2rem;
-  color: rgba(255,255,255,0.22);
-}
-
-.hero-doc-stroke {
-  font-family: "Abnes", sans-serif;
-  font-size: min(16vw, 38svh);
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.95);
-  letter-spacing: 0.02em;
-  line-height: 0.88;
-  align-self: flex-start;
-  padding-left: 1.5rem;
-}
-
-.hero-50-fill {
-  font-family: "Abnes", sans-serif;
-  font-size: min(16vw, 38svh);
-  color: var(--primary-color);
-  letter-spacing: 0.02em;
-  line-height: 0.88;
-  align-self: flex-end;
-  padding-right: 1.5rem;
 }
 
 .hero-title-rule {
@@ -2337,69 +2293,6 @@ section {
   animation-play-state: paused;
   transform: translateY(4px);
 }
-.emb-ripple {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 82px;
-  height: 82px;
-  margin-left: -41px;
-  margin-top: -41px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  pointer-events: none;
-}
-
-/* ============================================
-   EVENT INFO BUTTON RECHTS
-   ============================================ */
-.event-info-btn {
-  position: fixed;
-  right: 1.6rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.45rem;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-.event-info-btn.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-.eib-line {
-  width: 1px;
-  height: 2.5rem;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.32));
-}
-.eib-label {
-  writing-mode: vertical-rl;
-  font-family: var(--font-paragraph);
-  font-weight: 200;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.47);
-  text-transform: uppercase;
-  transition: color 0.25s ease;
-}
-.eib-arrow {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.42);
-  transition: color 0.25s ease, transform 0.25s ease;
-}
-.event-info-btn:hover .eib-label,
-.event-info-btn:hover .eib-arrow {
-  color: rgba(255,255,255,0.87);
-}
-.event-info-btn:hover .eib-arrow {
-  transform: translate(2px, -2px);
-}
-
 /* ═══════════════════════════════════════════════
    EVENT SIDE PANEL
    ═══════════════════════════════════════════════ */
@@ -2623,28 +2516,6 @@ section {
 .esp-ticket-arrow {
   font-size: 1rem;
   opacity: 0.8;
-}
-
-.esp-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.9rem 1.5rem;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.55);
-  text-decoration: none;
-  font-family: var(--font-paragraph);
-  font-weight: 400;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  border-radius: 4px;
-  transition: all 0.18s ease;
-}
-.esp-info:hover {
-  border-color: rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.75);
-  background: rgba(255,255,255,0.04);
 }
 
 .esp-content {
@@ -3240,19 +3111,6 @@ section {
   .mec-ticket[data-location="Deck1"]           { background: #E63289; color: #fff; }
   .mec-ticket[data-location="Deck1"]:hover     { background: #f03d97; }
 
-
-  .mec-ticket--none {
-    display: block;
-    font-family: var(--font-paragraph);
-    font-size: 0.68rem;
-    color: var(--text-faint);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.10);
-    padding: 0.45rem 0.75rem;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
 
   /* ── Filter Bar auf Mobile ── */
   .event-filter.visible {
