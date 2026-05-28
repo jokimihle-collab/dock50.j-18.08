@@ -725,10 +725,10 @@ window.addEventListener("load", () => {
     trigger: ".spotlight",
     start: "top top",
     end: () => `+=${window.innerHeight * (currentCount === 16 ? 10 : 5)}px`,
-    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
-    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
-    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
-    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
+    onEnter:     () => { filterBar.classList.add("visible"); },
+    onLeave:     () => { filterBar.classList.remove("visible"); },
+    onEnterBack: () => { filterBar.classList.add("visible"); },
+    onLeaveBack: () => { filterBar.classList.remove("visible"); },
   });
 
   // More-Button: Initial-Sichtbarkeit prüfen
