@@ -1037,6 +1037,14 @@ window.addEventListener("load", () => {
     function startAuto() { timer = setInterval(() => goTo((current + 1) % slides.length, 1), AUTO_MS); }
     btnNext?.addEventListener("click", next);
     btnPrev?.addEventListener("click", prev);
+    // Touch/swipe support
+    const SWIPE_MIN = 48;
+    let touchStartX = 0;
+    sliderEl.addEventListener("touchstart", e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    sliderEl.addEventListener("touchend",   e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) >= SWIPE_MIN) dx < 0 ? next() : prev();
+    }, { passive: true });
     startAuto();
   }
   initSlider(document.getElementById("sliderSky"));

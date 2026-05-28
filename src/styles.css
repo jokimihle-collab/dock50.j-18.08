@@ -1884,6 +1884,209 @@ section {
   }
 }
 
+/* ── Location Section Breakpoints (immersiv-mobile) ──────────────────── */
+
+/* ── ≤1024px: Immersiv-Mobile ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+
+  /* Section: Vollbild, kein Scroll */
+  .location {
+    height: 100svh;
+    overflow: hidden;
+    display: block;
+    position: relative;
+  }
+
+  /* lt-body: transparenter Fullscreen-Wrapper (kein Grid mehr) */
+  .lt-body {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  /* ── Tabs: ganz unten, deutlich größer + heller ─────────────────────── */
+  .lt-tabs {
+    position: absolute;
+    top: auto;
+    bottom: 0; left: 0; right: 0;
+    z-index: 20;
+    border-top: 2px solid rgba(255,255,255,0.18);
+    border-bottom: none;
+    backdrop-filter: blur(24px) brightness(0.72);
+    -webkit-backdrop-filter: blur(24px) brightness(0.72);
+    background: rgba(28,28,28,0.82);
+  }
+  .lt-tab        { padding: 1.7rem 2.5rem 1.5rem; gap: 0.4rem; }
+  .lt-tab--sky   { padding-left: 2.5rem; }
+  .lt-tab-num    { font-size: 0.75rem; }
+  .lt-tab-name   { font-size: clamp(1.4rem, 3.2vw, 1.9rem); }
+  /* Inaktive Tabs deutlicher sichtbar */
+  .lt-tab--sky .lt-tab-name         { color: rgba(212,170,40,0.78); }
+  .lt-tab--deck1 .lt-tab-name       { color: rgba(87,191,196,0.78); }
+  .lt-tab--sky .lt-tab-num          { color: rgba(212,170,40,0.60); }
+  .lt-tab--deck1 .lt-tab-num        { color: rgba(87,191,196,0.58); }
+  /* Aktiv-Indikator dicker auf Mobile */
+  .lt-tab::after { height: 3px; }
+
+  /* ── Foto: absolut, Vollbild-Hintergrund ─────────────────────────── */
+  .lt-photo {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .lt-photo-img {
+    top: 13svh;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 47svh;
+  }
+
+  /* Kein section-weiter Gradient */
+  .lt-photo::after { background: none; }
+
+  /* Fade direkt am Bild */
+  .lt-slider::after {
+    background: linear-gradient(180deg,
+      rgba(8,8,8,0.78) 0%,
+      rgba(8,8,8,0.22) 12%,
+      transparent 26%,
+      transparent 74%,
+      rgba(8,8,8,0.22) 88%,
+      rgba(8,8,8,0.78) 100%
+    );
+  }
+
+  .lt-slide img { filter: brightness(0.88) saturate(0.92); }
+
+  /* ── Pfeil-Buttons ────────────────────────────────────────────────── */
+  .lt-arrow       { width: max(2.6rem, 44px); height: max(2.6rem, 44px); }
+  .lt-arrow--prev { left: 1.2rem; }
+  .lt-arrow--next { right: 1.2rem; }
+
+  /* ── Dots ───────────────────────────────────────────────────────── */
+  .lt-slider-dots {
+    left: 0;
+    right: 0;
+    bottom: 0.8rem;
+    transform: none;
+    justify-content: center;
+  }
+
+  /* Adress-Label */
+  .lt-photo-label {
+    bottom: auto;
+    top: 1.6rem;
+    left: 1.8rem;
+  }
+
+  /* ── Panel: transparent, über dem Bild, über den Tabs ──────────────── */
+  .lt-panel {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 6.8rem;
+    top: auto;
+    width: 100%;
+    height: 22svh;
+    z-index: 15;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: transparent;
+    border-left: none;
+    border-top: none;
+    overflow: hidden;
+  }
+  .lt-panel::before { display: none; }
+
+  /* ── View-Inhalt ─────────────────────────────────────────────────── */
+  .lt-view {
+    position: absolute;
+    inset: 0;
+    padding: 1rem 2rem 0.8rem;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .lt-stats {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .lt-stats::-webkit-scrollbar { display: none; }
+  .lt-view-foot   { flex-shrink: 0; }
+
+  .lt-ghost-num  { display: none; }
+  .lt-name-logo  { max-height: clamp(3.5rem, 8svh, 8rem); }
+  .lt-eyebrow    { font-size: 0.78rem; color: inherit; }
+  .lt-stat-k     { color: rgba(255,255,255,0.72); font-size: 0.80rem; }
+  .lt-stat-v     { font-size: clamp(1.15rem, 3vw, 1.6rem); color: rgba(255,255,255,1); }
+
+  .lt-cta {
+    font-size: 0.80rem;
+    padding: 0.70rem 1.4rem;
+    color: rgba(255,255,255,0.92);
+    border-color: rgba(255,255,255,0.32);
+    background: rgba(0,0,0,0.28);
+  }
+  .lt-view--sky .lt-cta   { color: rgba(212,170,40,1);  border-color: rgba(212,170,40,0.52); background: rgba(0,0,0,0.28); }
+  .lt-view--deck1 .lt-cta { color: rgba(87,191,196,1);  border-color: rgba(87,191,196,0.48); background: rgba(0,0,0,0.28); }
+}
+
+/* ── ≤768px: Phone Portrait ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .lt-tab        { padding: 1.5rem 1.6rem 1.3rem; gap: 0.38rem; }
+  .lt-tab--sky   { padding-left: 1.6rem; }
+  .lt-tab-name   { font-size: clamp(1.25rem, 5.5vw, 1.65rem); }
+  .lt-tab-num    { font-size: 0.70rem; }
+
+  .lt-panel       { height: 24svh; bottom: 6.2rem; }
+
+  .lt-view   { padding: 0.9rem 1.5rem 0.8rem; gap: 0.60rem; }
+  .lt-stat   { padding: 0.44rem 0; }
+  .lt-stat-k { font-size: 0.76rem; }
+  .lt-stat-v { font-size: clamp(1.1rem, 5vw, 1.4rem); }
+  .lt-cta    { font-size: 0.76rem; padding: 0.65rem 1.1rem; }
+}
+
+/* ── ≤480px: Kleine Phones ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .lt-tab      { padding: 1.3rem 1.2rem 1.1rem; gap: 0.34rem; }
+  .lt-tab--sky { padding-left: 1.2rem; }
+  .lt-tab-name { font-size: clamp(1.1rem, 6vw, 1.45rem); }
+  .lt-tab-num  { font-size: 0.65rem; }
+
+  .lt-panel       { height: 26svh; bottom: 5.6rem; }
+
+  .lt-view    { padding: 0.8rem 1.2rem 0.7rem; gap: 0.52rem; }
+  .lt-eyebrow { font-size: 0.66rem; }
+  .lt-name-logo      { max-height: clamp(2.5rem, 8vw, 5.5rem); }
+  .lt-stat    { padding: 0.38rem 0; }
+  .lt-stat-k  { font-size: 0.72rem; color: rgba(255,255,255,0.68); }
+  .lt-stat-v  { font-size: clamp(1.05rem, 5vw, 1.35rem); color: rgba(255,255,255,1); }
+  .lt-cta     { font-size: 0.70rem; padding: 0.58rem 1rem; letter-spacing: 0.12em; }
+
+  .lt-tabs { padding-bottom: env(safe-area-inset-bottom, 0px); }
+}
+
+/* ── ≤390px: Kleinste Phones ─────────────────────────────────────────── */
+@media (max-width: 390px) {
+  .lt-tab      { padding: 1.2rem 1rem 1rem; }
+  .lt-tab-name { font-size: clamp(1rem, 6.5vw, 1.3rem); }
+
+  .lt-panel       { height: 28svh; bottom: 5.2rem; }
+}
+
+/* ── Touch-Geräte: Arrows immer sichtbar ─────────────────────────────── */
+@media (hover: none) {
+  .lt-arrow { opacity: 1; }
+  .lt-photo:hover .lt-slide img { filter: brightness(0.86) saturate(0.92); }
+}
+
 /* ── Tablet portrait (≤768px) ── */
 @media (max-width: 768px) {
   section { padding: 1.5rem; }
@@ -1900,27 +2103,6 @@ section {
     width: calc(100% - 3rem);
   }
   .project-index { left: 1.5rem; top: 1.5rem; }
-
-  /* Location: stack vertically on mobile */
-  .location { height: auto; }
-  .lt-body {
-    display: flex;
-    flex-direction: column;
-  }
-  .lt-photo {
-    height: 56vw;
-    min-height: 200px;
-    flex-shrink: 0;
-  }
-  .lt-panel {
-    border-left: none;
-    border-top: 1px solid rgba(255,255,255,0.07);
-    flex: 1;
-    min-height: 260px;
-  }
-  .lt-tab { padding: 1.2rem 1.5rem 1rem; }
-  .lt-tab--sky { padding-left: 2.5rem; }
-  .lt-tab-name { font-size: 1.2rem; }
 
   /* Navbar: collapse 3-column grid to single column */
   #navWrapper {
