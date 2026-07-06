@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
-import { eventLibrary, parseEventDate, getNearestN } from "./events.js";
+import { parseEventDate, getNearestN } from "./events.js";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -12,6 +12,12 @@ const lenis = new Lenis({ smoothWheel: !prefersReducedMotion, syncTouch: false }
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
+
+// ─── Exact mobile viewport height ────────────────────────────────────────────
+// Set once on load — do NOT update on resize.
+// On iOS Safari, window.innerHeight grows as chrome hides; updating would make
+// snap sections taller than the visible area.
+document.documentElement.style.setProperty('--mvh', window.innerHeight + 'px');
 
 ScrollTrigger.scrollerProxy(document.documentElement, {
   scrollTop(value) {
@@ -37,8 +43,8 @@ function renderEvents(events) {
   events.forEach((ev, i) => {
     if (imgEls[i]) {
       const img = imgEls[i].querySelector("img");
-      if (img) img.src = ev.image;
-      imgEls[i].dataset.location = ev.location;
+      if (img) img.src = ev.bildGross;
+      imgEls[i].dataset.location = ev.raum;
       let badge = imgEls[i].querySelector(".proj-ticket-badge");
       if (ev.hasTicket) {
         if (!badge) {
@@ -54,18 +60,18 @@ function renderEvents(events) {
     }
     if (nameEls[i]) {
       const p = nameEls[i].querySelector("p");
-      if (p) p.textContent = ev.title;
+      if (p) p.textContent = ev.titel;
       const numEl = nameEls[i].querySelector(".proj-num");
       if (numEl) numEl.textContent = String(i + 1).padStart(2, "0");
-      nameEls[i].dataset.location = ev.location;
+      nameEls[i].dataset.location = ev.raum;
     }
     if (divNums[i]) {
-      const venueAbbr = ev.location === "Skylounge" ? "SL" : "D1";
-      const dateStr   = ev.artist === "{Infos}" ? "{Infos}" : `20${ev.date.slice(-2)}`;
+      const venueAbbr = ev.raum === "Skylounge" ? "SL" : "D1";
+      const dateStr   = ev.titel === "{Infos}" ? "{Infos}" : `20${ev.datum.slice(-2)}`;
       divNums[i].textContent = `${String(i + 1).padStart(2, "0")} — ${venueAbbr} · ${dateStr}`;
     }
     if (dividerTitleEls[i]) {
-      dividerTitleEls[i].textContent = ev.title;
+      dividerTitleEls[i].textContent = ev.titel;
     }
   });
 
@@ -84,7 +90,7 @@ function renderEvents(events) {
   });
 
   const pidxEl = document.querySelector(".project-index h2");
-  if (pidxEl) pidxEl.textContent = events[0]?.date ?? "";
+  if (pidxEl) pidxEl.textContent = events[0]?.datum ?? "";
 }
 
 // ─── Module-scope state ───────────────────────────────────────────────────────
@@ -97,6 +103,7 @@ let currentFilter = "all";  // active filter key
 function renderMobileEvents(events) {
   const list = document.getElementById("mobileEventList");
   if (!list) return;
+  list.dataset.filter = currentFilter;
   const MONTHS = ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
   const DAYS   = ["So","Mo","Di","Mi","Do","Fr","Sa"];
   list.onclick = (e) => {
@@ -108,26 +115,24 @@ function renderMobileEvents(events) {
     }
   };
   list.innerHTML = events.map((ev, i) => {
-    const d       = parseEventDate(ev.date);
-    const dayNum  = ev.date.split(".")[0];
+    const d       = parseEventDate(ev.datum);
+    const dayNum  = ev.datum.split(".")[0];
     const dayName = DAYS[d.getDay()];
     const month   = MONTHS[d.getMonth()];
-    const isInfo  = ev.artist === "{Infos}";
     const ticket  = ev.hasTicket
-      ? `<span class="mec-ticket" data-ticket-url="${ev.ticketUrl}" data-location="${ev.location}">Tickets <span class="mec-arrow">↗</span></span>`
+      ? `<span class="mec-ticket" data-ticket-url="${ev.ticketUrl}" data-location="${ev.raum}">Tickets <span class="mec-arrow">↗</span></span>`
       : ``;
-    const locSlug = ev.location.toLowerCase();
-    return `<a href="/event.html?loc=${locSlug}&date=${encodeURIComponent(ev.date)}" class="mobile-event-card" data-index="${i}">
+    const locSlug = ev.raum.toLowerCase();
+    return `<a href="/event.html?loc=${locSlug}&date=${encodeURIComponent(ev.datum)}" class="mobile-event-card" data-index="${i}">
       <div class="mec-date">
         <span class="mec-day-name">${dayName}</span>
         <span class="mec-day-num">${dayNum}</span>
         <span class="mec-month">${month}</span>
       </div>
-      <div class="mec-img"><img src="${ev.image}" alt="" /></div>
+      <div class="mec-img"><img src="${ev.bildGross}" alt="" /></div>
       <div class="mec-info">
-        <span class="mec-category">${ev.category}</span>
-        <span class="mec-title">${isInfo ? "{Infos}" : ev.title}</span>
-        <span class="mec-meta">${ev.location}</span>
+        <span class="mec-title">${ev.titel === "{Infos}" ? "{Infos}" : ev.titel}</span>
+        <span class="mec-meta">${ev.raum}</span>
       </div>
       <div class="mec-right">${ticket}</div>
     </a>`;
@@ -137,7 +142,7 @@ function renderMobileEvents(events) {
 // ─── Spotlight Init (aufrufbar bei Expansion + Filter-Wechsel) ───────────────
 function initSpotlight() {
   if (window.innerWidth <= 1000) {
-    renderMobileEvents(eventData);
+    renderMobileEvents(getNearestN(currentFilter, 8));
     return;
   }
   // Cleanup vorheriger Instanz
@@ -209,7 +214,7 @@ function initSpotlight() {
 
   gsap.set(projectNameItems, { top: SLOTS.PARK, opacity: 0, yPercent: -50 });
   gsap.set(projectIndex,     { opacity: 0 });
-  projectIndex.textContent = eventData[0]?.artist === "{Infos}" ? "{Infos}" : (eventData[0]?.date ?? "01.01.26");
+  projectIndex.textContent = eventData[0]?.artist === "{Infos}" ? "{Infos}" : (eventData[0]?.datum ?? "01.01.26");
   if (connector) gsap.set(connector, { display: "none", opacity: 0 });
 
   // ─── Linker Connector (Datum ↔ Bild) ─────────────────────────────────
@@ -283,7 +288,7 @@ function initSpotlight() {
     if (changed) {
       gsap.to(projectIndex, { opacity: 0, duration: 0.12, ease: "power2.in", onComplete: () => {
         const evN = eventData[displayN];
-        projectIndex.textContent = evN?.artist === "{Infos}" ? "{Infos}" : (evN?.date ?? `${String(displayN + 1).padStart(2, "0")}.01.26`);
+        projectIndex.textContent = evN?.artist === "{Infos}" ? "{Infos}" : (evN?.datum ?? `${String(displayN + 1).padStart(2, "0")}.01.26`);
         gsap.to(projectIndex, { opacity: 1, duration: 0.2, ease: "power2.out" });
       }});
     }
@@ -404,8 +409,35 @@ function initSpotlight() {
 // ─── window.load ─────────────────────────────────────────────────────────────
 window.addEventListener("load", () => {
 
+  // ─── --vh für andere Elemente
+  if (window.innerWidth <= 1024) {
+    const setVh = () => {
+      const h = window.visualViewport?.height ?? window.innerHeight;
+      document.documentElement.style.setProperty("--vh", (h / 100) + "px");
+    };
+    setVh();
+    (window.visualViewport ?? window).addEventListener("resize", setVh);
+  }
+
   // ─── Initial render ────────────────────────────────────────────────────
   renderEvents(getNearestN("all"));
+
+  // ─── SplitText ─────────────────────────────────────────────────────────
+  const headlineEl = document.querySelector(".headline");
+  if (headlineEl) {
+    const split = new SplitText(headlineEl, { type: "chars", charsClass: "char" });
+    gsap.set(".char", { transformOrigin: "50% 60%" });
+    split.chars.forEach((char, i) => {
+      char.addEventListener("mouseenter", () => {
+        gsap.to(char, { scale: 1.1, duration: 0.25, ease: "power2.out" });
+        if (split.chars[i - 1]) gsap.to(split.chars[i - 1], { scale: 1.05, duration: 0.25, ease: "power2.out" });
+        if (split.chars[i + 1]) gsap.to(split.chars[i + 1], { scale: 1.05, duration: 0.25, ease: "power2.out" });
+      });
+      char.addEventListener("mouseleave", () => {
+        gsap.to(split.chars, { scale: 1, duration: 0.25, ease: "power2.out" });
+      });
+    });
+  }
 
   // ─── Hero Badge ────────────────────────────────────────────────────────
   const heroBadgeRing = document.querySelector(".hero-badge-ring");
@@ -445,66 +477,79 @@ window.addEventListener("load", () => {
   const SPOTLIGHT_I  = 1;
   const SEC_IDS      = sections.map(s => s.id);
 
-  if (progressFill) {
-    lenis.on("scroll", () => {
-      const vh  = window.innerHeight;
-      const idx = currentSection;
-      if (idx === SPOTLIGHT_I) {
-        if (spST) progressFill.style.width = (spST.progress * 100) + "%";
-        return;
-      }
-      if (idx >= SEC_IDS.length - 1) {
-        progressFill.style.width = "100%";
-        return;
-      }
-      const nextEl = document.getElementById(SEC_IDS[idx + 1]);
-      if (!nextEl) return;
-      const top  = nextEl.getBoundingClientRect().top;
-      const pct  = Math.max(0, Math.min(1, 2 * (1 - top / vh)));
-      progressFill.style.width = (pct * 100) + "%";
+  // Label-Wechsel Animation
+  function switchLabel(newIndex) {
+    if (newIndex === currentSection) return;
+    const prevIndex = currentSection;
+    currentSection  = newIndex;
+    if (!labelItems.length) return;
+    const prevItem = labelItems[prevIndex];
+    const nextItem = labelItems[newIndex];
+    if (!prevItem || !nextItem) return;
+    gsap.set(nextItem, { display: "flex", y: "100%", opacity: 1 });
+    gsap.to(prevItem, {
+      y: "-100%", duration: 0.52, ease: "power2.inOut",
+      onComplete: () => gsap.set(prevItem, { display: "none", y: 0 }),
     });
+    gsap.to(nextItem, { y: 0, duration: 0.52, ease: "power2.inOut" });
   }
 
   if (labelItems.length) {
-    function switchLabel(newIndex) {
-      if (newIndex === currentSection) return;
-      const prevIndex = currentSection;
-      currentSection  = newIndex;
-
-      const prevItem = labelItems[prevIndex];
-      const nextItem = labelItems[newIndex];
-
-      gsap.set(nextItem, { display: "flex", y: "100%", opacity: 1 });
-      gsap.to(prevItem, {
-        y: "-100%", duration: 0.52, ease: "power2.inOut",
-        onComplete: () => gsap.set(prevItem, { display: "none", y: 0 }),
-      });
-      gsap.to(nextItem, { y: 0, duration: 0.52, ease: "power2.inOut" });
-    }
-
     gsap.set(labelItems,    { display: "none", opacity: 0, y: 0 });
     gsap.set(labelItems[0], { display: "flex", opacity: 1, y: 0 });
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sec = sections.find(s => s.id === entry.target.id);
-          if (sec) switchLabel(sec.index);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) sectionObserver.observe(el);
-    });
   }
 
-  // Spotlight-Section: Leiste 1:1 an spST.progress koppeln
-  lenis.on("scroll", () => {
-    if (currentSection !== SPOTLIGHT_I || !spST || !progressFill) return;
-    progressFill.style.width = (spST.progress * 100) + "%";
-  });
+  // Flag: während Filter-Reinit keine Label/Progress-Updates
+  let spotlightReiniting = false;
+
+  // Einziger synchroner Handler für Label + Progress Bar
+  if (progressFill) {
+    const setFillWidth = gsap.quickSetter(progressFill, "width", "%");
+    let lastPct = 0;
+    let resetTimer = null;
+
+    lenis.on("scroll", () => {
+      if (spotlightReiniting) return;
+      const vh = window.innerHeight;
+
+      // Aktive Sektion: spST.isActive für Spotlight (zuverlässiger als DOM-Position),
+      // sonst letzte Sektion deren top ≤ 2px
+      let idx = 0;
+      if (spST && spST.isActive) {
+        idx = SPOTLIGHT_I;
+      } else {
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const el = document.getElementById(SEC_IDS[i]);
+          if (el && el.getBoundingClientRect().top <= 2) { idx = i; break; }
+        }
+      }
+
+      // Label synchron mit Progress wechseln
+      if (idx !== currentSection) switchLabel(idx);
+
+      // Progress berechnen
+      let pct;
+      if (idx === SPOTLIGHT_I) {
+        pct = spST ? spST.progress * 100 : 0;
+      } else if (idx >= SEC_IDS.length - 1) {
+        pct = 100;
+      } else {
+        const nextEl = document.getElementById(SEC_IDS[idx + 1]);
+        if (!nextEl) return;
+        pct = Math.max(0, Math.min(100, (1 - nextEl.getBoundingClientRect().top / vh) * 100));
+      }
+
+      // Sanfte Transition nur beim Zurückspringen (Sektionswechsel)
+      if (pct < lastPct - 10) {
+        progressFill.style.transition = "width 0.45s cubic-bezier(0.4,0,0.2,1)";
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => { progressFill.style.transition = "none"; }, 460);
+      }
+      lastPct = pct;
+
+      setFillWidth(pct);
+    });
+  }
 
   // ─── Spotlight ─────────────────────────────────────────────────────────
   initSpotlight();
@@ -520,27 +565,26 @@ window.addEventListener("load", () => {
     if (!ev) return "";
     const num        = String(idx + 1).padStart(2, "0");
     const imgSrc     = document.querySelector(`.project-img[data-index="${idx}"] img`)?.src || "";
-    const dateParts  = ev.date.split(".");
-    const dateDisplay = ev.artist === "{Infos}" ? "{Infos}"
+    const dateParts  = ev.datum.split(".");
+    const dateDisplay = ev.titel === "{Infos}" ? "{Infos}"
       : dateParts.length === 3 ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
-      : ev.date;
+      : ev.datum;
     const ticketBtn = ev.hasTicket
-      ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank"><span>Tickets</span><span class="esp-ticket-arrow">↗</span></a>`
+      ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank"><span>Tickets anfragen</span><span class="esp-ticket-arrow">↗</span></a>`
       : "";
     return `
       <img src="${imgSrc}" class="esp-bg-img" alt="" aria-hidden="true" />
       <div class="esp-left">
         <div class="esp-vline" aria-hidden="true"></div>
-        <p class="esp-num">${num} — ${ev.category}</p>
-        <p class="esp-artist">${ev.artist}</p>
-        <h2 class="esp-title">${ev.title}</h2>
+        <p class="esp-num">${num}</p>
+        <h2 class="esp-title">${ev.titel}</h2>
         <div class="esp-rule"><span class="esp-rule-dot"></span><span class="esp-rule-line"></span><span class="esp-rule-dot"></span></div>
         <div class="esp-date">${dateDisplay}</div>
         <div class="esp-location">
           <span class="esp-loc-label">Location</span>
-          <span class="esp-loc-val">${ev.location}</span>
+          <span class="esp-loc-val">${ev.raum}</span>
         </div>
-        <p class="esp-desc">${ev.desc}</p>
+        <p class="esp-desc">${ev.beschreibung}</p>
         <div class="esp-actions">
           ${ticketBtn}
         </div>
@@ -558,7 +602,7 @@ window.addEventListener("load", () => {
     gsap.fromTo(espContent.querySelector(".esp-bg-img"),
       { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.05 }
     );
-    const els = espContent.querySelectorAll(".esp-num, .esp-artist, .esp-title, .esp-rule, .esp-date, .esp-location, .esp-desc, .esp-actions");
+    const els = espContent.querySelectorAll(".esp-num, .esp-title, .esp-rule, .esp-date, .esp-location, .esp-desc, .esp-actions");
     gsap.fromTo(els,
       { opacity: 0, y: 12 },
       { opacity: 1, y: 0, duration: 0.26, stagger: 0.045, ease: "power2.out", delay: 0.18 }
@@ -616,6 +660,17 @@ window.addEventListener("load", () => {
     });
   });
 
+  // ─── Info-Button rechts ───────────────────────────────────────────────────
+  const infoBtn = document.getElementById("eventInfoBtn");
+  let currentActiveIdx = 0;
+
+  if (infoBtn) {
+    infoBtn.addEventListener("click", () => {
+      if (openCardIdx === currentActiveIdx) closeCard(true);
+      else openCard(currentActiveIdx);
+    });
+  }
+
   // ─── Filter Bar ───────────────────────────────────────────────────────────
   const filterBar   = document.getElementById("eventFilter");
   const filterItems = filterBar.querySelectorAll(".ef-item");
@@ -631,16 +686,32 @@ window.addEventListener("load", () => {
     indicator.style.height = activeRect.height + "px";
   }
 
+  function resetFilter() {
+    document.querySelectorAll(".hero-loc-btn").forEach(b => b.classList.remove("is-active"));
+    currentFilter = "all";
+    window._activeLocFilter = "ALL";
+    filterItems.forEach(i => i.classList.remove("active"));
+    const efAll = filterBar.querySelector('.ef-item[data-filter="all"]');
+    if (efAll) { efAll.classList.add("active"); moveIndicator(efAll); }
+    document.querySelectorAll(".mec-filter-item").forEach(i =>
+      i.classList.toggle("active", i.dataset.filter === "all")
+    );
+    renderMobileEvents(getNearestN("all", 8));
+    setSpotlightGlow("all");
+  }
+
   moveIndicator(filterBar.querySelector(".ef-item.active"));
 
   filterItems.forEach((item) => {
     item.addEventListener("click", () => {
       const loc = item.dataset.filter;
+      if (item.classList.contains("active")) return; // kein Toggle
       window._activeLocFilter = loc === "all" ? "ALL" : loc;
       currentFilter = loc;
       filterItems.forEach(i => i.classList.remove("active"));
-      item.classList.add("active");
-      moveIndicator(item);
+      const activeItem = loc === "all" ? filterBar.querySelector('.ef-item[data-filter="all"]') : item;
+      if (activeItem) activeItem.classList.add("active");
+      moveIndicator(activeItem);
       if (openCardIdx !== -1) closeCard(false);
       // Kollabiere Extra-Slots bei Filter-Wechsel
       if (currentCount === 16) {
@@ -651,14 +722,23 @@ window.addEventListener("load", () => {
           moreBtn.querySelector(".emb-arrow").textContent = "↓";
         }
       }
+      // Wenn im gepinnten Spotlight: erst zum Anfang scrollen, dann erst kill/recreate.
+      // So ändert sich die Pin-Spacer-Höhe bei scroll=0 der Section → kein Sprung.
+      if (spST && spST.isActive) {
+        lenis.scrollTo(spST.start, { immediate: true });
+      }
+
+      spotlightReiniting = true;
       renderEvents(getNearestN(loc, currentCount));
       initSpotlight();
+      setSpotlightGlow(loc);
       const slotIdx = currentCount === 16 ? 15 : 7;
       if (moreBtn) {
         const poolSize = getNearestN(loc, 100).length;
         moreBtn.style.display = poolSize > currentCount ? "" : "none";
       }
       ScrollTrigger.refresh();
+      requestAnimationFrame(() => { spotlightReiniting = false; });
     });
   });
 
@@ -708,27 +788,88 @@ window.addEventListener("load", () => {
     updateMecMoreBtn();
   }
 
-  // Mobile Filter Buttons (delegieren an Desktop-Filter)
+  // Mobile Filter Buttons
   document.querySelectorAll(".mec-filter-item").forEach(mItem => {
     mItem.addEventListener("click", () => {
-      resetMobileExpand();
-      const desktopItem = filterBar.querySelector(`.ef-item[data-filter="${mItem.dataset.filter}"]`);
-      if (desktopItem) desktopItem.click();
+      const isActive = mItem.classList.contains("active") && mItem.dataset.filter !== "all";
+      const newFilter = isActive ? "all" : mItem.dataset.filter;
+      if (newFilter === currentFilter && mobileExpandState === 0) return;
+
+      mobileExpandState = 0;
+      if (mobileList) mobileList.classList.remove("mec-expanded");
+
+      if (newFilter === "all") {
+        resetFilter();
+        updateMecMoreBtn();
+        return;
+      }
+
+      currentFilter = newFilter;
+      window._activeLocFilter = newFilter;
+
+      filterItems.forEach(i => i.classList.remove("active"));
+      const efActive = filterBar.querySelector(`.ef-item[data-filter="${newFilter}"]`);
+      if (efActive) { efActive.classList.add("active"); moveIndicator(efActive); }
+
       document.querySelectorAll(".mec-filter-item").forEach(i =>
-        i.classList.toggle("active", i.dataset.filter === mItem.dataset.filter)
+        i.classList.toggle("active", i.dataset.filter === newFilter)
       );
+
+      renderMobileEvents(getNearestN(newFilter, 8));
+      updateMecMoreBtn();
+      setSpotlightGlow(newFilter);
     });
   });
+
+  // ─── Mobile Event-Liste: Swipe links/rechts → Filter wechseln ────────────
+  if (mobileList) {
+    const FILTER_ORDER = ["all", "Deck1", "Skylounge"];
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    let swipeLocked = false;
+
+    mobileList.addEventListener("touchstart", (e) => {
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+      swipeLocked = false;
+    }, { passive: true });
+
+    mobileList.addEventListener("touchmove", (e) => {
+      if (swipeLocked) return;
+      const dx = e.touches[0].clientX - swipeStartX;
+      const dy = e.touches[0].clientY - swipeStartY;
+      // Erst nach 8px entscheiden ob horizontal oder vertikal
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      if (Math.abs(dy) > Math.abs(dx)) { swipeLocked = true; } // vertikal → ignorieren
+    }, { passive: true });
+
+    mobileList.addEventListener("touchend", (e) => {
+      if (swipeLocked) return;
+      const dx = e.changedTouches[0].clientX - swipeStartX;
+      const dy = e.changedTouches[0].clientY - swipeStartY;
+      if (Math.abs(dx) < 52 || Math.abs(dy) > Math.abs(dx) * 0.7) return;
+      const currentIdx = FILTER_ORDER.indexOf(currentFilter);
+      const nextIdx = dx < 0
+        ? Math.min(currentIdx + 1, FILTER_ORDER.length - 1)
+        : Math.max(currentIdx - 1, 0);
+      if (nextIdx === currentIdx) return;
+      mobileList.classList.add("is-swiping");
+      setTimeout(() => mobileList.classList.remove("is-swiping"), 200);
+      const targetFilter = FILTER_ORDER[nextIdx];
+      const mecItem = document.querySelector(`.mec-filter-item[data-filter="${targetFilter}"]`);
+      if (mecItem) mecItem.click();
+    }, { passive: true });
+  }
 
   // Filter + Info + More-Button visibility via ScrollTrigger
   ScrollTrigger.create({
     trigger: ".spotlight",
     start: "top top",
     end: () => `+=${window.innerHeight * (currentCount === 16 ? 10 : 5)}px`,
-    onEnter:     () => { filterBar.classList.add("visible"); },
-    onLeave:     () => { filterBar.classList.remove("visible"); },
-    onEnterBack: () => { filterBar.classList.add("visible"); },
-    onLeaveBack: () => { filterBar.classList.remove("visible"); },
+    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
+    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
+    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
+    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
   });
 
   // More-Button: Initial-Sichtbarkeit prüfen
@@ -739,11 +880,14 @@ window.addEventListener("load", () => {
       gsap.to(moreBtn, { opacity: 0, duration: 0.18, ease: "power2.in",
         onComplete: () => {
           if (currentCount === 8) {
+            if (spST && spST.isActive) lenis.scrollTo(spST.start, { immediate: true });
+            spotlightReiniting = true;
             currentCount = 16;
             document.querySelectorAll("[data-extra='true']").forEach(el => el.classList.remove("spotlight-extra"));
             renderEvents(getNearestN(currentFilter, 16));
             initSpotlight();
             ScrollTrigger.refresh();
+            requestAnimationFrame(() => { spotlightReiniting = false; });
             moreBtn.querySelector(".emb-label").textContent = "Weniger";
             moreBtn.querySelector(".emb-arrow").textContent = "↑";
           } else {
@@ -784,6 +928,28 @@ window.addEventListener("load", () => {
   window._activeLocFilter = "ALL";
   ScrollTrigger.refresh();
 
+  // ─── Spotlight Location-Glow ──────────────────────────────────────────
+  const spotlightGlow = document.querySelector(".spotlight-loc-glow");
+  const GLOW_COLORS = {
+    all:       "rgba(230,50,137,0.28)",
+    Deck1:     "rgba(87,191,196,0.35)",
+    Skylounge: "rgba(212,170,40,0.32)",
+  };
+  function setSpotlightGlow(filter, animate = true) {
+    if (!spotlightGlow) return;
+    const color = GLOW_COLORS[filter] ?? GLOW_COLORS.all;
+    const newBg = `radial-gradient(ellipse 90% 100% at 50% 0%, ${color} 0%, transparent 100%)`;
+    if (!animate) { spotlightGlow.style.background = newBg; return; }
+    gsap.to(spotlightGlow, {
+      opacity: 0, duration: 0.18, ease: "power2.in",
+      onComplete() {
+        spotlightGlow.style.background = newBg;
+        gsap.to(spotlightGlow, { opacity: 1, duration: 0.5, ease: "power2.out" });
+      },
+    });
+  }
+  setSpotlightGlow("all", false); // initialer Zustand ohne Animation
+
   // ─── Location: Tab Switch (Skylounge ↔ Deck1) ─────────────────────────
   {
     function switchLocation(to) {
@@ -802,17 +968,39 @@ window.addEventListener("load", () => {
         tabsEl.classList.toggle("active-sky",   to === "sky");
         tabsEl.classList.toggle("active-deck1", to === "deck1");
       }
-      document.querySelectorAll(".lt-view").forEach((v) => {
-        const active = v.classList.contains("lt-view--" + to);
-        gsap.to(v, {
-          opacity: active ? 1 : 0, duration: 0.45, ease: "power2.inOut",
-          onStart()    { if (active)  gsap.set(v, { pointerEvents: "auto" });  },
-          onComplete() { if (!active) gsap.set(v, { pointerEvents: "none" }); },
-        });
-      });
+
+      // Photo: scale-crossfade
       document.querySelectorAll(".lt-photo-img").forEach((p) => {
         const active = p.classList.contains("lt-photo-img--" + to);
-        gsap.to(p, { opacity: active ? 1 : 0, duration: 0.75, ease: "power2.inOut" });
+        if (active) {
+          gsap.fromTo(p,
+            { opacity: 0, scale: 1.05 },
+            { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" }
+          );
+        } else {
+          gsap.to(p, { opacity: 0, scale: 1.02, duration: 0.45, ease: "power2.in" });
+        }
+      });
+
+      // View: slide + fade
+      document.querySelectorAll(".lt-view").forEach((v) => {
+        const active = v.classList.contains("lt-view--" + to);
+        if (active) {
+          gsap.fromTo(v,
+            { opacity: 0, x: 28 },
+            { opacity: 1, x: 0, duration: 0.52, ease: "power2.out",
+              onStart() { gsap.set(v, { pointerEvents: "auto" }); } }
+          );
+          // Stagger stats
+          const stats = v.querySelectorAll(".lt-stat");
+          gsap.fromTo(stats,
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.38, stagger: 0.07, delay: 0.18, ease: "power2.out" }
+          );
+        } else {
+          gsap.to(v, { opacity: 0, x: -16, duration: 0.28, ease: "power2.in",
+            onComplete() { gsap.set(v, { pointerEvents: "none", x: 0 }); } });
+        }
       });
     }
     document.querySelectorAll(".lt-tab").forEach((tab) => {
@@ -824,14 +1012,24 @@ window.addEventListener("load", () => {
     // ─── Hero Location Buttons ────────────────────────────────────────────
     function activateLocation(locTo, filterName) {
       switchLocation(locTo);
-      const efItem = document.querySelector(`.ef-item[data-filter="${filterName}"]`);
-      if (efItem) efItem.click();
-      const mecItem = document.querySelector(`.mec-filter-item[data-filter="${filterName}"]`);
-      if (mecItem) {
-        document.querySelectorAll(".mec-filter-item").forEach(i =>
-          i.classList.toggle("active", i.dataset.filter === filterName)
-        );
-      }
+
+      // State direkt setzen – kein Click auf Desktop-Filter (kein Toggle-Risiko)
+      currentFilter = filterName;
+      window._activeLocFilter = filterName === "all" ? "ALL" : filterName;
+
+      // Desktop ef-items
+      filterItems.forEach(i => i.classList.remove("active"));
+      const efActive = filterBar.querySelector(`.ef-item[data-filter="${filterName}"]`);
+      if (efActive) { efActive.classList.add("active"); moveIndicator(efActive); }
+
+      // Mobile Filter-Buttons
+      document.querySelectorAll(".mec-filter-item").forEach(i =>
+        i.classList.toggle("active", i.dataset.filter === filterName)
+      );
+
+      // Mobile Event-Liste neu rendern
+      renderMobileEvents(getNearestN(filterName, 8));
+      setSpotlightGlow(filterName);
     }
     const heroLocBtns = document.querySelectorAll(".hero-loc-btn");
     function setHeroActive(btn) {
@@ -839,9 +1037,60 @@ window.addEventListener("load", () => {
       btn.classList.add("is-active");
     }
     document.querySelector(".hero-loc-btn--deck1")
-      ?.addEventListener("click", (e) => { activateLocation("deck1", "Deck1"); setHeroActive(e.currentTarget); });
+      ?.addEventListener("click", (e) => {
+        if (e.currentTarget.classList.contains("is-active")) {
+          resetFilter();
+        } else {
+          activateLocation("deck1", "Deck1");
+          setHeroActive(e.currentTarget);
+        }
+      });
     document.querySelector(".hero-loc-btn--sky")
-      ?.addEventListener("click", (e) => { activateLocation("sky", "Skylounge"); setHeroActive(e.currentTarget); });
+      ?.addEventListener("click", (e) => {
+        if (e.currentTarget.classList.contains("is-active")) {
+          resetFilter();
+        } else {
+          activateLocation("sky", "Skylounge");
+          setHeroActive(e.currentTarget);
+        }
+      });
+    document.getElementById("intro")
+      ?.addEventListener("click", (e) => {
+        if (e.target.closest(".hero-loc-btn")) return;
+        if ([...heroLocBtns].some(b => b.classList.contains("is-active"))) resetFilter();
+      });
+  }
+
+  // ─── Location: Entrance Animation ────────────────────────────────────────
+  {
+    const locSection = document.querySelector(".location");
+    const isMobileDevice = navigator.maxTouchPoints > 0 && window.innerWidth <= 1000;
+    if (locSection) {
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: locSection, start: "top 82%", once: true },
+      });
+      if (!isMobileDevice) {
+        tl.fromTo(".lt-tabs",
+          { y: -24, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }
+        );
+      }
+      tl.fromTo(".lt-photo",
+        { x: -48, opacity: 0, scale: 1.04 },
+        { x: 0, opacity: 1, scale: 1, duration: 0.75, ease: "power2.out" },
+        isMobileDevice ? "0" : "-=0.35"
+      )
+      .fromTo(".lt-panel",
+        { x: 40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.65, ease: "power2.out" },
+        "-=0.55"
+      )
+      .fromTo(".lt-view--deck1 .lt-stat",
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.35, stagger: 0.08, ease: "power2.out" },
+        "-=0.3"
+      );
+    }
   }
 
   // ─── Section Snap ────────────────────────────────────────────────────────
@@ -855,9 +1104,8 @@ window.addEventListener("load", () => {
     if (isSnapping) return;
     clearTimeout(snapTimer);
     snapTimer = setTimeout(() => {
-      // Touch: größere Toleranz, kein aggressives Snap
-      if (isTouch && window.innerWidth <= 1000) return;
-      const threshold = window.innerHeight * (isTouch ? 0.15 : 0.20);
+      const isMobile = isTouch && window.innerWidth <= 1000;
+      const threshold = window.innerHeight * (isMobile ? 0.13 : 0.20);
       let snapTarget = null, minDist = Infinity;
       snapSections.forEach((section) => {
         const rect = section.getBoundingClientRect();
@@ -870,12 +1118,12 @@ window.addEventListener("load", () => {
         snapSafetyTimer = setTimeout(() => { isSnapping = false; }, 1200);
         const exactTop = snapTarget.getBoundingClientRect().top + window.scrollY;
         lenis.scrollTo(exactTop, {
-          duration: isTouch ? 0.4 : 0.55,
+          duration: isMobile ? 0.45 : 0.55,
           easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
           onComplete: () => { isSnapping = false; clearTimeout(snapSafetyTimer); },
         });
       }
-    }, isTouch ? 200 : 80);
+    }, isTouch ? 220 : 80);
   });
 
   // ─── Navbar (overlay – tablet / mobile) ────────────────────────────────
