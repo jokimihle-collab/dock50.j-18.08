@@ -110,15 +110,6 @@
       margin-bottom: 1.25rem;
     }
 
-    .ev-category {
-      font-size: clamp(0.6rem, 1.3vw, 0.72rem);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--dim);
-      border: 1px solid var(--line);
-      padding: 0.25em 0.7em;
-    }
-
     .ev-location-tag {
       font-size: clamp(0.6rem, 1.3vw, 0.72rem);
       letter-spacing: 0.14em;
@@ -132,13 +123,6 @@
       line-height: 1.05;
       letter-spacing: -0.01em;
       margin-bottom: 0.4rem;
-    }
-
-    .ev-artist {
-      font-size: clamp(0.8rem, 1.8vw, 1rem);
-      color: var(--dim);
-      margin-bottom: 2rem;
-      letter-spacing: 0.06em;
     }
 
     .ev-divider {
@@ -269,12 +253,10 @@
 
     <div id="evMain">
       <div class="ev-meta-row">
-        <span class="ev-category" id="evCategory"></span>
         <span class="ev-location-tag" id="evLocationTag"></span>
       </div>
 
       <h1 class="ev-title" id="evTitle"></h1>
-      <p class="ev-artist" id="evArtist"></p>
 
       <div class="ev-divider">
         <span class="ev-divider-dot"></span>
@@ -290,10 +272,6 @@
         <div class="ev-detail-item">
           <p class="ev-detail-label">Location</p>
           <p class="ev-detail-value" id="evLocation"></p>
-        </div>
-        <div class="ev-detail-item">
-          <p class="ev-detail-label">Kategorie</p>
-          <p class="ev-detail-value" id="evCategoryDetail"></p>
         </div>
       </div>
 

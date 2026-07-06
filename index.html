@@ -2,7 +2,7 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>DOCK50 — Eventlocation Flensburg</title>
     <meta name="description" content="DOCK50 ist Flensburgs führende Eventlocation direkt am Hafen. Zwei exklusive Locations: Skylounge & Deck1. Konzerte, Club-Nächte und private Events." />
     <meta property="og:title" content="DOCK50 — Eventlocation Flensburg" />
@@ -31,7 +31,7 @@
         "addressCountry": "DE"
       },
       "url": "https://doc50.de",
-      "email": "info@doc50.de"
+      "email": "info@dock50.de"
     }
     </script>
   </head>
@@ -221,6 +221,8 @@
     <!-- ─── Events / Spotlight ──────────────────────────────────────────────── -->
     <section class="spotlight snap-section" id="spotlight">
 
+      <div class="spotlight-loc-glow" aria-hidden="true"></div>
+
       <!-- Datum oben links (JS steuert opacity + y) -->
       <div class="project-index"><h2></h2></div>
 
@@ -305,21 +307,6 @@
     <!-- ─── Location ─────────────────────────────────────────────────────────── -->
     <section class="location snap-section" id="location">
 
-      <!-- Tab-Leiste oben über der ganzen Section -->
-      <div class="lt-tabs active-deck1" role="tablist">
-        <div class="lt-tabs-inner">
-          <div class="lt-tabs-slider" aria-hidden="true"></div>
-          <button class="lt-tab lt-tab--deck1 is-active" data-to="deck1" role="tab" aria-selected="true">
-            <span class="lt-tab-num">01</span>
-            <span class="lt-tab-name">Deck 1</span>
-          </button>
-          <button class="lt-tab lt-tab--sky" data-to="sky" role="tab" aria-selected="false">
-            <span class="lt-tab-num">02</span>
-            <span class="lt-tab-name">Skylounge</span>
-          </button>
-        </div>
-      </div>
-
       <div class="lt-body">
 
         <!-- Links: Foto -->
@@ -383,10 +370,9 @@
             </div>
             <div class="lt-rule"></div>
             <div class="lt-stats">
-              <div class="lt-stat"><span class="lt-stat-k">Kapazität</span><span class="lt-stat-v">bis 150</span></div>
+              <div class="lt-stat"><span class="lt-stat-k">Kapazität</span><span class="lt-stat-v">150 Gäste</span></div>
               <div class="lt-stat"><span class="lt-stat-k">Stehplätze</span><span class="lt-stat-v">bis 150</span></div>
               <div class="lt-stat"><span class="lt-stat-k">Sitzplätze</span><span class="lt-stat-v">20–60 je nach Aufbau</span></div>
-              <div class="lt-stat"><span class="lt-stat-k">Lage</span><span class="lt-stat-v">{Infos}</span></div>
             </div>
             <div class="lt-view-foot">
               <a href="/anfrage.html" class="lt-cta">Verfügbarkeit anfragen <span class="lt-cta-arrow">↗</span></a>
@@ -402,16 +388,30 @@
             </div>
             <div class="lt-rule"></div>
             <div class="lt-stats">
-              <div class="lt-stat"><span class="lt-stat-k">Kapazität</span><span class="lt-stat-v">700</span></div>
-              <div class="lt-stat"><span class="lt-stat-k">Stehplätze (Party)</span><span class="lt-stat-v">700</span></div>
-              <div class="lt-stat"><span class="lt-stat-k">Stehplätze (Konzert)</span><span class="lt-stat-v">450</span></div>
-              <div class="lt-stat"><span class="lt-stat-k">Lage</span><span class="lt-stat-v">{Infos}</span></div>
+              <div class="lt-stat"><span class="lt-stat-k">Kapazität</span><span class="lt-stat-v">700 Gäste</span></div>
+              <div class="lt-stat"><span class="lt-stat-k">Stehplätze Party</span><span class="lt-stat-v">700</span></div>
+              <div class="lt-stat"><span class="lt-stat-k">Stehplätze Konzert</span><span class="lt-stat-v">450</span></div>
             </div>
             <div class="lt-view-foot">
               <a href="/anfrage.html" class="lt-cta">Verfügbarkeit anfragen <span class="lt-cta-arrow">↗</span></a>
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <!-- Tab-Leiste am Ende der Section -->
+      <div class="lt-tabs active-deck1" role="tablist">
+        <div class="lt-tabs-inner">
+          <div class="lt-tabs-slider" aria-hidden="true"></div>
+          <button class="lt-tab lt-tab--deck1 is-active" data-to="deck1" role="tab" aria-selected="true">
+            <span class="lt-tab-num">01</span>
+            <span class="lt-tab-name">Deck 1</span>
+          </button>
+          <button class="lt-tab lt-tab--sky" data-to="sky" role="tab" aria-selected="false">
+            <span class="lt-tab-num">02</span>
+            <span class="lt-tab-name">Skylounge</span>
+          </button>
         </div>
       </div>
 
@@ -435,9 +435,9 @@
             </div>
             <div class="cs-col">
               <span class="cs-col-label">Ansprechpartner</span>
-              <p class="cs-col-val">{Infos}</p>
-              <p class="cs-col-val"><a href="mailto:info@dock50.de" class="cs-link">{Infos}</a></p>
-              <p class="cs-col-val">{Infos}</p>
+              <p class="cs-col-val">Kai Nicolaisen</p>
+              <p class="cs-col-val"><a href="mailto:kai.nicolaisen@foerdeshow.de" class="cs-link">kai.nicolaisen@foerdeshow.de</a></p>
+              <p class="cs-col-val">+49 172 6558741</p>
             </div>
           </div>
           <div class="cs-bottom-row">
@@ -445,7 +445,10 @@
               <span class="cs-status-dot"></span>
               <span class="cs-status-text">Offen für Buchungen</span>
             </div>
-            <a href="/anfrage.html" class="cs-cta-main">Verfügbarkeit anfragen ↗</a>
+            <div class="cs-cta-wrap">
+              <a href="mailto:kai.nicolaisen@foerdeshow.de?subject=Venue-Anfrage%20%E2%80%93%20DOCK50" class="cs-cta-main">Verfügbarkeit anfragen ↗</a>
+              <p class="cs-cta-note">kai.nicolaisen@foerdeshow.de</p>
+            </div>
           </div>
         </div>
         <div class="cs-img-wrap">
@@ -457,6 +460,10 @@
       <div class="cs-body cs-body--mobile">
         <div class="cs-img-wrap cs-img-wrap--mobile">
           <img src="/doc50-concert-4.jpg" alt="Eventlocation DOCK50 Schiffbrücke 50 Flensburg" />
+        </div>
+        <div class="cs-mob-strip" aria-hidden="true">
+          <span>54°46′N · 9°26′E</span>
+          <span>Schiffbrücke 50 · Flensburg</span>
         </div>
         <div class="cs-left">
           <p class="cs-eyebrow">DOCK50 · KONTAKT</p>
@@ -471,9 +478,9 @@
             </div>
             <div class="cs-col">
               <span class="cs-col-label">Ansprechpartner</span>
-              <p class="cs-col-val">{Infos}</p>
-              <p class="cs-col-val"><a href="mailto:info@dock50.de" class="cs-link">{Infos}</a></p>
-              <p class="cs-col-val">{Infos}</p>
+              <p class="cs-col-val">Kai Nicolaisen</p>
+              <p class="cs-col-val"><a href="mailto:kai.nicolaisen@foerdeshow.de" class="cs-link">kai.nicolaisen@foerdeshow.de</a></p>
+              <p class="cs-col-val">+49 172 6558741</p>
             </div>
           </div>
           <div class="cs-bottom-row">
@@ -481,7 +488,10 @@
               <span class="cs-status-dot"></span>
               <span class="cs-status-text">Offen für Buchungen</span>
             </div>
-            <a href="/anfrage.html" class="cs-cta-main">Verfügbarkeit anfragen ↗</a>
+            <div class="cs-cta-wrap">
+              <a href="mailto:kai.nicolaisen@foerdeshow.de?subject=Venue-Anfrage%20%E2%80%93%20DOCK50" class="cs-cta-main">Verfügbarkeit anfragen ↗</a>
+              <p class="cs-cta-note">kai.nicolaisen@foerdeshow.de</p>
+            </div>
           </div>
         </div>
       </div>
@@ -505,29 +515,36 @@
           <img src="/logo-dock50.png" alt="DOCK50" class="footer-logo-img" />
           <p class="footer-tagline">Event Location &amp; Management<br/>Live Productions · Flensburg</p>
         </div>
-        <div class="footer-col">
-          <p class="footer-col-title">Navigation</p>
-          <nav class="footer-nav">
-            <a href="#intro"     class="nav-link">Home</a>
-            <a href="#spotlight" class="nav-link">Events</a>
-            <a href="#location"  class="nav-link">Location</a>
-          </nav>
+        <div class="footer-col footer-col--social">
+          <p class="footer-col-title">Social</p>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" class="footer-social-row" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener" class="footer-social-row" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <span>Facebook</span>
+          </a>
+          <a href="mailto:info@dock50.de" class="footer-social-row" aria-label="E-Mail">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            <span>E-Mail</span>
+          </a>
         </div>
-        <div class="footer-col">
+        <div class="footer-col footer-col--kontakt">
           <p class="footer-col-title">Kontakt</p>
           <p class="footer-detail">{Infos}</p>
           <p class="footer-detail">Schiffbrücke 50</p>
           <p class="footer-detail">24939 Flensburg</p>
-          <p class="footer-detail">info@doc50.de</p>
+          <p class="footer-detail">info@dock50.de</p>
           <p class="footer-detail">{Infos}</p>
         </div>
-        <div class="footer-col">
+        <div class="footer-col footer-col--impressum">
           <p class="footer-col-title">Impressum</p>
           <p class="footer-detail">Angaben gemäß §5 TMG</p>
           <p class="footer-detail">{Infos}</p>
           <p class="footer-detail">Schiffbrücke 50, 24939 Flensburg</p>
           <div class="footer-divider"></div>
-          <p class="footer-detail">Verantwortlich i.S.d. §55 Abs. 2 RStV:<br/>{Infos}</p>
+          <p class="foooter-detail">Verantwortlich i.S.d. §55 Abs. 2 RStV:<br/>{Infos}</p>
         </div>
       </div>
 
@@ -551,17 +568,6 @@
 
       <div class="footer-bottom">
         <p>© 2025 DOCK50 Eventlocation · Alle Rechte vorbehalten</p>
-        <div class="footer-bottom-social">
-          <a href="https://www.instagram.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a href="https://www.facebook.com" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="#" onclick="window.location.href='mailto:info@doc50.de';return false;" class="footer-social-link" aria-label="E-Mail">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-          </a>
-        </div>
         <p>Datenschutz · Impressum</p>
       </div>
     </footer>
@@ -569,7 +575,7 @@
     <!-- ─── Event Filter Bar ─────────────────────────────────────────────────── -->
     <div id="eventFilter" class="event-filter" aria-hidden="true">
       <div class="ef-track">
-        <button class="ef-item active" data-filter="all">Alle</button>
+        <button class="ef-item is-active active" data-filter="all">Alle</button>
         <button class="ef-item" data-filter="Deck1">Deck1</button>
         <button class="ef-item" data-filter="Skylounge">Skylounge</button>
         <div class="ef-indicator"></div>

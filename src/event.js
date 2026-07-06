@@ -22,44 +22,41 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Location logo
   const logoImg = document.querySelector(".ev-topbar-logo img");
-  if (ev.location === "Skylounge") {
+  if (ev.raum === "Skylounge") {
     logoImg.src = "/logo-skylounge.png";
     logoImg.alt = "Skylounge";
     logoImg.style.height = "clamp(28px, 4.5vh, 44px)";
     logoImg.style.filter = "invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92)";
-  } else if (ev.location === "Deck1") {
+  } else if (ev.raum === "Deck1") {
     logoImg.src = "/logo-deck1.png";
     logoImg.alt = "Deck1";
   }
 
   // Hero image
   const heroImg = document.getElementById("evHeroImg");
-  heroImg.src = ev.image;
-  heroImg.alt = ev.title !== "{Infos}" ? ev.title : "Event";
+  heroImg.src = ev.bildGross;
+  heroImg.alt = ev.titel !== "{Infos}" ? ev.titel : "Event";
 
   // Format date
-  const d = parseEventDate(ev.date);
-  const dateStr = `${DAYS_LONG[d.getDay()]}, ${d.getDate()}. ${MONTHS_LONG[d.getMonth()]} 20${ev.date.slice(-2)}`;
+  const d = parseEventDate(ev.datum);
+  const dateStr = `${DAYS_LONG[d.getDay()]}, ${d.getDate()}. ${MONTHS_LONG[d.getMonth()]} 20${ev.datum.slice(-2)}`;
 
   // Meta
-  document.getElementById("evCategory").textContent     = ev.category;
-  document.getElementById("evLocationTag").textContent  = ev.location;
+  document.getElementById("evLocationTag").textContent  = ev.raum;
 
   // Main info
-  document.getElementById("evTitle").textContent          = ev.title !== "{Infos}" ? ev.title  : "{Infos}";
-  document.getElementById("evArtist").textContent         = ev.artist !== "{Infos}" ? ev.artist : "{Infos}";
-  document.getElementById("evDate").textContent           = ev.artist !== "{Infos}" ? dateStr : "{Infos}";
-  document.getElementById("evLocation").textContent       = ev.location;
-  document.getElementById("evCategoryDetail").textContent = ev.category;
-  document.getElementById("evDesc").textContent           = ev.desc !== "{Infos}" ? ev.desc : "{Infos}";
+  document.getElementById("evTitle").textContent          = ev.titel !== "{Infos}" ? ev.titel  : "{Infos}";
+  document.getElementById("evDate").textContent           = ev.titel !== "{Infos}" ? dateStr : "{Infos}";
+  document.getElementById("evLocation").textContent       = ev.raum;
+  document.getElementById("evDesc").textContent           = ev.beschreibung !== "{Infos}" ? ev.beschreibung : "{Infos}";
 
   // Page title
-  document.title = ev.title !== "{Infos}" ? `${ev.title} — DOCK50` : "Event — DOCK50";
+  document.title = ev.titel !== "{Infos}" ? `${ev.titel} — DOCK50` : "Event — DOCK50";
 
   // CTA
-  const ctaColor = ev.location === "Skylounge" ? "rgb(212,170,40)" : "#E63289";
+  const ctaColor = ev.raum === "Skylounge" ? "rgb(212,170,40)" : "#E63289";
   const ctaWrapper = document.getElementById("evCtaWrapper");
   if (ev.hasTicket && ev.ticketUrl) {
-    ctaWrapper.innerHTML = `<a href="${ev.ticketUrl}" class="ev-cta" style="background:${ctaColor};color:#0e0e0e;">Tickets <span class="ev-cta-arrow">↗</span></a>`;
+    ctaWrapper.innerHTML = `<a href="${ev.ticketUrl}" class="ev-cta" style="background:${ctaColor};color:#0e0e0e;">Tickets anfragen <span class="ev-cta-arrow">↗</span></a>`;
   }
 });
