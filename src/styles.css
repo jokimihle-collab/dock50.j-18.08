@@ -2858,6 +2858,7 @@ section {
   font-size: 1.0rem;
   color: rgba(255,255,255,0.52);
   line-height: 1.8;
+  white-space: pre-line;
 }
 
 .esp-actions {
@@ -3551,12 +3552,12 @@ section {
     border-color: transparent;
   }
 
-  .mec-filter-item[data-filter="Skylounge"].active {
+  .mec-filter-item[data-filter="D50 Skylounge"].active {
     color: rgb(212,170,40);
     border-color: transparent;
   }
 
-  .mec-filter-item[data-filter="Deck1"].active {
+  .mec-filter-item[data-filter="D50 Deck 1"].active {
     color: rgb(87,191,196);
     border-color: transparent;
   }
@@ -3604,11 +3605,11 @@ section {
     transition: background 0.3s ease;
   }
 
-  #mobileEventList[data-filter="Deck1"] .mobile-event-card::before {
+  #mobileEventList[data-filter="D50 Deck 1"] .mobile-event-card::before {
     background: rgb(87,191,196);
   }
 
-  #mobileEventList[data-filter="Skylounge"] .mobile-event-card::before {
+  #mobileEventList[data-filter="D50 Skylounge"] .mobile-event-card::before {
     background: rgb(212,170,40);
   }
 
@@ -3755,10 +3756,10 @@ section {
   }
   .mec-more-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
 
-  .mec-ticket[data-location="Skylounge"]       { background: rgb(212,170,40); color: #fff; }
-  .mec-ticket[data-location="Skylounge"]:hover { background: rgb(232,190,60); }
-  .mec-ticket[data-location="Deck1"]           { background: #E63289; color: #fff; }
-  .mec-ticket[data-location="Deck1"]:hover     { background: #f03d97; }
+  .mec-ticket[data-location="D50 Skylounge"]       { background: rgb(212,170,40); color: #fff; }
+  .mec-ticket[data-location="D50 Skylounge"]:hover { background: rgb(232,190,60); }
+  .mec-ticket[data-location="D50 Deck 1"]           { background: #E63289; color: #fff; }
+  .mec-ticket[data-location="D50 Deck 1"]:hover     { background: #f03d97; }
 
 
   .mec-ticket--none {

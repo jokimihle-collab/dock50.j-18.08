@@ -36,3 +36,7 @@ The most complex part. The section is pinned (GSAP ScrollTrigger) for `5×vh` of
 - A connector line links the active image to its title
 
 All animations trigger inside the `ScrollTrigger.create` `onUpdate` callback — no `scrub`.
+
+## Event-Daten
+
+`src/events.js` enthält die Event-Library, auto-generiert aus MariaDB via Sönkes `generate_events.py`. Raum-Werte sind `"D50 Skylounge"` und `"D50 Deck 1"`.

@@ -43,7 +43,7 @@ function renderEvents(events) {
   events.forEach((ev, i) => {
     if (imgEls[i]) {
       const img = imgEls[i].querySelector("img");
-      if (img) img.src = ev.bildGross;
+      if (img) { img.src = ev.bildGross; img.alt = ev.titel; }
       imgEls[i].dataset.location = ev.raum;
       let badge = imgEls[i].querySelector(".proj-ticket-badge");
       if (ev.hasTicket) {
@@ -66,7 +66,7 @@ function renderEvents(events) {
       nameEls[i].dataset.location = ev.raum;
     }
     if (divNums[i]) {
-      const venueAbbr = ev.raum === "Skylounge" ? "SL" : "D1";
+      const venueAbbr = ev.raum === "D50 Skylounge" ? "SL" : "D1";
       const dateStr   = ev.titel === "{Infos}" ? "{Infos}" : `20${ev.datum.slice(-2)}`;
       divNums[i].textContent = `${String(i + 1).padStart(2, "0")} — ${venueAbbr} · ${dateStr}`;
     }
@@ -214,7 +214,7 @@ function initSpotlight() {
 
   gsap.set(projectNameItems, { top: SLOTS.PARK, opacity: 0, yPercent: -50 });
   gsap.set(projectIndex,     { opacity: 0 });
-  projectIndex.textContent = eventData[0]?.artist === "{Infos}" ? "{Infos}" : (eventData[0]?.datum ?? "01.01.26");
+  projectIndex.textContent = eventData[0]?.titel === "{Infos}" ? "{Infos}" : (eventData[0]?.datum ?? "01.01.26");
   if (connector) gsap.set(connector, { display: "none", opacity: 0 });
 
   // ─── Linker Connector (Datum ↔ Bild) ─────────────────────────────────
@@ -288,7 +288,7 @@ function initSpotlight() {
     if (changed) {
       gsap.to(projectIndex, { opacity: 0, duration: 0.12, ease: "power2.in", onComplete: () => {
         const evN = eventData[displayN];
-        projectIndex.textContent = evN?.artist === "{Infos}" ? "{Infos}" : (evN?.datum ?? `${String(displayN + 1).padStart(2, "0")}.01.26`);
+        projectIndex.textContent = evN?.titel === "{Infos}" ? "{Infos}" : (evN?.datum ?? `${String(displayN + 1).padStart(2, "0")}.01.26`);
         gsap.to(projectIndex, { opacity: 1, duration: 0.2, ease: "power2.out" });
       }});
     }
@@ -823,7 +823,7 @@ window.addEventListener("load", () => {
 
   // ─── Mobile Event-Liste: Swipe links/rechts → Filter wechseln ────────────
   if (mobileList) {
-    const FILTER_ORDER = ["all", "Deck1", "Skylounge"];
+    const FILTER_ORDER = ["all", "D50 Deck 1", "D50 Skylounge"];
     let swipeStartX = 0;
     let swipeStartY = 0;
     let swipeLocked = false;
@@ -932,8 +932,8 @@ window.addEventListener("load", () => {
   const spotlightGlow = document.querySelector(".spotlight-loc-glow");
   const GLOW_COLORS = {
     all:       "rgba(230,50,137,0.28)",
-    Deck1:     "rgba(87,191,196,0.35)",
-    Skylounge: "rgba(212,170,40,0.32)",
+    "D50 Deck 1":     "rgba(87,191,196,0.35)",
+    "D50 Skylounge": "rgba(212,170,40,0.32)",
   };
   function setSpotlightGlow(filter, animate = true) {
     if (!spotlightGlow) return;
@@ -1041,7 +1041,7 @@ window.addEventListener("load", () => {
         if (e.currentTarget.classList.contains("is-active")) {
           resetFilter();
         } else {
-          activateLocation("deck1", "Deck1");
+          activateLocation("deck1", "D50 Deck 1");
           setHeroActive(e.currentTarget);
         }
       });
@@ -1050,7 +1050,7 @@ window.addEventListener("load", () => {
         if (e.currentTarget.classList.contains("is-active")) {
           resetFilter();
         } else {
-          activateLocation("sky", "Skylounge");
+          activateLocation("sky", "D50 Skylounge");
           setHeroActive(e.currentTarget);
         }
       });

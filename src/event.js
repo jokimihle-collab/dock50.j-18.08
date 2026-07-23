@@ -22,12 +22,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Location logo
   const logoImg = document.querySelector(".ev-topbar-logo img");
-  if (ev.raum === "Skylounge") {
+  if (ev.raum === "D50 Skylounge") {
     logoImg.src = "/logo-skylounge.png";
     logoImg.alt = "Skylounge";
     logoImg.style.height = "clamp(28px, 4.5vh, 44px)";
     logoImg.style.filter = "invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92)";
-  } else if (ev.raum === "Deck1") {
+  } else if (ev.raum === "D50 Deck 1") {
     logoImg.src = "/logo-deck1.png";
     logoImg.alt = "Deck1";
   }
@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.title = ev.titel !== "{Infos}" ? `${ev.titel} — DOCK50` : "Event — DOCK50";
 
   // CTA
-  const ctaColor = ev.raum === "Skylounge" ? "rgb(212,170,40)" : "#E63289";
+  const ctaColor = ev.raum === "D50 Skylounge" ? "rgb(212,170,40)" : "#E63289";
   const ctaWrapper = document.getElementById("evCtaWrapper");
   if (ev.hasTicket && ev.ticketUrl) {
     ctaWrapper.innerHTML = `<a href="${ev.ticketUrl}" class="ev-cta" style="background:${ctaColor};color:#0e0e0e;">Tickets anfragen <span class="ev-cta-arrow">↗</span></a>`;
