@@ -39,4 +39,7 @@ All animations trigger inside the `ScrollTrigger.create` `onUpdate` callback —
 
 ## Event-Daten
 
-`src/events.js` enthält die Event-Library, auto-generiert aus MariaDB via Sönkes `generate_events.py`. Raum-Werte sind `"D50 Skylounge"` und `"D50 Deck 1"`.
+- **`src/events.js` darf NICHT verändert werden.** Die Datei wird automatisch aus einer MariaDB-Datenbank via Python-Skript (`generate_events.py`) generiert und enthält die echte Event-Library.
+- Feldnamen: `id`, `titel`, `untertitel`, `beschreibung`, `datum`, `einlass`, `beginn`, `veranstaltort`, `raum`, `veranstalter`, `rubrik`, `preis`, `status`, `externeUrl`, `ticketUrl`, `zusatzoption`, `bildGross`, `bildKlein`
+- `raum`-Werte: `"D50 Deck 1"`, `"D50 Skylounge"` oder `""` (leer)
+- `hasTicket` wird per `deriveHasTicket()` abgeleitet (true wenn `ticketUrl` nicht leer)

@@ -67,7 +67,7 @@ function renderEvents(events) {
     }
     if (divNums[i]) {
       const venueAbbr = ev.raum === "D50 Skylounge" ? "SL" : "D1";
-      const dateStr   = ev.titel === "{Infos}" ? "{Infos}" : `20${ev.datum.slice(-2)}`;
+      const dateStr   = `20${ev.datum.slice(-2)}`;
       divNums[i].textContent = `${String(i + 1).padStart(2, "0")} — ${venueAbbr} · ${dateStr}`;
     }
     if (dividerTitleEls[i]) {
@@ -123,15 +123,16 @@ function renderMobileEvents(events) {
       ? `<span class="mec-ticket" data-ticket-url="${ev.ticketUrl}" data-location="${ev.raum}">Tickets <span class="mec-arrow">↗</span></span>`
       : ``;
     const locSlug = ev.raum.toLowerCase();
-    return `<a href="/event.html?loc=${locSlug}&date=${encodeURIComponent(ev.datum)}" class="mobile-event-card" data-index="${i}">
+    return `<a href="/event.html?loc=${encodeURIComponent(locSlug)}&date=${encodeURIComponent(ev.datum)}" class="mobile-event-card" data-index="${i}">
       <div class="mec-date">
         <span class="mec-day-name">${dayName}</span>
         <span class="mec-day-num">${dayNum}</span>
         <span class="mec-month">${month}</span>
       </div>
-      <div class="mec-img"><img src="${ev.bildGross}" alt="" /></div>
+      <div class="mec-img"><img src="${ev.bildGross}" alt="${ev.titel}" /></div>
       <div class="mec-info">
-        <span class="mec-title">${ev.titel === "{Infos}" ? "{Infos}" : ev.titel}</span>
+        <span class="mec-category">${ev.rubrik}</span>
+        <span class="mec-title">${ev.titel}</span>
         <span class="mec-meta">${ev.raum}</span>
       </div>
       <div class="mec-right">${ticket}</div>
@@ -214,7 +215,7 @@ function initSpotlight() {
 
   gsap.set(projectNameItems, { top: SLOTS.PARK, opacity: 0, yPercent: -50 });
   gsap.set(projectIndex,     { opacity: 0 });
-  projectIndex.textContent = eventData[0]?.titel === "{Infos}" ? "{Infos}" : (eventData[0]?.datum ?? "01.01.26");
+  projectIndex.textContent = eventData[0]?.datum ?? "";
   if (connector) gsap.set(connector, { display: "none", opacity: 0 });
 
   // ─── Linker Connector (Datum ↔ Bild) ─────────────────────────────────
@@ -288,7 +289,7 @@ function initSpotlight() {
     if (changed) {
       gsap.to(projectIndex, { opacity: 0, duration: 0.12, ease: "power2.in", onComplete: () => {
         const evN = eventData[displayN];
-        projectIndex.textContent = evN?.titel === "{Infos}" ? "{Infos}" : (evN?.datum ?? `${String(displayN + 1).padStart(2, "0")}.01.26`);
+        projectIndex.textContent = evN?.datum ?? "";
         gsap.to(projectIndex, { opacity: 1, duration: 0.2, ease: "power2.out" });
       }});
     }
@@ -566,8 +567,7 @@ window.addEventListener("load", () => {
     const num        = String(idx + 1).padStart(2, "0");
     const imgSrc     = document.querySelector(`.project-img[data-index="${idx}"] img`)?.src || "";
     const dateParts  = ev.datum.split(".");
-    const dateDisplay = ev.titel === "{Infos}" ? "{Infos}"
-      : dateParts.length === 3 ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
+    const dateDisplay = dateParts.length === 3 ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
       : ev.datum;
     const ticketBtn = ev.hasTicket
       ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank"><span>Tickets anfragen</span><span class="esp-ticket-arrow">↗</span></a>`
@@ -576,7 +576,8 @@ window.addEventListener("load", () => {
       <img src="${imgSrc}" class="esp-bg-img" alt="" aria-hidden="true" />
       <div class="esp-left">
         <div class="esp-vline" aria-hidden="true"></div>
-        <p class="esp-num">${num}</p>
+        <p class="esp-num">${num} — ${ev.rubrik}</p>
+        <p class="esp-artist">${ev.untertitel}</p>
         <h2 class="esp-title">${ev.titel}</h2>
         <div class="esp-rule"><span class="esp-rule-dot"></span><span class="esp-rule-line"></span><span class="esp-rule-dot"></span></div>
         <div class="esp-date">${dateDisplay}</div>
@@ -602,7 +603,7 @@ window.addEventListener("load", () => {
     gsap.fromTo(espContent.querySelector(".esp-bg-img"),
       { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out", delay: 0.05 }
     );
-    const els = espContent.querySelectorAll(".esp-num, .esp-title, .esp-rule, .esp-date, .esp-location, .esp-desc, .esp-actions");
+    const els = espContent.querySelectorAll(".esp-num, .esp-artist, .esp-title, .esp-rule, .esp-date, .esp-location, .esp-desc, .esp-actions");
     gsap.fromTo(els,
       { opacity: 0, y: 12 },
       { opacity: 1, y: 0, duration: 0.26, stagger: 0.045, ease: "power2.out", delay: 0.18 }
@@ -931,9 +932,9 @@ window.addEventListener("load", () => {
   // ─── Spotlight Location-Glow ──────────────────────────────────────────
   const spotlightGlow = document.querySelector(".spotlight-loc-glow");
   const GLOW_COLORS = {
-    all:       "rgba(230,50,137,0.28)",
+    all:              "rgba(230,50,137,0.28)",
     "D50 Deck 1":     "rgba(87,191,196,0.35)",
-    "D50 Skylounge": "rgba(212,170,40,0.32)",
+    "D50 Skylounge":  "rgba(212,170,40,0.32)",
   };
   function setSpotlightGlow(filter, animate = true) {
     if (!spotlightGlow) return;
@@ -973,12 +974,15 @@ window.addEventListener("load", () => {
       document.querySelectorAll(".lt-photo-img").forEach((p) => {
         const active = p.classList.contains("lt-photo-img--" + to);
         if (active) {
+          p.style.pointerEvents = "auto";
           gsap.fromTo(p,
             { opacity: 0, scale: 1.05 },
             { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" }
           );
         } else {
-          gsap.to(p, { opacity: 0, scale: 1.02, duration: 0.45, ease: "power2.in" });
+          gsap.to(p, { opacity: 0, scale: 1.02, duration: 0.45, ease: "power2.in",
+            onComplete() { p.style.pointerEvents = "none"; }
+          });
         }
       });
 

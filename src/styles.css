@@ -294,7 +294,6 @@ section {
 .hero-subloc-logo--sky {
   height: 80%;
   opacity: 1;
-  filter: invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92);
 }
 
 .hero-subloc {
@@ -698,7 +697,7 @@ section {
   transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.lt-tab--sky { padding-left: 3.5rem; }
+.lt-tab--sky { padding-left: 2rem; }
 
 .lt-tab--sky::after {
   background: linear-gradient(90deg, rgb(212,170,40), rgba(212,170,40,0.3));
@@ -734,15 +733,19 @@ section {
   line-height: 1;
 }
 
-.lt-tab--sky .lt-tab-num          { color: rgba(212,170,40,0.50); }
-.lt-tab--sky .lt-tab-name         { color: rgba(212,170,40,0.65); }
-.lt-tab--sky.is-active .lt-tab-num  { color: rgb(212,170,40); }
-.lt-tab--sky.is-active .lt-tab-name { color: rgb(255,218,90); }
+.lt-tab--sky .lt-tab-num               { color: rgba(255,255,255,0.45); }
+.lt-tab--sky .lt-tab-name              { color: rgba(255,255,255,0.70); }
+.lt-tab--sky .lt-tab-sky               { color: rgba(212,170,40,0.70); }
+.lt-tab--sky.is-active .lt-tab-num    { color: rgba(255,255,255,0.75); }
+.lt-tab--sky.is-active .lt-tab-name   { color: rgba(255,255,255,1); }
+.lt-tab--sky.is-active .lt-tab-sky    { color: rgb(212,170,40); }
 
-.lt-tab--deck1 .lt-tab-num           { color: rgba(87,191,196,0.48); }
-.lt-tab--deck1 .lt-tab-name          { color: rgba(87,191,196,0.65); }
+.lt-tab--deck1 .lt-tab-num            { color: rgba(87,191,196,0.48); }
+.lt-tab--deck1 .lt-tab-name           { color: rgba(87,191,196,0.65); }
+.lt-tab--deck1 .lt-tab-one            { color: rgba(255,255,255,0.70); }
 .lt-tab--deck1.is-active .lt-tab-num  { color: rgb(87,191,196); }
 .lt-tab--deck1.is-active .lt-tab-name { color: rgb(120,210,214); }
+.lt-tab--deck1.is-active .lt-tab-one  { color: #fff; }
 
 .lt-body {
   flex: 1;
@@ -764,7 +767,7 @@ section {
   inset: 0;
 }
 
-.lt-photo-img--sky   { opacity: 0; }
+.lt-photo-img--sky   { opacity: 0; pointer-events: none; }
 .lt-photo-img--deck1 { opacity: 1; }
 
 .lt-slider {
@@ -816,7 +819,7 @@ section {
   width: auto;
   height: clamp(6rem, 12svh, 11rem);
   object-fit: contain;
-  filter: invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92);
+  filter: invert(1) hue-rotate(208deg) saturate(2) brightness(0.95);
   display: block;
 }
 
@@ -992,7 +995,6 @@ section {
   object-position: left center;
 }
 
-.lt-name-logo--sky   { filter: invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92); }
 .lt-name-logo--deck1 { background-color: #0e0e0e; }
 
 .lt-rule {
@@ -1858,7 +1860,8 @@ section {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   padding: 1.4rem 0;
   border-top: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -1867,7 +1870,6 @@ section {
 
 .footer-ticker-track {
   display: flex;
-  gap: 2rem;
   white-space: nowrap;
   animation: tickerScroll 22s linear infinite;
   width: max-content;
@@ -1880,6 +1882,7 @@ section {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   flex-shrink: 0;
+  padding: 0 1rem;
 }
 
 .footer-ticker-track .ft-sep {
@@ -2802,14 +2805,24 @@ section {
   margin-bottom: 2rem;
 }
 
+.esp-artist {
+  font-family: var(--font-paragraph);
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 0.55rem;
+}
 
 .esp-title {
-  font-family: var(--font-header);
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-family: var(--font-paragraph);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
   color: rgba(255,255,255,0.88);
   letter-spacing: -0.02em;
   line-height: 1.05;
   margin-bottom: 2rem;
+  max-width: 70%;
 }
 
 .esp-rule {
@@ -3293,58 +3306,11 @@ section {
     inset: 0;
     display: flex;
     flex-direction: column;
-    padding-top: 0;
-    gap: 0;
   }
 
-  /* Bild: feste Höhe oben */
-  .cs-img-wrap--mobile {
-    position: relative;
-    flex: 0 0 42svh;
-    width: 100%;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  /* Leichter Fade nur am unteren Bildrand */
-  .cs-img-wrap--mobile::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg,
-      transparent 65%,
-      rgba(14,14,14,0.55) 100%
-    );
-    z-index: 1;
-  }
-
-  .cs-img-wrap--mobile::before { display: none; }
-
-  .cs-img-wrap--mobile img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
-    filter: brightness(0.78) saturate(0.82);
-  }
-
-  /* Trennstreifen Bild → Content */
-  .cs-mob-strip {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.55rem 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.09);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    font-family: var(--font-paragraph);
-    font-size: 0.50rem;
-    letter-spacing: 0.20em;
-    color: rgba(255,255,255,0.28);
-    text-transform: uppercase;
-    position: relative;
-    z-index: 2;
-    background: #0e0e0e;
-  }
+  /* Bild + Streifen komplett ausblenden */
+  .cs-img-wrap--mobile,
+  .cs-mob-strip { display: none; }
 
   /* Crosshairs auf Mobile zeigen */
   .contact-sec .sc-cross { display: block; }
@@ -3352,7 +3318,7 @@ section {
   .sc-cross--tr { top: 1rem; right: 1rem; }
   .sc-cross--br { bottom: 1rem; right: 1rem; }
 
-  /* Content-Bereich: dunkler Hintergrund, füllt Rest */
+  /* Content füllt die gesamte Höhe */
   .cs-body--mobile .cs-left {
     position: relative;
     z-index: 2;
@@ -3360,91 +3326,83 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1.2rem 1.5rem max(1.5rem, env(safe-area-inset-bottom, 1rem));
-    background: #0e0e0e;
+    padding: clamp(3rem, 8svh, 5rem) 1.8rem max(2rem, env(safe-area-inset-bottom, 2rem));
+    background: transparent;
     overflow: hidden;
   }
 
-  /* Logo kleiner, kompakter */
   .cs-body--mobile .cs-name-logo {
-    height: clamp(1.6rem, 4.5vw, 2.4rem);
-    max-height: clamp(1.6rem, 4.5vw, 2.4rem);
-    margin-bottom: 0.5rem;
+    height: clamp(2rem, 6vw, 3rem);
+    max-height: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 0.7rem;
   }
 
   .cs-body--mobile .cs-eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    color: rgba(87,191,196,0.65);
-    margin-bottom: 0.6rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    color: rgba(87,191,196,0.60);
+    margin-bottom: 0.5rem;
   }
 
   .cs-body--mobile .cs-coords {
-    font-size: 0.88rem;
+    font-size: 0.80rem;
     letter-spacing: 0.14em;
-    color: rgba(255,255,255,0.50);
-    margin-bottom: 1rem;
+    color: rgba(255,255,255,0.38);
+    margin-bottom: 0;
   }
 
-  .cs-body--mobile .cs-divider { margin-bottom: 0.8rem; }
+  .cs-body--mobile .cs-divider { margin-bottom: 1rem; margin-top: 1.4rem; }
 
-  /* Grid: 2 Spalten nebeneinander */
   .cs-body--mobile .cs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 0.8rem;
+    gap: 1rem;
+    margin-bottom: 0;
   }
 
   .cs-body--mobile .cs-col { border-left: none; padding-left: 0; padding-right: 0; }
 
   .cs-body--mobile .cs-col-label {
-    font-size: 0.52rem;
-    letter-spacing: 0.20em;
-    margin-bottom: 0.3rem;
-    color: rgba(255,255,255,0.30);
+    font-size: 0.50rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.4rem;
+    color: rgba(255,255,255,0.28);
   }
 
   .cs-body--mobile .cs-col-val {
-    font-size: 0.92rem;
-    color: rgba(255,255,255,0.78);
-    line-height: 1.5;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
   }
 
-  /* Bottom row: stacked */
   .cs-body--mobile .cs-bottom-row {
     flex-direction: column;
-    gap: 0.9rem;
-    padding-top: 1rem;
+    gap: 1rem;
+    padding-top: 1.4rem;
     align-items: flex-start;
     border-top: 1px solid rgba(255,255,255,0.08);
   }
 
-  /* CTA: full width, klar lesbar */
   .cs-body--mobile .cs-cta-main {
     display: block;
     width: 100%;
     text-align: center;
     padding: 1.1rem 1rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.20em;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.32);
-    color: rgba(255,255,255,0.96);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    font-size: 0.80rem;
+    letter-spacing: 0.22em;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: rgba(255,255,255,0.92);
     transition: background 0.3s, border-color 0.3s;
   }
   .cs-body--mobile .cs-cta-main:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: rgba(255,255,255,0.52);
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.45);
   }
-  .cs-body--mobile .cs-cta-wrap {
-    width: 100%;
-  }
+  .cs-body--mobile .cs-cta-wrap { width: 100%; }
   .cs-body--mobile .cs-cta-note {
     text-align: center;
-    font-size: 0.58rem;
+    font-size: 0.56rem;
     letter-spacing: 0.08em;
   }
 
@@ -3553,14 +3511,18 @@ section {
   }
 
   .mec-filter-item[data-filter="D50 Skylounge"].active {
-    color: rgb(212,170,40);
+    color: #fff;
     border-color: transparent;
   }
+  .mec-filter-item[data-filter="D50 Skylounge"] .lt-tab-sky       { color: rgba(212,170,40,0.65); }
+  .mec-filter-item[data-filter="D50 Skylounge"].active .lt-tab-sky { color: rgb(212,170,40); }
 
   .mec-filter-item[data-filter="D50 Deck 1"].active {
     color: rgb(87,191,196);
     border-color: transparent;
   }
+  .mec-filter-item[data-filter="D50 Deck 1"] .lt-tab-one       { color: rgba(255,255,255,0.55); }
+  .mec-filter-item[data-filter="D50 Deck 1"].active .lt-tab-one { color: #fff; }
 
   /* ── Mobile Liste einblenden ── */
   .mobile-event-list {
@@ -3684,6 +3646,15 @@ section {
     gap: clamp(0.05rem, 0.4vh, 0.15rem);
     min-width: 0;
     overflow: hidden;
+  }
+
+  .mec-category {
+    font-family: var(--font-paragraph);
+    font-size: clamp(0.48rem, 1.3vh, 0.62rem);
+    color: #fff;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
   }
 
   .mec-title {

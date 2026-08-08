@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
     logoImg.src = "/logo-skylounge.png";
     logoImg.alt = "Skylounge";
     logoImg.style.height = "clamp(28px, 4.5vh, 44px)";
-    logoImg.style.filter = "invert(1) sepia(1) saturate(3) hue-rotate(10deg) brightness(0.92)";
+    logoImg.style.filter = "";
   } else if (ev.raum === "D50 Deck 1") {
     logoImg.src = "/logo-deck1.png";
     logoImg.alt = "Deck1";
@@ -35,23 +35,26 @@ window.addEventListener("DOMContentLoaded", () => {
   // Hero image
   const heroImg = document.getElementById("evHeroImg");
   heroImg.src = ev.bildGross;
-  heroImg.alt = ev.titel !== "{Infos}" ? ev.titel : "Event";
+  heroImg.alt = ev.titel;
 
   // Format date
   const d = parseEventDate(ev.datum);
   const dateStr = `${DAYS_LONG[d.getDay()]}, ${d.getDate()}. ${MONTHS_LONG[d.getMonth()]} 20${ev.datum.slice(-2)}`;
 
   // Meta
+  document.getElementById("evCategory").textContent    = ev.rubrik;
   document.getElementById("evLocationTag").textContent  = ev.raum;
 
   // Main info
-  document.getElementById("evTitle").textContent          = ev.titel !== "{Infos}" ? ev.titel  : "{Infos}";
-  document.getElementById("evDate").textContent           = ev.titel !== "{Infos}" ? dateStr : "{Infos}";
+  document.getElementById("evTitle").textContent          = ev.titel;
+  document.getElementById("evArtist").textContent         = ev.untertitel;
+  document.getElementById("evDate").textContent           = dateStr;
   document.getElementById("evLocation").textContent       = ev.raum;
-  document.getElementById("evDesc").textContent           = ev.beschreibung !== "{Infos}" ? ev.beschreibung : "{Infos}";
+  document.getElementById("evCategoryDetail").textContent = ev.rubrik;
+  document.getElementById("evDesc").textContent           = ev.beschreibung;
 
   // Page title
-  document.title = ev.titel !== "{Infos}" ? `${ev.titel} — DOCK50` : "Event — DOCK50";
+  document.title = `${ev.titel} — DOCK50`;
 
   // CTA
   const ctaColor = ev.raum === "D50 Skylounge" ? "rgb(212,170,40)" : "#E63289";

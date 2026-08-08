@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anfrage — DOC50</title>
+    <title>Anfrage — DOCK50</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
 
       :root {
         --font-header: "Special Gothic Expanded One", sans-serif;
         --font-mono:   "Geist Mono", monospace;
-        --bg:          #111;
-        --text:        rgba(255,255,255,0.90);
-        --text-mid:    rgba(255,255,255,0.52);
-        --text-dim:    rgba(255,255,255,0.22);
-        --border:      rgba(255,255,255,0.08);
-        --border-hi:   rgba(255,255,255,0.36);
+        --bg:          #171717;
+        --text:        rgba(255,255,255,0.92);
+        --text-mid:    rgba(255,255,255,0.60);
+        --text-dim:    rgba(255,255,255,0.42);
+        --border:      rgba(255,255,255,0.13);
+        --border-hi:   rgba(255,255,255,0.48);
         --topbar-h:    3.4rem;
       }
 
@@ -87,10 +87,10 @@
         position: absolute; inset: 0; z-index: 1;
         background: linear-gradient(
           to bottom,
-          rgba(17,17,17,0.50) 0%,
-          rgba(17,17,17,0.18) 30%,
-          rgba(17,17,17,0.65) 70%,
-          rgba(17,17,17,0.97) 100%
+          rgba(23,23,23,0.42) 0%,
+          rgba(23,23,23,0.12) 30%,
+          rgba(23,23,23,0.55) 70%,
+          rgba(23,23,23,0.92) 100%
         );
       }
 
@@ -159,7 +159,7 @@
         font-family: var(--font-header);
         font-size: clamp(4rem, 9vw, 8rem);
         color: transparent;
-        -webkit-text-stroke: 1px rgba(255,255,255,0.09);
+        -webkit-text-stroke: 1px rgba(255,255,255,0.18);
         letter-spacing: -0.04em; line-height: 1;
         padding: 2.8rem 0 2.8rem 2.5rem;
         display: flex; align-items: flex-start;
@@ -174,7 +174,7 @@
         font-family: var(--font-header);
         font-size: clamp(1.6rem, 3.5vw, 3rem);
         color: transparent;
-        -webkit-text-stroke: 1px rgba(255,255,255,0.52);
+        -webkit-text-stroke: 1px rgba(255,255,255,0.72);
         letter-spacing: -0.02em; line-height: 1;
         margin-bottom: 2.4rem;
       }
@@ -201,7 +201,7 @@
         -webkit-appearance: none; appearance: none; border-radius: 0;
       }
       .fld input::placeholder,
-      .fld textarea::placeholder { color: rgba(255,255,255,0.11); }
+      .fld textarea::placeholder { color: rgba(255,255,255,0.22); }
       .fld input:focus,
       .fld select:focus,
       .fld textarea:focus { border-bottom-color: var(--border-hi); }
@@ -242,12 +242,12 @@
         font-family: var(--font-header);
         font-size: clamp(1.4rem, 3vw, 2.6rem);
         color: transparent;
-        -webkit-text-stroke: 1px rgba(255,255,255,0.50);
+        -webkit-text-stroke: 1px rgba(255,255,255,0.70);
         letter-spacing: -0.02em; line-height: 1;
       }
       .submit-note {
         font-family: var(--font-mono); font-size: 0.52rem;
-        color: rgba(255,255,255,0.14); letter-spacing: 0.08em; line-height: 1.7;
+        color: rgba(255,255,255,0.30); letter-spacing: 0.08em; line-height: 1.7;
       }
       .submit-actions { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
       .btn-send {
@@ -262,12 +262,12 @@
       .btn-send:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.52); }
       .btn-mail {
         font-family: var(--font-mono); font-size: 0.58rem;
-        color: rgba(255,255,255,0.22); letter-spacing: 0.14em;
+        color: rgba(255,255,255,0.40); letter-spacing: 0.14em;
         text-transform: uppercase; text-decoration: none;
-        border-bottom: 1px solid rgba(255,255,255,0.07);
+        border-bottom: 1px solid rgba(255,255,255,0.16);
         padding-bottom: 0.15rem; transition: color 0.25s;
       }
-      .btn-mail:hover { color: rgba(255,255,255,0.50); }
+      .btn-mail:hover { color: rgba(255,255,255,0.70); }
 
       /* ═══════════════════════════════════════════
          SUCCESS
@@ -313,10 +313,10 @@
       }
       .ticker-track span {
         font-family: var(--font-mono); font-size: 0.55rem;
-        color: rgba(255,255,255,0.13); letter-spacing: 0.22em;
+        color: rgba(255,255,255,0.25); letter-spacing: 0.22em;
         text-transform: uppercase; flex-shrink: 0;
       }
-      .ticker-track .sep { color: rgba(255,255,255,0.07); }
+      .ticker-track .sep { color: rgba(255,255,255,0.14); }
       @keyframes tickerScroll {
         from { transform: translateX(0); }
         to   { transform: translateX(-50%); }
@@ -343,24 +343,27 @@
         .form-block { grid-template-columns: 1fr; }
         .block-num {
           font-size: clamp(3rem, 10vw, 5rem);
-          padding: 2rem 1.5rem 0;
+          padding: 2rem 1.5rem 0.5rem;
           border-bottom: none;
         }
-        .block-body { padding: 1.2rem 1.5rem 2.5rem; border-left: none; }
+        .block-body { padding: 1.4rem 1.5rem 3rem; border-left: none; }
         .form-submit { grid-template-columns: 1fr; }
         .submit-side { padding: 2rem 1.5rem 0; font-size: clamp(1.8rem, 8vw, 3rem); }
-        .submit-body { padding: 1.2rem 1.5rem 3rem; border-left: none; }
+        .submit-body { padding: 1.4rem 1.5rem 3.5rem; border-left: none; }
+        .fld { margin-bottom: 2.4rem; }
+        .block-title { margin-bottom: 2rem; font-size: clamp(1.4rem, 5vw, 2.4rem); }
       }
 
       @media (max-width: 768px) {
         .topbar { padding: 0 1.5rem; }
         .hero-content { padding: 0 1.5rem; }
-        .hero-bottom { padding: 1rem 1.5rem; }
+        .hero-bottom { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.6rem; }
         .hero-stat { padding-right: 1.2rem; margin-right: 1.2rem; }
         .frow { grid-template-columns: 1fr; gap: 0; }
-        .submit-actions { flex-direction: column; align-items: flex-start; }
-        .btn-send { width: 100%; text-align: center; }
-        .btn-mail { align-self: center; }
+        .submit-actions { flex-direction: column; align-items: stretch; gap: 1rem; }
+        .btn-send { width: 100%; text-align: center; padding: 1.1rem 2rem; }
+        .btn-mail { text-align: center; padding: 0.5rem 0; }
+        .fld input, .fld select, .fld textarea { font-size: 1rem; padding: 0.8rem 0; }
       }
 
       @media (max-width: 480px) {
@@ -370,20 +373,26 @@
         .hero-bottom { padding: 0.9rem 1.25rem; }
         .hero-title { font-size: clamp(3.2rem, 18vw, 7rem); }
         .hero-stat:last-of-type { display: none; }
-        .block-num { padding: 1.5rem 1.25rem 0; }
-        .block-body { padding: 1rem 1.25rem 2rem; }
-        .submit-side { padding: 1.5rem 1.25rem 0; }
-        .submit-body { padding: 1rem 1.25rem 3rem; }
+        .block-num { display: none; }
+        .form-block { border-top: 1px solid var(--border); }
+        .block-body { padding: 1.6rem 1.25rem 2.8rem; }
+        .block-body:first-child { padding-top: 1.6rem; }
+        .block-title { font-size: clamp(1.3rem, 6vw, 2rem); margin-bottom: 1.6rem; }
+        .submit-side { display: none; }
+        .submit-body { padding: 1.6rem 1.25rem 3.5rem; }
+        .fld { margin-bottom: 2rem; }
+        .fld label { font-size: 0.55rem; margin-bottom: 0.6rem; }
+        .fld input, .fld select, .fld textarea { font-size: 1rem; padding: 0.85rem 0; }
+        .fld textarea { min-height: 100px; }
+        .hero-cta { display: none; }
       }
 
       @media (max-width: 390px) {
         .topbar { padding: 0 1rem; }
         .hero-content { padding: 0 1rem; }
         .hero-bottom { padding: 0.8rem 1rem; }
-        .block-num { padding: 1.2rem 1rem 0; }
-        .block-body { padding: 0.8rem 1rem 1.5rem; }
-        .submit-side { padding: 1.2rem 1rem 0; }
-        .submit-body { padding: 0.8rem 1rem 2.5rem; }
+        .block-body { padding: 1.4rem 1rem 2.4rem; }
+        .submit-body { padding: 1.4rem 1rem 3rem; }
       }
     </style>
   </head>
@@ -392,7 +401,7 @@
     <!-- Topbar -->
     <header class="topbar" id="topbar">
       <a href="/" class="tb-back">← Zurück</a>
-      <a href="/" class="tb-logo">DOC50</a>
+      <a href="/" class="tb-logo">DOCK50</a>
       <span class="tb-tag">Venue-Buchung</span>
     </header>
 
@@ -540,13 +549,13 @@
     <!-- Ticker -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>DOC50</span><span class="sep">✦</span>
+        <span>DOCK50</span><span class="sep">✦</span>
         <span>Flensburg</span><span class="sep">✦</span>
         <span>Schiffbrücke 50</span><span class="sep">✦</span>
         <span>Event Location</span><span class="sep">✦</span>
         <span>Live Productions</span><span class="sep">✦</span>
         <span>Est. 2025</span><span class="sep">✦</span>
-        <span>DOC50</span><span class="sep">✦</span>
+        <span>DOCK50</span><span class="sep">✦</span>
         <span>Flensburg</span><span class="sep">✦</span>
         <span>Schiffbrücke 50</span><span class="sep">✦</span>
         <span>Event Location</span><span class="sep">✦</span>
@@ -579,9 +588,9 @@
       // ── Mailto ────────────────────────────────────────────────────────────
       function buildMailto() {
         const v = id => (document.getElementById(id).value || "").trim();
-        const subject = encodeURIComponent("Venue-Anfrage – DOC50");
+        const subject = encodeURIComponent("Venue-Anfrage – DOCK50");
         const body = encodeURIComponent(
-`DOC50 Venue-Anfrage
+`DOCK50 Venue-Anfrage
 ────────────────────────────
 Name:          ${v("name")  || "—"}
 Organisation:  ${v("org")   || "—"}
@@ -597,7 +606,7 @@ Nachricht:
 ${v("msg") || "—"}
 ────────────────────────────`
         );
-        return `mailto:info@doc50.de?subject=${subject}&body=${body}`;
+        return `mailto:info@dock50.de?subject=${subject}&body=${body}`;
       }
 
       const mailLink = document.getElementById("mailLink");
