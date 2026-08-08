@@ -614,6 +614,7 @@ window.addEventListener("load", () => {
     const projectIndexEl = document.querySelector(".project-index");
     if (projectIndexEl) gsap.to(projectIndexEl, { opacity: 0, x: -28, duration: 0.22, ease: "power2.in" });
     document.querySelectorAll(".project-connector").forEach(c => gsap.to(c, { opacity: 0, duration: 0.15 }));
+    lenis.stop();
   }
 
   function closeCard(animate = true) {
@@ -635,7 +636,16 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       document.querySelectorAll(".project-connector").forEach(c => gsap.set(c, { clearProps: "opacity" }));
     }, animate ? 260 : 0);
+    lenis.start();
   }
+
+  // Wheel-Events auf das ESP-Panel umleiten, solange es offen ist
+  espPanel.addEventListener("wheel", (e) => {
+    if (openCardIdx === -1) return;
+    e.preventDefault();
+    const scrollTarget = espContent.querySelector(".esp-left");
+    if (scrollTarget) scrollTarget.scrollTop += e.deltaY;
+  }, { passive: false });
 
   espClose.addEventListener("click", () => closeCard(true));
   espBdrop.addEventListener("click", () => closeCard(true));
