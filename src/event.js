@@ -60,6 +60,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const ctaColor = ev.raum === "D50 Skylounge" ? "rgb(212,170,40)" : "#E63289";
   const ctaWrapper = document.getElementById("evCtaWrapper");
   if (ev.hasTicket && ev.ticketUrl) {
-    ctaWrapper.innerHTML = `<a href="${ev.ticketUrl}" class="ev-cta" style="background:${ctaColor};color:#0e0e0e;">Tickets anfragen <span class="ev-cta-arrow">↗</span></a>`;
+    ctaWrapper.innerHTML = `<a href="${ev.ticketUrl}" class="ev-cta" target="_blank" rel="noopener" style="background:${ctaColor};color:#0e0e0e;">Tickets anfragen <span class="ev-cta-arrow">↗</span></a>`;
   }
 });

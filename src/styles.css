@@ -558,6 +558,9 @@ section {
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 140px 100px;
+  padding: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
 
 .spotlight-loc-glow {
@@ -948,14 +951,14 @@ section {
 .lt-view--sky .lt-eyebrow    { color: rgba(212,170,40,0.70); }
 .lt-view--sky .lt-ghost-num  { -webkit-text-stroke: 1px rgba(212,170,40,0.10); }
 .lt-view--sky .lt-rule       { background: linear-gradient(90deg, rgba(212,170,40,0.35) 0%, rgba(255,255,255,0.06) 45%, transparent 100%); }
-.lt-view--sky .lt-cta        { color: rgba(212,170,40,0.45); border-color: rgba(212,170,40,0.20); }
-.lt-view--sky .lt-cta:hover  { color: rgb(212,170,40); border-color: rgba(212,170,40,0.50); background: rgba(212,170,40,0.07); }
+.lt-view--sky .lt-cta        { color: rgba(212,170,40,0.85); border-color: rgba(212,170,40,0.45); }
+.lt-view--sky .lt-cta:hover  { color: rgb(212,170,40); border-color: rgba(212,170,40,0.70); background: rgba(212,170,40,0.07); }
 
 .lt-view--deck1 .lt-eyebrow   { color: rgba(87,191,196,0.65); }
 .lt-view--deck1 .lt-ghost-num { -webkit-text-stroke: 1px rgba(87,191,196,0.08); }
 .lt-view--deck1 .lt-rule      { background: linear-gradient(90deg, rgba(87,191,196,0.30) 0%, rgba(255,255,255,0.06) 45%, transparent 100%); }
-.lt-view--deck1 .lt-cta       { color: rgba(87,191,196,0.45); border-color: rgba(87,191,196,0.20); }
-.lt-view--deck1 .lt-cta:hover { color: rgb(87,191,196); border-color: rgba(87,191,196,0.45); background: rgba(87,191,196,0.07); }
+.lt-view--deck1 .lt-cta       { color: rgba(87,191,196,0.85); border-color: rgba(87,191,196,0.40); }
+.lt-view--deck1 .lt-cta:hover { color: rgb(87,191,196); border-color: rgba(87,191,196,0.65); background: rgba(87,191,196,0.07); }
 
 .lt-ghost-num {
   position: absolute;
@@ -2878,8 +2881,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
-  margin-top: auto;
-  padding-top: 2rem;
+  margin-bottom: 1.8rem;
 }
 
 .esp-ticket {
@@ -3451,6 +3453,8 @@ section {
     overflow: visible;
     padding: 0;
     padding-top: 3rem; /* Abstand zur Filterleiste */
+    -webkit-mask-image: none;
+    mask-image: none;
     background-color: #0e0e0e;
     /* Raster-Design sinngemäß wie Desktop-Version */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cline x1='0' y1='0' x2='0' y2='120' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.055'/%3E%3Cline x1='120' y1='0' x2='120' y2='120' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.055'/%3E%3Cline x1='0' y1='0' x2='120' y2='0' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.055'/%3E%3Cline x1='0' y1='120' x2='120' y2='120' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.055'/%3E%3Cline x1='60' y1='0' x2='60' y2='120' stroke='%23ffffff' stroke-width='0.8' stroke-opacity='0.025'/%3E%3Cline x1='0' y1='60' x2='120' y2='60' stroke='%23ffffff' stroke-width='0.8' stroke-opacity='0.025'/%3E%3Cline x1='0' y1='0' x2='120' y2='120' stroke='%23ffffff' stroke-width='0.8' stroke-opacity='0.035'/%3E%3Ccircle cx='0' cy='0' r='2.5' fill='%23ffffff' fill-opacity='0.14'/%3E%3Ccircle cx='120' cy='0' r='2.5' fill='%23ffffff' fill-opacity='0.14'/%3E%3Ccircle cx='0' cy='120' r='2.5' fill='%23ffffff' fill-opacity='0.14'/%3E%3Ccircle cx='120' cy='120' r='2.5' fill='%23ffffff' fill-opacity='0.14'/%3E%3Ccircle cx='60' cy='0' r='1.8' fill='%23ffffff' fill-opacity='0.08'/%3E%3Ccircle cx='0' cy='60' r='1.8' fill='%23ffffff' fill-opacity='0.08'/%3E%3Ccircle cx='120' cy='60' r='1.8' fill='%23ffffff' fill-opacity='0.08'/%3E%3Ccircle cx='60' cy='120' r='1.8' fill='%23ffffff' fill-opacity='0.08'/%3E%3C/svg%3E");

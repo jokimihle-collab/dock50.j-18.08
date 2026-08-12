@@ -6,6 +6,24 @@ import { parseEventDate, getNearestN } from "./events.js";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// ─── Scroll-Lock (muss VOR Lenis registriert werden, damit capture-Phase zuerst feuert) ──
+window.addEventListener("wheel", (e) => {
+  if (openCardIdx === -1) return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  if (e.target.closest("#eventSidePanel")) {
+    const scrollTarget = document.getElementById("espContent")?.querySelector(".esp-left");
+    if (scrollTarget) scrollTarget.scrollTop += e.deltaY;
+  }
+}, { passive: false, capture: true });
+
+window.addEventListener("touchmove", (e) => {
+  if (openCardIdx === -1) return;
+  if (e.target.closest(".esp-left")) return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+}, { passive: false, capture: true });
+
 // ─── Lenis ───────────────────────────────────────────────────────────────────
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const lenis = new Lenis({ smoothWheel: !prefersReducedMotion, syncTouch: false });
@@ -53,6 +71,8 @@ function renderEvents(events) {
           imgEls[i].appendChild(badge);
         }
         badge.href = ev.ticketUrl || "/anfrage.html";
+        badge.target = "_blank";
+        badge.rel = "noopener";
         badge.textContent = "Tickets ↗";
       } else {
         if (badge) badge.remove();
@@ -111,7 +131,7 @@ function renderMobileEvents(events) {
     if (ticket) {
       e.preventDefault();
       e.stopPropagation();
-      window.location.href = ticket.dataset.ticketUrl;
+      window.open(ticket.dataset.ticketUrl, "_blank", "noopener");
     }
   };
   list.innerHTML = events.map((ev, i) => {
@@ -570,7 +590,7 @@ window.addEventListener("load", () => {
     const dateDisplay = dateParts.length === 3 ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
       : ev.datum;
     const ticketBtn = ev.hasTicket
-      ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank"><span>Tickets anfragen</span><span class="esp-ticket-arrow">↗</span></a>`
+      ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank" rel="noopener"><span>Tickets anfragen</span><span class="esp-ticket-arrow">↗</span></a>`
       : "";
     return `
       <img src="${imgSrc}" class="esp-bg-img" alt="" aria-hidden="true" />
@@ -585,10 +605,8 @@ window.addEventListener("load", () => {
           <span class="esp-loc-label">Location</span>
           <span class="esp-loc-val">${ev.raum}</span>
         </div>
+        ${ticketBtn ? `<div class="esp-actions">${ticketBtn}</div>` : ""}
         <p class="esp-desc">${ev.beschreibung}</p>
-        <div class="esp-actions">
-          ${ticketBtn}
-        </div>
       </div>`;
   }
 
@@ -639,13 +657,6 @@ window.addEventListener("load", () => {
     lenis.start();
   }
 
-  // Wheel-Events auf das ESP-Panel umleiten, solange es offen ist
-  espPanel.addEventListener("wheel", (e) => {
-    if (openCardIdx === -1) return;
-    e.preventDefault();
-    const scrollTarget = espContent.querySelector(".esp-left");
-    if (scrollTarget) scrollTarget.scrollTop += e.deltaY;
-  }, { passive: false });
 
   espClose.addEventListener("click", () => closeCard(true));
   espBdrop.addEventListener("click", () => closeCard(true));
@@ -654,7 +665,8 @@ window.addEventListener("load", () => {
   // Klick auf Bild öffnet/schließt Panel
   document.querySelectorAll(".project-img").forEach((imgEl) => {
     imgEl.style.cursor = "pointer";
-    imgEl.addEventListener("click", () => {
+    imgEl.addEventListener("click", (e) => {
+      if (e.target.closest(".proj-ticket-badge")) return;
       const idx = parseInt(imgEl.dataset.index, 10);
       if (openCardIdx === idx) closeCard(true);
       else openCard(idx);
