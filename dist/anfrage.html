@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anfrage — DOCK50</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
+
+      :root {
+        --font-header: "Special Gothic Expanded One", sans-serif;
+        --font-mono:   "Geist Mono", monospace;
+        --bg:          #171717;
+        --text:        rgba(255,255,255,0.92);
+        --text-mid:    rgba(255,255,255,0.60);
+        --text-dim:    rgba(255,255,255,0.42);
+        --border:      rgba(255,255,255,0.13);
+        --border-hi:   rgba(255,255,255,0.48);
+        --topbar-h:    3.4rem;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html { overflow-x: hidden; scroll-behavior: smooth; }
+
+      body { font-family: "Google Sans", sans-serif; background: var(--bg); color: var(--text); }
+
+      body::before {
+        content: "";
+        position: fixed; inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        background-size: 300px; pointer-events: none; z-index: 0; mix-blend-mode: overlay;
+      }
+
+      /* ═══════════════════════════════════════════
+         TOPBAR
+      ═══════════════════════════════════════════ */
+
+      .topbar {
+        position: fixed; top: 0; left: 0; right: 0;
+        height: var(--topbar-h);
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 2.5rem;
+        z-index: 100;
+        transition: background 0.45s ease, backdrop-filter 0.45s ease, border-color 0.45s ease;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+      }
+
+      .topbar.solid {
+        background: rgba(17,17,17,0.92);
+        backdrop-filter: blur(20px);
+        border-bottom-color: var(--border);
+      }
+
+      .tb-back {
+        font-family: var(--font-mono); font-size: 0.58rem;
+        color: rgba(255,255,255,0.50); letter-spacing: 0.18em;
+        text-transform: uppercase; text-decoration: none;
+        display: flex; align-items: center; gap: 0.4rem;
+        transition: color 0.25s;
+      }
+
+      .tb-back:hover { color: rgba(255,255,255,0.80); }
+
+      .tb-logo {
+        font-family: var(--font-header); font-size: 0.88rem;
+        color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.72);
+        text-decoration: none; justify-self: center;
+      }
+
+      .tb-tag {
+        font-family: var(--font-mono); font-size: 0.52rem;
+        color: rgba(255,255,255,0.25); letter-spacing: 0.18em;
+        text-transform: uppercase; justify-self: end;
+      }
+
+      /* ═══════════════════════════════════════════
+         HERO
+      ═══════════════════════════════════════════ */
+
+      .hero {
+        height: 100svh;
+        position: relative; overflow: hidden;
+        display: flex; flex-direction: column; justify-content: flex-end;
+      }
+
+      .hero-img {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center 25%;
+        z-index: 0;
+      }
+
+      .hero-overlay {
+        position: absolute; inset: 0; z-index: 1;
+        background: linear-gradient(
+          to bottom,
+          rgba(23,23,23,0.42) 0%,
+          rgba(23,23,23,0.12) 30%,
+          rgba(23,23,23,0.55) 70%,
+          rgba(23,23,23,0.92) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative; z-index: 2;
+        padding: 0 2.5rem;
+      }
+
+      .hero-eyebrow {
+        font-family: var(--font-mono); font-size: 0.58rem;
+        color: rgba(255,255,255,0.42); letter-spacing: 0.26em;
+        text-transform: uppercase; margin-bottom: 0.5rem;
+      }
+
+      .hero-title {
+        font-family: var(--font-header);
+        font-size: clamp(5rem, 17vw, 16rem);
+        color: transparent;
+        -webkit-text-stroke: 2px rgba(255,255,255,0.92);
+        letter-spacing: -0.04em; line-height: 0.82;
+        margin-left: -0.05em;
+      }
+
+      .hero-bottom {
+        position: relative; z-index: 2;
+        display: flex; align-items: center;
+        padding: 1.2rem 2.5rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(255,255,255,0.10);
+        gap: 0;
+      }
+
+      .hero-stat {
+        display: flex; flex-direction: column; gap: 0.1rem;
+        padding-right: 2rem; margin-right: 2rem;
+        border-right: 1px solid rgba(255,255,255,0.10);
+      }
+
+      .stat-val {
+        font-family: var(--font-header); font-size: 1.3rem;
+        color: rgba(255,255,255,0.88); letter-spacing: -0.02em; line-height: 1.1;
+      }
+
+      .stat-key {
+        font-family: var(--font-mono); font-size: 0.48rem;
+        color: rgba(255,255,255,0.30); letter-spacing: 0.22em; text-transform: uppercase;
+      }
+
+      .hero-cta {
+        margin-left: auto;
+        font-family: var(--font-mono); font-size: 0.58rem;
+        color: rgba(255,255,255,0.35); letter-spacing: 0.20em;
+        text-transform: uppercase; text-decoration: none;
+        display: flex; align-items: center; gap: 0.5rem;
+        transition: color 0.25s;
+      }
+
+      .hero-cta:hover { color: rgba(255,255,255,0.65); }
+
+      /* ═══════════════════════════════════════════
+         FORM SECTION
+      ═══════════════════════════════════════════ */
+
+      .form-section { position: relative; z-index: 1; background: var(--bg); }
+
+      /* Each block: big number left + fields right */
+
+      .form-block {
+        display: grid;
+        grid-template-columns: clamp(8rem, 16vw, 14rem) 1fr;
+        border-top: 1px solid var(--border);
+      }
+
+      .block-num {
+        font-family: var(--font-header);
+        font-size: clamp(4rem, 9vw, 8rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.18);
+        letter-spacing: -0.04em; line-height: 1;
+        padding: 2.8rem 0 2.8rem 2.5rem;
+        display: flex; align-items: flex-start;
+      }
+
+      .block-body {
+        padding: 2.8rem 2.5rem 2.8rem 2rem;
+        border-left: 1px solid var(--border);
+      }
+
+      .block-title {
+        font-family: var(--font-header);
+        font-size: clamp(1.6rem, 3.5vw, 3rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.72);
+        letter-spacing: -0.02em; line-height: 1;
+        margin-bottom: 2.4rem;
+      }
+
+      /* Fields */
+
+      .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+
+      .fld { margin-bottom: 2rem; }
+
+      .fld label {
+        display: block; font-family: var(--font-mono);
+        font-size: 0.50rem; color: var(--text-dim);
+        letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 0.5rem;
+      }
+
+      .fld label.req::after { content: " *"; color: rgba(255,255,255,0.15); }
+
+      .fld input,
+      .fld select,
+      .fld textarea {
+        width: 100%; background: transparent;
+        border: none; border-bottom: 1px solid rgba(255,255,255,0.10);
+        padding: 0.65rem 0;
+        font-family: var(--font-mono); font-size: 0.86rem;
+        color: var(--text); letter-spacing: 0.04em;
+        outline: none; transition: border-color 0.25s;
+        caret-color: rgba(255,255,255,0.6);
+        -webkit-appearance: none; appearance: none; border-radius: 0;
+      }
+
+      .fld input::placeholder,
+      .fld textarea::placeholder { color: rgba(255,255,255,0.22); }
+
+      .fld input:focus,
+      .fld select:focus,
+      .fld textarea:focus { border-bottom-color: var(--border-hi); }
+
+      .fld input.err,
+      .fld select.err { border-bottom-color: rgba(255,70,70,0.55); }
+
+      .fld select {
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.28)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: right 0 center;
+        padding-right: 1.2rem; color: var(--text);
+      }
+
+      .fld select option { background: #1c1c1c; color: #fff; }
+
+      .fld select option[value=""] { color: rgba(255,255,255,0.28); }
+
+      .fld textarea { resize: vertical; min-height: 130px; line-height: 1.65; }
+
+      /* Submit block */
+
+      .form-submit {
+        border-top: 1px solid var(--border);
+        display: grid;
+        grid-template-columns: clamp(8rem, 16vw, 14rem) 1fr;
+      }
+
+      .submit-side {
+        padding: 2.8rem 0 4rem 2.5rem;
+        display: flex; align-items: flex-start;
+        font-family: var(--font-header);
+        font-size: clamp(2rem, 5vw, 4.5rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+        letter-spacing: -0.04em; line-height: 1;
+      }
+
+      .submit-body {
+        padding: 2.8rem 2.5rem 4rem 2rem;
+        border-left: 1px solid var(--border);
+        display: flex; flex-direction: column; justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .submit-headline {
+        font-family: var(--font-header);
+        font-size: clamp(1.4rem, 3vw, 2.6rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255,255,255,0.70);
+        letter-spacing: -0.02em; line-height: 1;
+      }
+
+      .submit-note {
+        font-family: var(--font-mono); font-size: 0.52rem;
+        color: rgba(255,255,255,0.30); letter-spacing: 0.08em; line-height: 1.7;
+      }
+
+      .submit-actions { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+
+      .btn-send {
+        font-family: var(--font-mono); font-size: 0.68rem;
+        color: rgba(255,255,255,0.95); letter-spacing: 0.22em;
+        text-transform: uppercase; padding: 1rem 2.4rem;
+        border: 1px solid rgba(255,255,255,0.28);
+        background: rgba(255,255,255,0.05);
+        cursor: pointer; transition: background 0.3s, border-color 0.3s;
+        white-space: nowrap;
+      }
+
+      .btn-send:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.52); }
+
+      .btn-mail {
+        font-family: var(--font-mono); font-size: 0.58rem;
+        color: rgba(255,255,255,0.40); letter-spacing: 0.14em;
+        text-transform: uppercase; text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.16);
+        padding-bottom: 0.15rem; transition: color 0.25s;
+      }
+
+      .btn-mail:hover { color: rgba(255,255,255,0.70); }
+
+      /* ═══════════════════════════════════════════
+         SUCCESS
+      ═══════════════════════════════════════════ */
+
+      .success { display: none; padding: 8rem 2.5rem; text-align: center; }
+
+      .success.show { display: block; }
+
+      .success-mark {
+        font-family: var(--font-header); font-size: 3.5rem;
+        color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+        margin-bottom: 2rem;
+      }
+
+      .success-title {
+        font-family: var(--font-header);
+        font-size: clamp(2.5rem, 7vw, 6rem);
+        color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.78);
+        letter-spacing: -0.03em; margin-bottom: 1.2rem;
+      }
+
+      .success-sub {
+        font-family: var(--font-mono); font-size: 0.76rem;
+        color: var(--text-mid); line-height: 1.8; letter-spacing: 0.06em;
+        margin-bottom: 2.5rem;
+      }
+
+      .success-link {
+        font-family: var(--font-mono); font-size: 0.62rem;
+        color: rgba(255,255,255,0.25); letter-spacing: 0.18em;
+        text-transform: uppercase; text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.09);
+        padding-bottom: 0.2rem; transition: color 0.25s;
+      }
+
+      .success-link:hover { color: rgba(255,255,255,0.55); }
+
+      /* ═══════════════════════════════════════════
+         TICKER
+      ═══════════════════════════════════════════ */
+
+      .ticker {
+        overflow: hidden; width: 100%;
+        padding: 1.2rem 0;
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .ticker-track {
+        display: flex; gap: 2rem; white-space: nowrap;
+        animation: tickerScroll 22s linear infinite; width: max-content;
+      }
+
+      .ticker-track span {
+        font-family: var(--font-mono); font-size: 0.55rem;
+        color: rgba(255,255,255,0.25); letter-spacing: 0.22em;
+        text-transform: uppercase; flex-shrink: 0;
+      }
+
+      .ticker-track .sep { color: rgba(255,255,255,0.14); }
+
+      @keyframes tickerScroll {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+
+      /* ═══════════════════════════════════════════
+         CURSOR
+      ═══════════════════════════════════════════ */
+
+      #cur {
+        width: 12px; height: 12px; border-radius: 50%;
+        position: fixed; top: 0; left: 0; z-index: 9999;
+        background: white; pointer-events: none;
+        mix-blend-mode: difference; transform: translate(-50%,-50%);
+        transition: transform 0.12s ease, scale 0.2s ease;
+      }
+
+      /* ═══════════════════════════════════════════
+         RESPONSIVE
+      ═══════════════════════════════════════════ */
+
+      @media (hover: none) { #cur { display: none; } }
+
+      @media (max-width: 900px) {
+        .hero-title { font-size: clamp(4rem, 18vw, 10rem); }
+        .form-block { grid-template-columns: 1fr; }
+        .block-num {
+          font-size: clamp(3rem, 10vw, 5rem);
+          padding: 2rem 1.5rem 0.5rem;
+          border-bottom: none;
+        }
+        .block-body { padding: 1.4rem 1.5rem 3rem; border-left: none; }
+        .form-submit { grid-template-columns: 1fr; }
+        .submit-side { padding: 2rem 1.5rem 0; font-size: clamp(1.8rem, 8vw, 3rem); }
+        .submit-body { padding: 1.4rem 1.5rem 3.5rem; border-left: none; }
+        .fld { margin-bottom: 2.4rem; }
+        .block-title { margin-bottom: 2rem; font-size: clamp(1.4rem, 5vw, 2.4rem); }
+      }
+
+      @media (max-width: 768px) {
+        .topbar { padding: 0 1.5rem; }
+        .hero-content { padding: 0 1.5rem; }
+        .hero-bottom { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.6rem; }
+        .hero-stat { padding-right: 1.2rem; margin-right: 1.2rem; }
+        .frow { grid-template-columns: 1fr; gap: 0; }
+        .submit-actions { flex-direction: column; align-items: stretch; gap: 1rem; }
+        .btn-send { width: 100%; text-align: center; padding: 1.1rem 2rem; }
+        .btn-mail { text-align: center; padding: 0.5rem 0; }
+        .fld input, .fld select, .fld textarea { font-size: 1rem; padding: 0.8rem 0; }
+      }
+
+      @media (max-width: 480px) {
+        .topbar { padding: 0 1.25rem; }
+        .tb-tag { display: none; }
+        .hero-content { padding: 0 1.25rem; }
+        .hero-bottom { padding: 0.9rem 1.25rem; }
+        .hero-title { font-size: clamp(3.2rem, 18vw, 7rem); }
+        .hero-stat:last-of-type { display: none; }
+        .block-num { display: none; }
+        .form-block { border-top: 1px solid var(--border); }
+        .block-body { padding: 1.6rem 1.25rem 2.8rem; }
+        .block-body:first-child { padding-top: 1.6rem; }
+        .block-title { font-size: clamp(1.3rem, 6vw, 2rem); margin-bottom: 1.6rem; }
+        .submit-side { display: none; }
+        .submit-body { padding: 1.6rem 1.25rem 3.5rem; }
+        .fld { margin-bottom: 2rem; }
+        .fld label { font-size: 0.55rem; margin-bottom: 0.6rem; }
+        .fld input, .fld select, .fld textarea { font-size: 1rem; padding: 0.85rem 0; }
+        .fld textarea { min-height: 100px; }
+        .hero-cta { display: none; }
+      }
+
+      @media (max-width: 390px) {
+        .topbar { padding: 0 1rem; }
+        .hero-content { padding: 0 1rem; }
+        .hero-bottom { padding: 0.8rem 1rem; }
+        .block-body { padding: 1.4rem 1rem 2.4rem; }
+        .submit-body { padding: 1.4rem 1rem 3rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Topbar -->
+    <header class="topbar" id="topbar">
+      <a href="/" class="tb-back">← Zurück</a>
+      <a href="/" class="tb-logo">DOCK50</a>
+      <span class="tb-tag">Venue-Buchung</span>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img src="./hero-bg.jpg" alt="DOCK50 Venue" class="hero-img" />
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">Schiffbrücke 50 · 24939 Flensburg</p>
+        <h1 class="hero-title">ANFRAGEN</h1>
+      </div>
+
+      <div class="hero-bottom">
+        <div class="hero-stat">
+          <span class="stat-val">850</span>
+          <span class="stat-key">Max. Gäste</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-val">2</span>
+          <span class="stat-key">Locations</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-val">48 h</span>
+          <span class="stat-key">Antwortzeit</span>
+        </div>
+        <a href="#formSection" class="hero-cta">Anfrage starten ↓</a>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section class="form-section" id="formSection">
+      <div id="formBody">
+
+        <!-- 01 · Kontakt -->
+        <div class="form-block">
+          <div class="block-num">01</div>
+          <div class="block-body">
+            <h2 class="block-title">KONTAKTDATEN</h2>
+            <div class="frow">
+              <div class="fld">
+                <label for="name" class="req">Name</label>
+                <input id="name" type="text" placeholder="Vor- und Nachname" autocomplete="name" />
+              </div>
+              <div class="fld">
+                <label for="email" class="req">E-Mail</label>
+                <input id="email" type="email" placeholder="ihre@email.de" autocomplete="email" />
+              </div>
+            </div>
+            <div class="frow">
+              <div class="fld">
+                <label for="org">Organisation</label>
+                <input id="org" type="text" placeholder="Firma / Verband (optional)" />
+              </div>
+              <div class="fld">
+                <label for="phone">Telefon</label>
+                <input id="phone" type="tel" placeholder="+49 …" autocomplete="tel" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 · Event -->
+        <div class="form-block">
+          <div class="block-num">02</div>
+          <div class="block-body">
+            <h2 class="block-title">VERANSTALTUNG</h2>
+            <div class="frow">
+              <div class="fld">
+                <label for="type" class="req">Art der Veranstaltung</label>
+                <select id="type">
+                  <option value="" disabled selected>Bitte wählen …</option>
+                  <option>Konzert / Live-Musik</option>
+                  <option>Firmenveranstaltung</option>
+                  <option>Private Feier</option>
+                  <option>Festival / Mehrtages-Event</option>
+                  <option>Messe / Ausstellung</option>
+                  <option>Theater / Bühne</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
+              <div class="fld">
+                <label for="guests" class="req">Gästeanzahl</label>
+                <select id="guests">
+                  <option value="" disabled selected>Bitte wählen …</option>
+                  <option>bis 100</option>
+                  <option>100 – 250</option>
+                  <option>250 – 500</option>
+                  <option>500 – 850</option>
+                  <option>Anfrage: über 850</option>
+                </select>
+              </div>
+            </div>
+            <div class="frow">
+              <div class="fld">
+                <label for="from">Datum von</label>
+                <input id="from" type="date" />
+              </div>
+              <div class="fld">
+                <label for="to">Datum bis <span style="opacity:0.4">(optional)</span></label>
+                <input id="to" type="date" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 · Nachricht -->
+        <div class="form-block">
+          <div class="block-num">03</div>
+          <div class="block-body">
+            <h2 class="block-title">IHRE NACHRICHT</h2>
+            <div class="fld">
+              <label for="msg">Beschreibung des Events</label>
+              <textarea id="msg" placeholder="Kurze Beschreibung, besondere Anforderungen, technischer Bedarf …"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-submit">
+          <div class="submit-side">↗</div>
+          <div class="submit-body">
+            <div>
+              <p class="submit-headline">ANFRAGE ABSENDEN</p>
+              <p class="submit-note" style="margin-top:0.6rem;">* Pflichtfelder · Wir antworten innerhalb von 48 Stunden.</p>
+            </div>
+            <div class="submit-actions">
+              <button class="btn-send" id="submitBtn">Anfrage senden ↗</button>
+              <a href="#" class="btn-mail" id="mailLink">Per E-Mail öffnen</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /formBody -->
+
+      <!-- Erfolg -->
+      <div class="success" id="successMsg">
+        <div class="success-mark">✦</div>
+        <p class="success-title">DANKE.</p>
+        <p class="success-sub">Ihre Anfrage wurde gesendet.<br/>Wir melden uns innerhalb von 48 Stunden.</p>
+        <a href="/" class="success-link">← Zurück zur Website</a>
+      </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>DOCK50</span><span class="sep">✦</span>
+        <span>Flensburg</span><span class="sep">✦</span>
+        <span>Schiffbrücke 50</span><span class="sep">✦</span>
+        <span>Event Location</span><span class="sep">✦</span>
+        <span>Live Productions</span><span class="sep">✦</span>
+        <span>Est. 2025</span><span class="sep">✦</span>
+        <span>DOCK50</span><span class="sep">✦</span>
+        <span>Flensburg</span><span class="sep">✦</span>
+        <span>Schiffbrücke 50</span><span class="sep">✦</span>
+        <span>Event Location</span><span class="sep">✦</span>
+        <span>Live Productions</span><span class="sep">✦</span>
+        <span>Est. 2025</span><span class="sep">✦</span>
+      </div>
+    </div>
+
+    <div id="cur"></div>
+
+    <script>
+      // ── Cursor ────────────────────────────────────────────────────────────
+      const cur = document.getElementById("cur");
+      window.addEventListener("mousemove", e => {
+        cur.style.left = e.clientX + "px";
+        cur.style.top  = e.clientY + "px";
+      });
+      document.querySelectorAll("a, button, input, select, textarea").forEach(el => {
+        el.addEventListener("mouseenter", () => cur.style.scale = "3.5");
+        el.addEventListener("mouseleave", () => cur.style.scale = "1");
+      });
+
+      // ── Topbar scroll ─────────────────────────────────────────────────────
+      const topbar = document.getElementById("topbar");
+      const heroH  = () => window.innerHeight * 0.75;
+      window.addEventListener("scroll", () => {
+        topbar.classList.toggle("solid", window.scrollY > heroH());
+      }, { passive: true });
+
+      // ── Mailto ────────────────────────────────────────────────────────────
+      function buildMailto() {
+        const v = id => (document.getElementById(id).value || "").trim();
+        const subject = encodeURIComponent("Venue-Anfrage – DOCK50");
+        const body = encodeURIComponent(
+`DOCK50 Venue-Anfrage
+────────────────────────────
+Name:          ${v("name")  || "—"}
+Organisation:  ${v("org")   || "—"}
+E-Mail:        ${v("email") || "—"}
+Telefon:       ${v("phone") || "—"}
+
+Veranstaltung: ${document.getElementById("type").value   || "—"}
+Gästeanzahl:   ${document.getElementById("guests").value || "—"}
+Datum von:     ${v("from") || "—"}
+Datum bis:     ${v("to")   || "—"}
+
+Nachricht:
+${v("msg") || "—"}
+────────────────────────────`
+        );
+        return `mailto:info@dock50.de?subject=${subject}&body=${body}`;
+      }
+
+      const mailLink = document.getElementById("mailLink");
+      document.querySelectorAll("input, select, textarea").forEach(el => {
+        el.addEventListener("input",  () => mailLink.href = buildMailto());
+        el.addEventListener("change", () => mailLink.href = buildMailto());
+      });
+      mailLink.href = buildMailto();
+
+      // ── Submit ────────────────────────────────────────────────────────────
+      document.getElementById("submitBtn").addEventListener("click", () => {
+        const fields = [
+          document.getElementById("name"),
+          document.getElementById("email"),
+          document.getElementById("type"),
+          document.getElementById("guests"),
+        ];
+        let ok = true;
+        fields.forEach(f => {
+          if (!f.value.trim()) {
+            f.classList.add("err");
+            ok = false;
+            setTimeout(() => f.classList.remove("err"), 2500);
+          }
+        });
+        if (!ok) return;
+
+        window.location.href = buildMailto();
+        setTimeout(() => {
+          document.getElementById("formBody").style.display = "none";
+          document.getElementById("successMsg").classList.add("show");
+        }, 800);
+      });
+    </script>
+  </body>
+</html>
