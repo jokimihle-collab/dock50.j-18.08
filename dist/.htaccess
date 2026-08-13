@@ -1,0 +1,14 @@
+# MIME types for Vite build
+AddType application/javascript .js .mjs
+AddType text/css .css
+AddType image/svg+xml .svg
+AddType application/json .json
+AddType font/otf .otf
+AddType font/ttf .ttf
+AddType font/woff .woff
+AddType font/woff2 .woff2
+
+# Enable CORS for fonts
+<FilesMatch "\.(ttf|otf|woff|woff2)$">
+  Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
