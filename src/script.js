@@ -106,18 +106,24 @@ function renderEvents(events) {
     }
   });
 
-  // Slots jenseits events.length ausblenden (z.B. wenn Pool < 16)
+  // Leere Slots komplett ausblenden (display:none → nehmen keinen Platz)
+  const allDividers = document.querySelectorAll(".project-divider");
   imgEls.forEach((imgEl, i) => {
     if (i >= events.length) {
       const img = imgEl.querySelector("img");
       if (img) img.src = "";
-      imgEl.style.visibility = "hidden";
+      imgEl.classList.add("event-hidden");
     } else {
-      imgEl.style.visibility = "";
+      imgEl.classList.remove("event-hidden");
     }
   });
+  allDividers.forEach((div, i) => {
+    if (i >= events.length) div.classList.add("event-hidden");
+    else                    div.classList.remove("event-hidden");
+  });
   nameEls.forEach((nameEl, i) => {
-    nameEl.style.visibility = i < events.length ? "" : "hidden";
+    if (i >= events.length) nameEl.classList.add("event-hidden");
+    else                    nameEl.classList.remove("event-hidden");
   });
 
   const pidxEl = document.querySelector(".project-index h2");
@@ -128,6 +134,7 @@ function renderEvents(events) {
 let spST          = null;   // spotlight ScrollTrigger instance
 let openCardIdx   = -1;     // index of currently open side panel (-1 = closed)
 let currentCount  = 8;      // how many events are currently shown (8 or 16)
+let visibleCount  = 8;      // tatsächlich sichtbare Events (≤ currentCount, abhängig vom Pool)
 let currentFilter = "all";  // active filter key
 
 // ─── Mobile Event List ───────────────────────────────────────────────────────
@@ -188,11 +195,12 @@ function initSpotlight() {
   if (!spotlightSection) return;
 
   const projectIndex           = spotlightSection.querySelector(".project-index h2");
-  const projectImgs            = spotlightSection.querySelectorAll(".project-img:not(.spotlight-extra)");
+  const projectImgs            = spotlightSection.querySelectorAll(".project-img:not(.spotlight-extra):not(.event-hidden)");
   const projectImagesContainer = spotlightSection.querySelector(".project-images");
-  const projectNameItems       = spotlightSection.querySelectorAll(".project-name-item:not(.spotlight-extra)");
+  const projectNameItems       = spotlightSection.querySelectorAll(".project-name-item:not(.spotlight-extra):not(.event-hidden)");
   const connector              = spotlightSection.querySelector(".project-connector");
   const totalProjectCount      = projectNameItems.length;
+  visibleCount                 = totalProjectCount;
 
   if (!projectIndex || !projectImagesContainer || totalProjectCount === 0) {
     console.warn("Spotlight: Pflicht-Elemente fehlen");
@@ -206,7 +214,7 @@ function initSpotlight() {
   const moveDistImages = VH - imgsH;
 
   const firstImg     = projectImgs[0];
-  const firstDivider = spotlightSection.querySelector(".project-divider:not(.spotlight-extra)");
+  const firstDivider = spotlightSection.querySelector(".project-divider:not(.spotlight-extra):not(.event-hidden)");
   const imgH         = firstImg     ? firstImg.offsetHeight     : VH * 0.197;
   const divH         = firstDivider ? firstDivider.offsetHeight : VH * 0.10;
   const halfSpan     = (imgH + 2 * divH) / 2;
@@ -263,7 +271,7 @@ function initSpotlight() {
     return p ? p.textContent.trim() : "";
   });
 
-  const projectDividers = spotlightSection.querySelectorAll(".project-divider:not(.spotlight-extra)");
+  const projectDividers = spotlightSection.querySelectorAll(".project-divider:not(.spotlight-extra):not(.event-hidden)");
 
   projectDividers.forEach((div, di) => {
     const wrapper = document.createElement("div");
@@ -915,7 +923,7 @@ window.addEventListener("load", () => {
   ScrollTrigger.create({
     trigger: ".spotlight",
     start: "top top",
-    end: () => `+=${window.innerHeight * (currentCount === 16 ? 10 : 5)}px`,
+    end: () => `+=${window.innerHeight * visibleCount * 5 / 8}px`,
     onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
     onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
     onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },

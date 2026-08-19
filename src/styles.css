@@ -2551,6 +2551,10 @@ section {
 .spotlight-extra {
   display: none;
 }
+/* Leere Event-Slots (kein Datensatz) komplett ausblenden */
+.event-hidden {
+  display: none !important;
+}
 
 /* gleitende Markierungslinie links */
 .ef-indicator {
