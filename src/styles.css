@@ -1104,6 +1104,19 @@ section {
 .lt-cta-arrow { transition: transform 0.25s ease; }
 .lt-cta:hover .lt-cta-arrow { transform: translate(3px, -3px); }
 
+/* ── Desktop: Tabs oben ──────────────────────────────────────────────── */
+@media (min-width: 1025px) {
+  .lt-tabs {
+    order: -1;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    border-top: none;
+  }
+
+  .lt-tab        { padding: 2.2rem 2rem 1.95rem; }
+  .lt-tab--sky   { padding-left: 2rem; }
+  .lt-tab--deck1 { align-items: flex-end; }
+}
+
 
 
 

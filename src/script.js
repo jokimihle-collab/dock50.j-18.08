@@ -624,7 +624,7 @@ window.addEventListener("load", () => {
     const dateDisplay = dateParts.length === 3 ? `${dateParts[0]} — ${dateParts[1]} — ${dateParts[2]}`
       : ev.datum;
     const ticketBtn = ev.hasTicket
-      ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank" rel="noopener"><span>Tickets anfragen</span><span class="esp-ticket-arrow">↗</span></a>`
+      ? `<a href="${ev.ticketUrl}" class="esp-ticket" target="_blank" rel="noopener"><span>Tickets</span><span class="esp-ticket-arrow">↗</span></a>`
       : "";
     return `
       <img src="${imgSrc}" class="esp-bg-img" alt="" aria-hidden="true" />
