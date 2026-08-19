@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
-import { parseEventDate, getNearestN } from "./events.js";
+import { parseEventDate, getNearestN, eventLibrary } from "./events.js";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -1334,6 +1334,26 @@ window.addEventListener("load", () => {
     }, { passive: true });
     startAuto();
   }
+  // Slider-Slides mit Event-Bildern aus der Datenbank befüllen
+  function fillSliderWithEvents(sliderEl, raum, startSlide) {
+    if (!sliderEl) return;
+    const imgs    = sliderEl.querySelectorAll(".lt-slide img");
+    const usedSrcs = new Set(Array.from(imgs).slice(0, startSlide).map(img => img.src));
+    const events  = eventLibrary.filter(ev => {
+      if (ev.raum !== raum || !ev.bildGross) return false;
+      if (usedSrcs.has(ev.bildGross)) return false;
+      usedSrcs.add(ev.bildGross);
+      return true;
+    });
+    for (let i = startSlide; i < imgs.length; i++) {
+      const ev = events[i - startSlide];
+      if (ev) { imgs[i].src = ev.bildGross; imgs[i].alt = ev.titel; }
+    }
+  }
+
+  fillSliderWithEvents(document.getElementById("sliderSky"),   "D50 Skylounge", 1);
+  fillSliderWithEvents(document.getElementById("sliderDeck1"), "D50 Deck 1",    2);
+
   initSlider(document.getElementById("sliderSky"));
   initSlider(document.getElementById("sliderDeck1"));
 
