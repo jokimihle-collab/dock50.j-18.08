@@ -13,7 +13,12 @@ window.addEventListener("wheel", (e) => {
   e.stopImmediatePropagation();
   if (e.target.closest("#eventSidePanel")) {
     const scrollTarget = document.getElementById("espContent")?.querySelector(".esp-left");
-    if (scrollTarget) scrollTarget.scrollTop += e.deltaY;
+    if (scrollTarget) {
+      let dy = e.deltaY;
+      if (e.deltaMode === 1) dy *= 16;
+      else if (e.deltaMode === 2) dy *= window.innerHeight;
+      scrollTarget.scrollTop += dy;
+    }
   }
 }, { passive: false, capture: true });
 
@@ -23,6 +28,12 @@ window.addEventListener("touchmove", (e) => {
   e.preventDefault();
   e.stopImmediatePropagation();
 }, { passive: false, capture: true });
+
+window.addEventListener("keydown", (e) => {
+  if (openCardIdx === -1) return;
+  const scrollKeys = ["Space","ArrowDown","ArrowUp","PageDown","PageUp","Home","End"];
+  if (scrollKeys.includes(e.code)) e.preventDefault();
+});
 
 // ─── Lenis ───────────────────────────────────────────────────────────────────
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -86,9 +97,9 @@ function renderEvents(events) {
       nameEls[i].dataset.location = ev.raum;
     }
     if (divNums[i]) {
-      const venueAbbr = ev.raum === "D50 Skylounge" ? "SL" : "D1";
-      const dateStr   = `20${ev.datum.slice(-2)}`;
-      divNums[i].textContent = `${String(i + 1).padStart(2, "0")} — ${venueAbbr} · ${dateStr}`;
+      const venue = ev.raum || ev.veranstaltort || "";
+      const parts = [venue, ev.rubrik, ev.beginn].filter(Boolean);
+      divNums[i].textContent = parts.join(" · ");
     }
     if (dividerTitleEls[i]) {
       dividerTitleEls[i].textContent = ev.titel;
@@ -344,6 +355,20 @@ function initSpotlight() {
     });
   }
 
+  // ─── quickSetters für onUpdate Performance ──────────────────────────
+  const qsImgsY        = gsap.quickSetter(projectImagesContainer, "y", "px");
+  const qsIdxOpacity   = gsap.quickSetter(projectIndex, "opacity");
+  const qsConnDisplay  = connector     ? gsap.quickSetter(connector, "display")     : null;
+  const qsConnLeft     = connector     ? gsap.quickSetter(connector, "left", "px")  : null;
+  const qsConnTop      = connector     ? gsap.quickSetter(connector, "top", "px")   : null;
+  const qsConnWidth    = connector     ? gsap.quickSetter(connector, "width", "px") : null;
+  const qsConnOpacity  = connector     ? gsap.quickSetter(connector, "opacity")     : null;
+  const qsConnLDisplay = connectorLeft ? gsap.quickSetter(connectorLeft, "display")     : null;
+  const qsConnLLeft    = connectorLeft ? gsap.quickSetter(connectorLeft, "left", "px")  : null;
+  const qsConnLTop     = connectorLeft ? gsap.quickSetter(connectorLeft, "top", "px")   : null;
+  const qsConnLWidth   = connectorLeft ? gsap.quickSetter(connectorLeft, "width", "px") : null;
+  const qsConnLOpacity = connectorLeft ? gsap.quickSetter(connectorLeft, "opacity")     : null;
+
   // ─── ScrollTrigger ───────────────────────────────────────────────────
   spST = ScrollTrigger.create({
     trigger: spotlightSection,
@@ -355,12 +380,12 @@ function initSpotlight() {
       const progress  = self.progress;
       const scrollDir = self.direction;
 
-      gsap.set(projectImagesContainer, { y: progress * moveDistImages });
+      qsImgsY(progress * moveDistImages);
       const moreBtn = document.getElementById("eventMoreBtn");
       if (moreBtn) gsap.set(moreBtn, { y: progress * moveDistImages, xPercent: -50 });
 
       const dateOpacity = Math.min(1, progress / 0.04) * Math.min(1, (1 - progress) / 0.02);
-      gsap.set(projectIndex, { opacity: dateOpacity });
+      qsIdxOpacity(dateOpacity);
 
       let N = 0;
       for (let i = totalProjectCount - 1; i >= 0; i--) {
@@ -394,33 +419,34 @@ function initSpotlight() {
           const lineX  = imgR.right + 10;
           const lineW  = Math.max(0, itemR.left - lineX - 10);
           const rightY = itemR.top + itemR.height / 2;
-          gsap.set(connector, {
-            display: "flex", left: lineX, top: rightY,
-            width: lineW, opacity: dateOpacity > 0.15 ? 0.5 : 0,
-          });
+          const connOpacity = dateOpacity > 0.15 ? 0.5 : 0;
+          qsConnDisplay("flex"); qsConnLeft(lineX); qsConnTop(rightY);
+          qsConnWidth(lineW); qsConnOpacity(connOpacity);
 
           const leftLineEnd   = imgR.left - 10;
           const leftLineStart = idxR.right + 10;
           const leftLineW     = Math.max(0, leftLineEnd - leftLineStart);
           const leftY         = idxR.top + idxR.height / 2;
-          gsap.set(connectorLeft, {
-            display: "flex", left: leftLineStart, top: leftY,
-            width: leftLineW, opacity: dateOpacity > 0.15 ? 0.5 : 0,
-          });
+          qsConnLDisplay("flex"); qsConnLLeft(leftLineStart); qsConnLTop(leftY);
+          qsConnLWidth(leftLineW); qsConnLOpacity(connOpacity);
         } else {
-          gsap.set(connector,     { opacity: 0 });
-          gsap.set(connectorLeft, { opacity: 0 });
+          qsConnOpacity(0);
+          qsConnLOpacity(0);
         }
       }
 
     },
   });
 
-  // Button initial unter dem letzten Bild positionieren
+  // Button initial unter dem letzten sichtbaren Divider positionieren
   const moreBtnEl  = document.getElementById("eventMoreBtn");
   const lastImg    = projectImgs[projectImgs.length - 1];
   if (moreBtnEl && lastImg) {
-    const btnInitialTop = lastImg.offsetTop + lastImg.offsetHeight + 24;
+    const trailingDivider = lastImg.nextElementSibling?.classList.contains("project-divider")
+      ? lastImg.nextElementSibling
+      : null;
+    const refEl = trailingDivider || lastImg;
+    const btnInitialTop = refEl.offsetTop + refEl.offsetHeight + 24;
     gsap.set(moreBtnEl, { top: btnInitialTop, y: 0, xPercent: -50 });
   }
 
@@ -651,10 +677,11 @@ window.addEventListener("load", () => {
     );
     const projectIndexEl2 = document.querySelector(".project-index");
     if (projectIndexEl2) gsap.to(projectIndexEl2, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out", delay: animate ? 0.1 : 0 });
+    requestAnimationFrame(() => applySlots(lastValidN));
     setTimeout(() => {
       document.querySelectorAll(".project-connector").forEach(c => gsap.set(c, { clearProps: "opacity" }));
     }, animate ? 260 : 0);
-    lenis.start();
+    if (!document.getElementById("Navbar")?.classList.contains("nav-open")) lenis.start();
   }
 
 
@@ -1127,7 +1154,14 @@ window.addEventListener("load", () => {
   const isTouch    = navigator.maxTouchPoints > 0;
 
   lenis.on("scroll", () => {
-    if (isSnapping) return;
+    // Wenn ein Snap lief aber Lenis am Ziel angekommen ist (oder vom User abgebrochen wurde), sofort freigeben
+    if (isSnapping) {
+      if (Math.abs(lenis.animatedScroll - lenis.targetScroll) < 1) {
+        isSnapping = false;
+        clearTimeout(snapSafetyTimer);
+      }
+      return;
+    }
     clearTimeout(snapTimer);
     snapTimer = setTimeout(() => {
       const isMobile = isTouch && window.innerWidth <= 1000;
@@ -1141,12 +1175,11 @@ window.addEventListener("load", () => {
       if (snapTarget && minDist > 2) {
         isSnapping = true;
         clearTimeout(snapSafetyTimer);
-        snapSafetyTimer = setTimeout(() => { isSnapping = false; }, 1200);
+        snapSafetyTimer = setTimeout(() => { isSnapping = false; }, 600);
         const exactTop = snapTarget.getBoundingClientRect().top + window.scrollY;
         lenis.scrollTo(exactTop, {
           duration: isMobile ? 0.45 : 0.55,
           easing: (t) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
-          onComplete: () => { isSnapping = false; clearTimeout(snapSafetyTimer); },
         });
       }
     }, isTouch ? 220 : 80);
@@ -1185,7 +1218,7 @@ window.addEventListener("load", () => {
         navbar.classList.remove("nav-open");
         menuBtn.classList.remove("active");
         menuBtn.setAttribute("aria-expanded", "false");
-        lenis.start();
+        if (openCardIdx === -1) lenis.start();
       }, 200);
     }
 

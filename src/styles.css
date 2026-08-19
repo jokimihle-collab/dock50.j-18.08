@@ -408,6 +408,7 @@ section {
   display: block;
   object-fit: cover;
   object-position: center;
+  aspect-ratio: 16/9;
 }
 
 .proj-ticket-badge {
@@ -650,6 +651,7 @@ section {
 .location {
   position: relative;
   height: 100vh;
+  height: 100svh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -857,6 +859,7 @@ section {
   justify-content: center;
   transition: background 0.2s, border-color 0.2s;
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .lt-arrow:hover { background: var(--accent-pink); border-color: var(--accent-pink); }
@@ -2734,6 +2737,7 @@ section {
   justify-content: center;
   transition: all 0.18s ease;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .esp-close:hover {
   border-color: rgba(255,255,255,0.5);
