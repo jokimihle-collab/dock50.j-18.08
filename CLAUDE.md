@@ -43,3 +43,19 @@ All animations trigger inside the `ScrollTrigger.create` `onUpdate` callback —
 - Feldnamen: `id`, `titel`, `untertitel`, `beschreibung`, `datum`, `einlass`, `beginn`, `veranstaltort`, `raum`, `veranstalter`, `rubrik`, `preis`, `status`, `externeUrl`, `ticketUrl`, `zusatzoption`, `bildGross`, `bildKlein`
 - `raum`-Werte: `"D50 Deck 1"`, `"D50 Skylounge"` oder `""` (leer)
 - `hasTicket` wird per `deriveHasTicket()` abgeleitet (true wenn `ticketUrl` nicht leer)
+
+## Dist-Build für Testserver (wirtesten.dock50.de)
+
+Der Testserver ist ein WordPress-Apache-Server (`/usr/share/wordpress`). Die `.htaccess` hat alle Rewrite-Regeln auskommentiert und kann nicht geändert werden. Dateien im Root werden ausgeliefert, **aber der `assets/`-Unterordner gibt 404**.
+
+Nach `npm run build` müssen folgende Anpassungen am `dist/`-Ordner gemacht werden:
+
+1. **CSS inline einbetten** — Inhalt von `dist/assets/main-XXXX.css` als `<style>` in `index.html` einfügen, `<link rel="stylesheet">` entfernen
+2. **JS inline einbetten** — Events-JS: `export{i as n,r,a as t}` → `window.__ev={n:i,r:r,t:a}`. Main-JS: `import{n as e,r as t}from"./events-XXXX.js"` → `const{n:e,r:t}=window.__ev`. Für `event.html`: `import{r as e,t}from"./events-XXXX.js"` → `const{r:e,t}=window.__ev`
+3. **`type="module"` auf allen inline `<script>` Tags** — ohne das: Variablen kollidieren (gleicher Scope) und Scripts laufen vor DOM-Parsing (GSAP/Lenis finden nichts)
+4. **Alle Pfade relativ** — `src="/bild.jpg"` → `src="./bild.jpg"`, `href="/seite.html"` → `href="./seite.html"`
+5. **Font-Pfade in inline CSS** — `url(./fonts/...)` verwenden (nicht `../fonts/`, weil CSS inline im Root-HTML liegt)
+6. **`crossorigin` entfernen** — von allen lokalen `<script>` und `<link>` Tags (nur Google Fonts `preconnect` behält es)
+7. **`modulepreload` entfernen** — nicht nötig wenn JS inline ist
+
+Videos `sampleForBarclay*.mp4` fehlen im Repo und auf dem Server — bekannt und unkritisch.
