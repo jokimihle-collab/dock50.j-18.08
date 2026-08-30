@@ -22,6 +22,7 @@ export default defineConfig({
         anfrage: resolve(__dirname, "anfrage.html"),
         event:   resolve(__dirname, "event.html"),
         "404":   resolve(__dirname, "404.html"),
+        impressum: resolve(__dirname, "impressum.html"),
       },
     },
   },

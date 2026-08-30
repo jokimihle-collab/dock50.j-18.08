@@ -157,21 +157,6 @@ section {
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 100%);
 }
 
-.hero-bg-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Abnes", sans-serif;
-  font-size: max(90vw, 85svh);
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.055);
-  white-space: nowrap;
-  pointer-events: none;
-  line-height: 1;
-  z-index: 0;
-  user-select: none;
-}
 
 .section-1-img {
   position: absolute;
@@ -249,12 +234,6 @@ section {
   display: block;
 }
 
-.hero-subloc-sky-card {
-  background: transparent;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
 
 .hero-loc-btn {
   display: flex;
@@ -296,42 +275,6 @@ section {
   opacity: 1;
 }
 
-.hero-subloc {
-  font-family: "Abnes", sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.55);
-  letter-spacing: 0.06em;
-  line-height: 1;
-  pointer-events: none;
-}
-
-.hero-subloc-sep {
-  font-family: var(--font-paragraph);
-  font-size: 1.2rem;
-  color: rgba(255,255,255,0.22);
-}
-
-.hero-doc-stroke {
-  font-family: "Abnes", sans-serif;
-  font-size: min(16vw, 38svh);
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,255,255,0.95);
-  letter-spacing: 0.02em;
-  line-height: 0.88;
-  align-self: flex-start;
-  padding-left: 1.5rem;
-}
-
-.hero-50-fill {
-  font-family: "Abnes", sans-serif;
-  font-size: min(16vw, 38svh);
-  color: var(--primary-color);
-  letter-spacing: 0.02em;
-  line-height: 0.88;
-  align-self: flex-end;
-  padding-right: 1.5rem;
-}
 
 .hero-title-rule {
   width: calc(100% - 3rem);
@@ -370,15 +313,6 @@ section {
    SPOTLIGHT / GALLERY SECTION
    ============================================ */
 
-.project-index {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 2rem;
-  z-index: 3;
-  text-align: left;
-}
-
 .project-images {
   position: absolute;
   top: 0;
@@ -394,12 +328,13 @@ section {
 
 .project-img {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 40/21;
   opacity: 0.5;
   transition: opacity 0.3s ease;
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+  outline: 1px solid rgba(255,255,255,0.10);
 }
 
 .project-img img {
@@ -408,7 +343,6 @@ section {
   display: block;
   object-fit: cover;
   object-position: center;
-  aspect-ratio: 16/9;
 }
 
 .proj-ticket-badge {
@@ -813,26 +747,13 @@ section {
   transform: translateX(0%);
 }
 
-.lt-slide--logo {
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lt-slide-sky-logo {
-  width: auto;
-  height: clamp(6rem, 12svh, 11rem);
-  object-fit: contain;
-  filter: invert(1) hue-rotate(208deg) saturate(2) brightness(0.95);
-  display: block;
-}
 
 .lt-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  background: #0e0e0e;
   filter: brightness(0.78) grayscale(0.05);
   transition: filter 0.8s ease;
 }
@@ -1198,31 +1119,28 @@ section {
   letter-spacing: 0.04em;
 }
 
-.footer-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer-nav a {
-  font-family: var(--font-paragraph);
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.72);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.footer-nav a:hover {
-  color: var(--primary-color);
-  text-decoration: none;
-}
 
 .footer-divider {
   width: 100%;
   height: 1px;
   background-color: rgba(255,255,255,0.10);
   margin: 0.8rem 0;
+}
+
+.footer-imp-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-family: var(--font-paragraph);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  transition: color 0.22s, border-color 0.22s;
+}
+.footer-imp-link:hover {
+  color: rgba(255,255,255,0.70);
+  border-color: rgba(255,255,255,0.40);
 }
 
 .footer-bottom {
@@ -1866,11 +1784,6 @@ section {
    ============================================ */
 .char { display: inline-block; transform-origin: 50% 60%; }
 
-/* ============================================
-   FONT UTILITY CLASSES
-   ============================================ */
-.aguafina-script-regular { font-family: "Aguafina Script", cursive; font-weight: 400; font-style: normal; }
-.special-gothic-expanded-one-regular { font-family: "Special Gothic Expanded One", sans-serif; font-weight: 400; font-style: normal; }
 
 /* ============================================
    FOOTER TICKER (Marquee)
@@ -2940,27 +2853,6 @@ section {
   opacity: 0.8;
 }
 
-.esp-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.9rem 1.5rem;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.55);
-  text-decoration: none;
-  font-family: var(--font-paragraph);
-  font-weight: 400;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  border-radius: 4px;
-  transition: all 0.18s ease;
-}
-.esp-info:hover {
-  border-color: rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.75);
-  background: rgba(255,255,255,0.04);
-}
 
 .esp-content {
   height: 100%;
@@ -3178,6 +3070,22 @@ section {
   color: rgba(255,255,255,0.25);
   letter-spacing: 0.10em;
   text-align: left;
+}
+
+.cs-imp-link {
+  font-family: var(--font-paragraph);
+  font-size: 0.58rem;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  text-transform: uppercase;
+  transition: color 0.22s, border-color 0.22s;
+  align-self: flex-start;
+}
+.cs-imp-link:hover {
+  color: rgba(255,255,255,0.50);
+  border-color: rgba(255,255,255,0.30);
 }
 
 /* ── Right column: image ── */
@@ -3648,11 +3556,12 @@ section {
   .mec-img {
     height: calc(15vh * 0.68);
     min-height: 44px;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 40/21;
     flex-shrink: 0;
     overflow: hidden;
     border-radius: 2px;
     background: #1a1a1a;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
   }
 
   .mec-img img {
@@ -3758,18 +3667,6 @@ section {
   .mec-ticket[data-location="D50 Deck 1"]:hover     { background: #f03d97; }
 
 
-  .mec-ticket--none {
-    display: block;
-    font-family: var(--font-paragraph);
-    font-size: 0.68rem;
-    color: var(--text-faint);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    border: 1px solid rgba(255,255,255,0.10);
-    padding: 0.45rem 0.75rem;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
 
   /* ── Filter Bar auf Mobile ── */
   .event-filter.visible {

@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impressum — DOCK50</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg:          #171717;
+        --text:        rgba(255,255,255,0.92);
+        --text-mid:    rgba(255,255,255,0.60);
+        --text-dim:    rgba(255,255,255,0.38);
+        --border:      rgba(255,255,255,0.12);
+        --accent:      rgba(255,255,255,0.06);
+        --topbar-h:    3.4rem;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { overflow-x: hidden; }
+      body {
+        font-family: "Google Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100dvh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed; inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        background-size: 300px; pointer-events: none; z-index: 0; mix-blend-mode: overlay;
+      }
+
+      /* ── Topbar ── */
+      .topbar {
+        position: fixed; top: 0; left: 0; right: 0;
+        height: var(--topbar-h);
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 2.5rem;
+        z-index: 100;
+        background: rgba(23,23,23,0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+      .tb-back {
+        font-size: 0.65rem;
+        color: var(--text-mid);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex; align-items: center; gap: 0.45rem;
+        transition: color 0.22s;
+      }
+      .tb-back:hover { color: var(--text); }
+      .tb-logo {
+        font-size: 0.78rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.75);
+        text-decoration: none;
+      }
+      .tb-right { display: flex; justify-content: flex-end; }
+      .tb-tag {
+        font-size: 0.58rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        padding: 0.25em 0.75em;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+      }
+
+      /* ── Layout ── */
+      main {
+        position: relative; z-index: 1;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: calc(var(--topbar-h) + 4rem) 2rem 6rem;
+      }
+
+      /* ── Page Header ── */
+      .imp-header {
+        margin-bottom: 3.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .imp-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 0.9rem;
+      }
+      .imp-title {
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        color: var(--text);
+      }
+      .imp-sub {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-mid);
+        line-height: 1.6;
+      }
+
+      /* ── Sections ── */
+      .imp-section {
+        margin-bottom: 3rem;
+      }
+      .imp-section + .imp-section {
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .imp-section-title {
+        font-size: 0.6rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 1.4rem;
+      }
+
+      /* ── Entity Block ── */
+      .imp-entity {
+        background: var(--accent);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.75rem 2rem;
+        margin-bottom: 1.25rem;
+      }
+      .imp-entity:last-child { margin-bottom: 0; }
+      .imp-entity-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .imp-rows { display: flex; flex-direction: column; gap: 0.55rem; }
+      .imp-row {
+        display: grid;
+        grid-template-columns: 8rem 1fr;
+        gap: 0.75rem;
+        font-size: 0.84rem;
+        line-height: 1.5;
+      }
+      .imp-row-key {
+        color: var(--text-dim);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding-top: 0.12em;
+        flex-shrink: 0;
+      }
+      .imp-row-val { color: var(--text-mid); }
+      .imp-row-val a {
+        color: var(--text-mid);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .imp-row-val a:hover { color: var(--text); border-color: rgba(255,255,255,0.5); }
+
+      /* ── Fließtext ── */
+      .imp-prose { display: flex; flex-direction: column; gap: 1.6rem; }
+      .imp-prose-block h3 {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.70);
+        margin-bottom: 0.65rem;
+      }
+      .imp-prose-block p {
+        font-size: 0.84rem;
+        line-height: 1.75;
+        color: var(--text-mid);
+      }
+      .imp-prose-block p + p { margin-top: 0.55rem; }
+      .imp-source {
+        margin-top: 0.5rem;
+        font-size: 0.72rem;
+        color: var(--text-dim);
+        font-style: italic;
+      }
+
+      /* ── Bildquellen-Liste ── */
+      .imp-credits {
+        font-size: 0.82rem;
+        color: var(--text-mid);
+        line-height: 1.75;
+      }
+      .imp-credits p + p { margin-top: 0.5rem; }
+
+      /* ── Footer ── */
+      .imp-footer {
+        position: relative; z-index: 1;
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+        text-align: center;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .imp-footer a {
+        color: var(--text-dim);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+        transition: color 0.2s;
+      }
+      .imp-footer a:hover { color: var(--text-mid); }
+
+      /* ── Responsive ── */
+      @media (max-width: 600px) {
+        .topbar { padding: 0 1.25rem; }
+        main { padding: calc(var(--topbar-h) + 2.5rem) 1.25rem 4rem; }
+        .imp-row { grid-template-columns: 1fr; gap: 0.18rem; }
+        .imp-row-key { padding-top: 0; }
+        .imp-entity { padding: 1.25rem 1.25rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <a href="./index.html" class="tb-back" aria-label="Zurück zur Startseite">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 3L5 8l5 5"/>
+        </svg>
+        Zurück
+      </a>
+      <a href="./index.html" class="tb-logo">DOCK50</a>
+      <div class="tb-right">
+        <span class="tb-tag">Impressum</span>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- Header -->
+      <div class="imp-header">
+        <p class="imp-eyebrow">DOCK50 · Flensburg · Rechtliches</p>
+        <h1 class="imp-title">Impressum</h1>
+        <p class="imp-sub">Angaben gemäß § 5 TMG</p>
+      </div>
+
+      <!-- Betreiber -->
+      <section class="imp-section">
+        <p class="imp-section-title">Betreiber</p>
+
+        <div class="imp-entity">
+          <div class="imp-entity-name">DOCK50 (Förde Show Concept GmbH)</div>
+          <div class="imp-rows">
+            <div class="imp-row">
+              <span class="imp-row-key">Anschrift</span>
+              <span class="imp-row-val">Berliner Platz 1, 24937 Flensburg</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Vertreter</span>
+              <span class="imp-row-val">Peter Thomsen</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Telefon</span>
+              <span class="imp-row-val"><a href="tel:+494613180211">0461 31802-110</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Fax</span>
+              <span class="imp-row-val">0461 31802-199</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">E-Mail</span>
+              <span class="imp-row-val"><a href="mailto:info@foerdeshow.de">info@foerdeshow.de</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Website</span>
+              <span class="imp-row-val"><a href="https://www.foerdeshow.de" target="_blank" rel="noopener">www.foerdeshow.de</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Handelsreg.</span>
+              <span class="imp-row-val">Amtsgericht Flensburg, HRB 2397</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">USt.-ID</span>
+              <span class="imp-row-val">DE 134 651 456</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="imp-entity">
+          <div class="imp-entity-name">Deutsches Haus (Deutsches Haus Veranstaltungsstätten GmbH)</div>
+          <div class="imp-rows">
+            <div class="imp-row">
+              <span class="imp-row-key">Anschrift</span>
+              <span class="imp-row-val">Berliner Platz 1, 24937 Flensburg</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Vertreter</span>
+              <span class="imp-row-val">Peter Thomsen</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Telefon</span>
+              <span class="imp-row-val"><a href="tel:+494613180211">0461 31802-110</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Fax</span>
+              <span class="imp-row-val">0461 31802-199</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">E-Mail</span>
+              <span class="imp-row-val"><a href="mailto:info@deutscheshaus-fl.de">info@deutscheshaus-fl.de</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Website</span>
+              <span class="imp-row-val"><a href="https://www.events-flensburg.de" target="_blank" rel="noopener">www.events-flensburg.de</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Handelsreg.</span>
+              <span class="imp-row-val">Amtsgericht Flensburg, HRB 2004</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">USt.-ID</span>
+              <span class="imp-row-val">DE 180 407 636</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Datenschutzbeauftragte -->
+      <section class="imp-section">
+        <p class="imp-section-title">Datenschutzbeauftragte</p>
+
+        <div class="imp-entity">
+          <div class="imp-entity-name">GGW Arena / Förde Show Concept GmbH</div>
+          <div class="imp-rows">
+            <div class="imp-row">
+              <span class="imp-row-key">Name</span>
+              <span class="imp-row-val">Jan Heldt</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Telefon</span>
+              <span class="imp-row-val"><a href="tel:+494613180211">0461 31802-110</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">E-Mail</span>
+              <span class="imp-row-val"><a href="mailto:datenschutzbeauftragter@foerdeshow.de">datenschutzbeauftragter@foerdeshow.de</a></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="imp-entity">
+          <div class="imp-entity-name">Deutsches Haus</div>
+          <div class="imp-rows">
+            <div class="imp-row">
+              <span class="imp-row-key">Name</span>
+              <span class="imp-row-val">Marc Ihle</span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">Telefon</span>
+              <span class="imp-row-val"><a href="tel:+494613180211">0461 31802-110</a></span>
+            </div>
+            <div class="imp-row">
+              <span class="imp-row-key">E-Mail</span>
+              <span class="imp-row-val"><a href="mailto:datenschutzbeauftragter@deutscheshaus-fl.de">datenschutzbeauftragter@deutscheshaus-fl.de</a></span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Rechtliche Hinweise -->
+      <section class="imp-section">
+        <p class="imp-section-title">Rechtliche Hinweise</p>
+        <div class="imp-prose">
+
+          <div class="imp-prose-block">
+            <h3>Haftung für Inhalte</h3>
+            <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+            <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+          </div>
+
+          <div class="imp-prose-block">
+            <h3>Haftung für Links</h3>
+            <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+            <p>Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+          </div>
+
+          <div class="imp-prose-block">
+            <h3>Urheberrecht</h3>
+            <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+            <p>Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+            <p class="imp-source">Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener">e-recht24.de</a></p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="imp-footer">
+      <span>© 2025 DOCK50 Eventlocation · <a href="./index.html">Startseite</a></span>
+      <br/>
+      <span style="font-size:0.55rem;letter-spacing:0.10em;color:rgba(255,255,255,0.18);margin-top:0.6rem;display:inline-block;">Design &amp; Entwicklung — Jokim Ihle &amp; Luca Judah</span>
+    </footer>
+
+  </body>
+</html>

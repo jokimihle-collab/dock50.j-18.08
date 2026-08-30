@@ -718,17 +718,6 @@ window.addEventListener("load", () => {
     });
   });
 
-  // ─── Info-Button rechts ───────────────────────────────────────────────────
-  const infoBtn = document.getElementById("eventInfoBtn");
-  let currentActiveIdx = 0;
-
-  if (infoBtn) {
-    infoBtn.addEventListener("click", () => {
-      if (openCardIdx === currentActiveIdx) closeCard(true);
-      else openCard(currentActiveIdx);
-    });
-  }
-
   // ─── Filter Bar ───────────────────────────────────────────────────────────
   const filterBar   = document.getElementById("eventFilter");
   const filterItems = filterBar.querySelectorAll(".ef-item");
@@ -790,7 +779,6 @@ window.addEventListener("load", () => {
       renderEvents(getNearestN(loc, currentCount));
       initSpotlight();
       setSpotlightGlow(loc);
-      const slotIdx = currentCount === 16 ? 15 : 7;
       if (moreBtn) {
         const poolSize = getNearestN(loc, 100).length;
         moreBtn.style.display = poolSize > currentCount ? "" : "none";
@@ -924,10 +912,10 @@ window.addEventListener("load", () => {
     trigger: ".spotlight",
     start: "top top",
     end: () => `+=${window.innerHeight * visibleCount * 5 / 8}px`,
-    onEnter:     () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
-    onLeave:     () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
-    onEnterBack: () => { filterBar.classList.add("visible"); if (infoBtn) infoBtn.classList.add("visible"); },
-    onLeaveBack: () => { filterBar.classList.remove("visible"); if (infoBtn) infoBtn.classList.remove("visible"); },
+    onEnter:     () => { filterBar.classList.add("visible"); },
+    onLeave:     () => { filterBar.classList.remove("visible"); },
+    onEnterBack: () => { filterBar.classList.add("visible"); },
+    onLeaveBack: () => { filterBar.classList.remove("visible"); },
   });
 
   // More-Button: Initial-Sichtbarkeit prüfen
@@ -971,17 +959,6 @@ window.addEventListener("load", () => {
       });
     });
   }
-
-  // currentActiveIdx für Info-Button synchron halten
-  lenis.on("scroll", () => {
-    const vh2 = window.innerHeight / 2;
-    document.querySelectorAll(".project-img").forEach((img) => {
-      const r = img.getBoundingClientRect();
-      if (r.top <= vh2 && r.bottom >= vh2) {
-        currentActiveIdx = parseInt(img.dataset.index, 10);
-      }
-    });
-  });
 
   window._activeLocFilter = "ALL";
   ScrollTrigger.refresh();
