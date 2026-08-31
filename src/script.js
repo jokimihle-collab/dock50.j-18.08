@@ -1,10 +1,10 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
+
 import Lenis from "lenis";
 import { parseEventDate, getNearestN, eventLibrary } from "./events.js";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 // ─── Scroll-Lock (muss VOR Lenis registriert werden, damit capture-Phase zuerst feuert) ──
 window.addEventListener("wheel", (e) => {
@@ -477,22 +477,6 @@ window.addEventListener("load", () => {
   // ─── Initial render ────────────────────────────────────────────────────
   renderEvents(getNearestN("all"));
 
-  // ─── SplitText ─────────────────────────────────────────────────────────
-  const headlineEl = document.querySelector(".headline");
-  if (headlineEl) {
-    const split = new SplitText(headlineEl, { type: "chars", charsClass: "char" });
-    gsap.set(".char", { transformOrigin: "50% 60%" });
-    split.chars.forEach((char, i) => {
-      char.addEventListener("mouseenter", () => {
-        gsap.to(char, { scale: 1.1, duration: 0.25, ease: "power2.out" });
-        if (split.chars[i - 1]) gsap.to(split.chars[i - 1], { scale: 1.05, duration: 0.25, ease: "power2.out" });
-        if (split.chars[i + 1]) gsap.to(split.chars[i + 1], { scale: 1.05, duration: 0.25, ease: "power2.out" });
-      });
-      char.addEventListener("mouseleave", () => {
-        gsap.to(split.chars, { scale: 1, duration: 0.25, ease: "power2.out" });
-      });
-    });
-  }
 
   // ─── Hero Badge ────────────────────────────────────────────────────────
   const heroBadgeRing = document.querySelector(".hero-badge-ring");

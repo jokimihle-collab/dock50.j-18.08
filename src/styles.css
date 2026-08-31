@@ -1,32 +1,82 @@
 @font-face {
   font-family: "Bebas Neue";
-  src: url("/fonts/BebasNeue-Light.ttf") format("truetype");
+  src: url("/fonts/BebasNeue-Light.woff2") format("woff2"),
+       url("/fonts/BebasNeue-Light.ttf") format("truetype");
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
   font-family: "Bebas Neue";
-  src: url("/fonts/BebasNeue-Book.ttf") format("truetype");
+  src: url("/fonts/BebasNeue-Book.woff2") format("woff2"),
+       url("/fonts/BebasNeue-Book.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "Bebas Neue";
-  src: url("/fonts/BebasNeue-Regular.ttf") format("truetype");
+  src: url("/fonts/BebasNeue-Regular.woff2") format("woff2"),
+       url("/fonts/BebasNeue-Regular.ttf") format("truetype");
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
   font-family: "Bebas Neue";
-  src: url("/fonts/BebasNeue-Bold.otf") format("opentype");
+  src: url("/fonts/BebasNeue-Bold.woff2") format("woff2"),
+       url("/fonts/BebasNeue-Bold.otf") format("opentype");
   font-weight: 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Abnes";
-  src: url("/fonts/abnes.otf") format("opentype");
+  src: url("/fonts/abnes.woff2") format("woff2"),
+       url("/fonts/abnes.otf") format("opentype");
   font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DMSans-Regular.woff2") format("woff2"),
+       url("/fonts/DMSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("/fonts/DMSans-Bold.woff2") format("woff2"),
+       url("/fonts/DMSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Special Gothic Expanded One";
+  src: url("/fonts/SpecialGothicExpandedOne-Regular.woff2") format("woff2"),
+       url("/fonts/SpecialGothicExpandedOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Light.woff2") format("woff2"),
+       url("/fonts/GeistMono-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Regular.woff2") format("woff2"),
+       url("/fonts/GeistMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Medium.woff2") format("woff2"),
+       url("/fonts/GeistMono-Medium.ttf") format("truetype");
+  font-weight: 500;
   font-display: swap;
 }
 
@@ -604,9 +654,6 @@ section {
   width: 100%;
 }
 
-.lt-tabs-slider {
-  display: none;
-}
 
 .lt-tab {
   flex: 1;
@@ -1344,7 +1391,6 @@ section {
   text-transform: uppercase;
 }
 
-.nav-meta-dot { display: none; }
 
 .nav-items {
   grid-column: 2;
@@ -1771,18 +1817,6 @@ section {
   justify-content: center;
   transition: background-color 0.2s ease;
 }
-
-/* Detail-state: switch off blend mode, use readable styling */
-#cursor.cursor-detail {
-  mix-blend-mode: normal;
-  background-color: rgba(255, 255, 255, 0.92);
-}
-
-
-/* ============================================
-   SPLITTEXT
-   ============================================ */
-.char { display: inline-block; transform-origin: 50% 60%; }
 
 
 /* ============================================
@@ -2563,68 +2597,6 @@ section {
   animation-play-state: paused;
   transform: translateY(0.25rem);
 }
-.emb-ripple {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5.125rem;
-  height: 5.125rem;
-  margin-left: -2.5625rem;
-  margin-top: -2.5625rem;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  pointer-events: none;
-}
-
-/* ============================================
-   EVENT INFO BUTTON RECHTS
-   ============================================ */
-.event-info-btn {
-  position: fixed;
-  right: 1.6rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.45rem;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-.event-info-btn.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-.eib-line {
-  width: 1px;
-  height: 2.5rem;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.32));
-}
-.eib-label {
-  writing-mode: vertical-rl;
-  font-family: var(--font-paragraph);
-  font-weight: 200;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.47);
-  text-transform: uppercase;
-  transition: color 0.25s ease;
-}
-.eib-arrow {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.42);
-  transition: color 0.25s ease, transform 0.25s ease;
-}
-.event-info-btn:hover .eib-label,
-.event-info-btn:hover .eib-arrow {
-  color: rgba(255,255,255,0.87);
-}
-.event-info-btn:hover .eib-arrow {
-  transform: translate(2px, -2px);
-}
 
 /* ═══════════════════════════════════════════════
    EVENT SIDE PANEL
@@ -2768,7 +2740,7 @@ section {
   background: rgba(87,191,196,0.4);
   margin-bottom: 1.6rem;
 }
-.esp-rule-line, .esp-rule-dot { display: none; }
+
 
 .esp-date {
   font-family: var(--font-paragraph);

@@ -53,8 +53,13 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("evCategoryDetail").textContent = ev.rubrik;
   document.getElementById("evDesc").textContent           = ev.beschreibung;
 
-  // Page title
+  // Page title + meta tags
   document.title = `${ev.titel} — DOCK50`;
+  const desc = `${ev.titel} – ${ev.untertitel} | ${dateStr} im DOCK50 Flensburg`;
+  document.querySelector('meta[name="description"]').setAttribute("content", desc);
+  document.querySelector('meta[property="og:title"]').setAttribute("content", `${ev.titel} — DOCK50`);
+  document.querySelector('meta[property="og:description"]').setAttribute("content", desc);
+  document.querySelector('meta[property="og:image"]').setAttribute("content", ev.bildGross);
 
   // CTA
   const ctaColor = ev.raum === "D50 Skylounge" ? "rgb(212,170,40)" : "#E63289";

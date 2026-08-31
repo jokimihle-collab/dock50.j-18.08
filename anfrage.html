@@ -4,8 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anfrage — DOCK50</title>
+    <meta name="description" content="Jetzt Anfrage für eure Veranstaltung im DOCK50 Flensburg stellen. Skylounge & Deck 1 für Konzerte, Partys und private Events." />
+    <meta property="og:title" content="Anfrage — DOCK50" />
+    <meta property="og:description" content="Jetzt Anfrage für eure Veranstaltung im DOCK50 Flensburg stellen." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
+      @font-face { font-family: "DM Sans"; src: url("/fonts/DMSans-Regular.woff2") format("woff2"), url("/fonts/DMSans-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+      @font-face { font-family: "DM Sans"; src: url("/fonts/DMSans-Bold.woff2") format("woff2"), url("/fonts/DMSans-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
 
       :root {
         --font-header: "Special Gothic Expanded One", sans-serif;
@@ -21,7 +28,7 @@
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html { overflow-x: hidden; scroll-behavior: smooth; }
-      body { font-family: "Google Sans", sans-serif; background: var(--bg); color: var(--text); }
+      body { font-family: "DM Sans", sans-serif; background: var(--bg); color: var(--text); }
 
       body::before {
         content: "";
@@ -641,5 +648,8 @@ ${v("msg") || "—"}
         }, 800);
       });
     </script>
+    <footer style="position:relative;z-index:1;border-top:1px solid rgba(255,255,255,0.12);padding:1.5rem 2rem;text-align:center;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.38)">
+      <a href="/impressum.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15)">Impressum</a> · <a href="/datenschutz.html" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15)">Datenschutz</a>
+    </footer>
   </body>
 </html>

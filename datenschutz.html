@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datenschutz — DOCK50</title>
+    <meta name="description" content="Datenschutzerklärung der DOCK50 Eventlocation Flensburg." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      @font-face { font-family: "DM Sans"; src: url("/fonts/DMSans-Regular.woff2") format("woff2"), url("/fonts/DMSans-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+      @font-face { font-family: "DM Sans"; src: url("/fonts/DMSans-Bold.woff2") format("woff2"), url("/fonts/DMSans-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+      :root {
+        --bg:          #171717;
+        --text:        rgba(255,255,255,0.92);
+        --text-mid:    rgba(255,255,255,0.60);
+        --text-dim:    rgba(255,255,255,0.38);
+        --border:      rgba(255,255,255,0.12);
+        --accent:      rgba(255,255,255,0.06);
+        --topbar-h:    3.4rem;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { overflow-x: hidden; }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100dvh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed; inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        background-size: 300px; pointer-events: none; z-index: 0; mix-blend-mode: overlay;
+      }
+
+      .topbar {
+        position: fixed; top: 0; left: 0; right: 0;
+        height: var(--topbar-h);
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 2.5rem;
+        z-index: 100;
+        background: rgba(23,23,23,0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+      .tb-back {
+        font-size: 0.65rem;
+        color: var(--text-mid);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex; align-items: center; gap: 0.45rem;
+        transition: color 0.22s;
+      }
+      .tb-back:hover { color: var(--text); }
+      .tb-logo {
+        font-size: 0.78rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.75);
+        text-decoration: none;
+      }
+      .tb-right { display: flex; justify-content: flex-end; }
+      .tb-tag {
+        font-size: 0.58rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        padding: 0.25em 0.75em;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+      }
+
+      main {
+        position: relative; z-index: 1;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: calc(var(--topbar-h) + 4rem) 2rem 6rem;
+      }
+
+      .ds-header {
+        margin-bottom: 3.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .ds-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 0.9rem;
+      }
+      .ds-title {
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        color: var(--text);
+      }
+      .ds-sub {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-mid);
+        line-height: 1.6;
+      }
+
+      .ds-section {
+        margin-bottom: 3rem;
+      }
+      .ds-section + .ds-section {
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .ds-section-title {
+        font-size: 0.6rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 1.4rem;
+      }
+
+      .ds-prose h3 {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.70);
+        margin-bottom: 0.65rem;
+      }
+      .ds-prose p {
+        font-size: 0.84rem;
+        line-height: 1.75;
+        color: var(--text-mid);
+      }
+      .ds-prose p + p { margin-top: 0.55rem; }
+      .ds-prose a {
+        color: var(--text-mid);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .ds-prose a:hover { color: var(--text); border-color: rgba(255,255,255,0.5); }
+
+      .ds-placeholder {
+        background: var(--accent);
+        border: 1px dashed rgba(255,255,255,0.20);
+        border-radius: 8px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 0.82rem;
+        line-height: 1.7;
+      }
+
+      .ds-footer {
+        position: relative; z-index: 1;
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+        text-align: center;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .ds-footer a {
+        color: var(--text-dim);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+        transition: color 0.2s;
+      }
+      .ds-footer a:hover { color: var(--text-mid); }
+
+      @media (max-width: 600px) {
+        .topbar { padding: 0 1.25rem; }
+        main { padding: calc(var(--topbar-h) + 2.5rem) 1.25rem 4rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="topbar">
+      <a href="./index.html" class="tb-back" aria-label="Zurück zur Startseite">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 3L5 8l5 5"/>
+        </svg>
+        Zurück
+      </a>
+      <a href="./index.html" class="tb-logo">DOCK50</a>
+      <div class="tb-right">
+        <span class="tb-tag">Datenschutz</span>
+      </div>
+    </header>
+
+    <main>
+
+      <div class="ds-header">
+        <p class="ds-eyebrow">DOCK50 · Flensburg · Rechtliches</p>
+        <h1 class="ds-title">Datenschutz</h1>
+        <p class="ds-sub">Hinweise zum Umgang mit Ihren personenbezogenen Daten</p>
+      </div>
+
+      <!-- Allgemeines -->
+      <section class="ds-section">
+        <p class="ds-section-title">Allgemeines</p>
+        <div class="ds-prose">
+          <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer personenbezogenen Daten (z.B. IP-Adresse, Anrede, Namen, Adresse, E-Mail-Adresse, Telefonnummer, Bankverbindung) sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der Europäischen Datenschutzgrundverordnung (folgend EU-DSGVO) sowie dieses Datenschutzhinweises.</p>
+          <p>Soweit auf unseren Seiten personenbezogene Daten erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis gemäß Artikel 6 EU-DSGVO. Diese Daten werden ohne Ihre ausdrückliche Zustimmung, eine entsprechende gesetzliche Grundlage oder durch die Notwendigkeit zur Durchführung einer vertraglichen Maßnahme nicht an Dritte weitergegeben.</p>
+          <p>Dieser Datenschutzhinweis bezieht sich nur auf diese Internetseite und die Verarbeitung Ihrer Daten in unseren Unternehmen. Falls Sie über, bei uns eingestellte, Links auf andere Seiten weitergeleitet werden, informieren Sie sich bitte dort über den jeweiligen Umgang mit Ihren Daten.</p>
+          <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+        </div>
+      </section>
+
+      <!-- Verantwortliche -->
+      <section class="ds-section">
+        <p class="ds-section-title">Verantwortliche für die Datenverarbeitung</p>
+        <div class="ds-prose">
+          <p>Verantwortlich für die Datenverarbeitung und den Datenschutz ist die Geschäftsleitung:</p>
+          <p>
+            förde show concept GmbH<br/>
+            Peter Thomsen<br/>
+            Tel. <a href="tel:+4946131802110">0461 31802-110</a><br/>
+            <a href="mailto:info@foerdeshow.de">info@foerdeshow.de</a>
+          </p>
+          <p>
+            Berliner Platz 1, 24937 Flensburg<br/>
+            Amtsgericht Flensburg, HRB 2397<br/>
+            USt.-ID-Nr. DE 134 651 456
+          </p>
+          <p>Die Einhaltung des Datenschutzes wird durch unseren Datenschutzbeauftragten kontrolliert:</p>
+          <p>
+            förde show concept GmbH<br/>
+            Jan Heldt<br/>
+            Tel. <a href="tel:+4946131802110">0461 31802-110</a><br/>
+            <a href="mailto:datenschutz@foerdeshow.de">datenschutz@foerdeshow.de</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Bestandsdaten -->
+      <section class="ds-section">
+        <p class="ds-section-title">Bestandsdaten und Zweck der Datenverarbeitung</p>
+        <div class="ds-prose">
+          <p>Ihre personenbezogenen Daten, soweit diese für die Begründung, inhaltliche Ausgestaltung oder Änderung des Vertragsverhältnisses erforderlich sind (Bestandsdaten), werden ausschließlich zur Erstellung von Angeboten und zur Vertragsabwicklung verwendet.</p>
+          <p>Eine Verarbeitung Ihrer personenbezogenen Daten erfolgt durch unsere Mitarbeiter. Unsere Mitarbeiter sind auf einen datenschutzkonformen Umgang mit Ihren Daten geschult und darauf verpflichtet. Dabei werden nur den Mitarbeitern Ihre Daten zur Verfügung gestellt, die für eine Bearbeitung Ihre Daten auch benötigen.</p>
+          <p>Sofern für eine Vertragsabwicklung notwendig, leiten wir Ihre personenbezogenen Daten auch an Dritte weiter (z.B. Ihr Name und Ihre Anschrift an einen Warenlieferanten u.ä. Erfüllungsgehilfen). Dabei achten wir darauf, dass Dritte nur die personenbezogenen Daten von Ihnen erhalten, die für die Vertragsabwicklung notwendig sind. Generell gilt, dass wir ohne Ihre ausdrückliche Einwilligung oder ohne gesetzliche Grundlage Ihre personenbezogenen Daten nicht an außerhalb der Vertragsabwicklung stehende Dritte weitergeben.</p>
+        </div>
+      </section>
+
+      <!-- Löschung -->
+      <section class="ds-section">
+        <p class="ds-section-title">Löschung personenbezogener Daten</p>
+        <div class="ds-prose">
+          <p>Spätestens nach Ablauf der steuer- und handelsrechtlichen Vorschriften werden Ihre personenbezogenen Daten von uns gelöscht, sofern Sie nicht ausdrücklich in die weitere Nutzung eingewilligt haben.</p>
+          <p>Personenbezogene Daten die lediglich im Zusammenhang mit allgemeinen Anfragen per E-Mail verarbeitet werden und die für eine weitere Vertragsabwicklung nicht notwendig sind, speichern wir nur so lange, wie dies für die jeweilige Korrespondenz notwendig ist. Der Löschvorgang wird dabei mehrstufig durchgeführt. In der ersten Stufe werden die Daten vom Rechner der Mitarbeiter gelöscht, im zweiten Schritt von unserem Mailserver. Die Löschung vom Mailserver erfolgt zeitversetzt und gesondert, um ggf. automatisch ungewollt gelöschte Daten wieder herstellen zu können. Die Wiederherstellung von Daten erfolgt datenschutzkonform und kontrolliert.</p>
+          <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular, inklusive der von Ihnen dort angegebenen Kontaktdaten, zwecks Bearbeitung der Anfrage solange gespeichert, wie dies für die jeweilige Korrespondenz notwendig ist. Aus dem Kontaktformular wird intern eine E-Mail erzeugt – folglich entspricht die Löschroutine für Kontaktformulare denen von E-Mails.</p>
+        </div>
+      </section>
+
+      <!-- Cookies -->
+      <section class="ds-section">
+        <p class="ds-section-title">Cookies</p>
+        <div class="ds-prose">
+          <p>Wir setzen derzeit keinerlei Cookies ein.</p>
+        </div>
+      </section>
+
+      <!-- Schriftarten -->
+      <section class="ds-section">
+        <p class="ds-section-title">Schriftarten</p>
+        <div class="ds-prose">
+          <p>Diese Seite verwendet Schriftarten, die lokal auf unserem Server gehostet werden. Es findet kein Datentransfer an externe Anbieter (z.B. Google) statt.</p>
+        </div>
+      </section>
+
+      <!-- Externe Bildinhalte -->
+      <section class="ds-section">
+        <p class="ds-section-title">Externe Bildinhalte</p>
+        <div class="ds-prose">
+          <p>Event-Bilder auf dieser Website werden von einem Server der Förde Show Concept GmbH (wartung.foerdeshow.de) geladen. Dabei wird Ihre IP-Adresse an diesen Server übermittelt. Der Server wird vom selben Verantwortlichen betrieben wie diese Website. Eine Weitergabe an Dritte findet nicht statt.</p>
+        </div>
+      </section>
+
+      <!-- Externe Links / Ticketing -->
+      <section class="ds-section">
+        <p class="ds-section-title">Externe Links und Ticketing</p>
+        <div class="ds-prose">
+          <p>Diese Website enthält Links zu externen Ticketanbietern (z.B. Eventim). Beim Klick auf einen Ticket-Link werden Sie über einen Redirect-Dienst (tidd.ly / Tradedoubler) zum jeweiligen Anbieter weitergeleitet. Erst durch Ihren aktiven Klick werden Daten an diese Drittanbieter übermittelt. Wir haben keinen Einfluss auf die Datenverarbeitung durch diese Anbieter. Bitte informieren Sie sich auf den jeweiligen Websites über deren Datenschutzbestimmungen.</p>
+        </div>
+      </section>
+
+      <!-- Server-Log-Files -->
+      <section class="ds-section">
+        <p class="ds-section-title">Server-Log-Files</p>
+        <div class="ds-prose">
+          <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+          <p>
+            – Browsertyp und Browserversion<br/>
+            – verwendetes Betriebssystem<br/>
+            – Referrer URL<br/>
+            – Hostname des zugreifenden Rechners<br/>
+            – Uhrzeit der Serveranfrage
+          </p>
+          <p>Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
+        </div>
+      </section>
+
+      <!-- SSL -->
+      <section class="ds-section">
+        <p class="ds-section-title">SSL-Verschlüsselung</p>
+        <div class="ds-prose">
+          <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+          <p>Wenn die SSL-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
+        </div>
+      </section>
+
+      <!-- Betroffenenrechte -->
+      <section class="ds-section">
+        <p class="ds-section-title">Ihre Betroffenenrechte gemäß EU-DSGVO</p>
+        <div class="ds-prose">
+          <p>Nach der EU-Datenschutzgrundverordnung stehen Ihnen die folgenden Rechte zu:</p>
+
+          <h3>Recht auf Auskunft</h3>
+          <p>Sie können gemäß Artikel 15 EU-DSGVO eine Bestätigung darüber verlangen, ob Sie betreffende Daten verarbeitet werden. Ist dies der Fall, so haben Sie ein Recht auf Auskunft über die verarbeiteten Informationen.</p>
+
+          <h3>Recht auf Widerruf der Einwilligung</h3>
+          <p>Sofern die Verarbeitung personenbezogener Daten aufgrund einer Einwilligung erfolgt, haben Sie gemäß Artikel 7 EU-DSGVO das Recht diese Einwilligung jederzeit zu widerrufen.</p>
+
+          <h3>Recht auf Widerspruch</h3>
+          <p>Sofern die Verarbeitung Ihrer personenbezogenen Daten zur Wahrung der berechtigten Interessen unseres Unternehmens erforderlich ist, können Sie gemäß Artikel 21 EU-DSGVO jederzeit Widerspruch gegen die Verarbeitung einlegen.</p>
+
+          <h3>Recht auf Löschung</h3>
+          <p>Sofern Sie Ihre Einwilligung widerrufen haben, Widerspruch gegen die Verarbeitung Ihrer personenbezogenen Daten eingelegt haben (und keine vorrangigen berechtigten Gründe für die Verarbeitung vorliegen), Ihre personenbezogenen Daten für die Zwecke der Verarbeitung nicht mehr notwendig sind, eine entsprechende rechtliche Verpflichtung besteht oder Ihre personenbezogenen Daten unrechtmäßig verarbeitet wurden, haben Sie das Recht, gemäß Artikel 17 EU-DSGVO, die Löschung Ihrer personenbezogenen Daten zu verlangen.</p>
+
+          <h3>Recht auf Berichtigung</h3>
+          <p>Sofern Ihre personenbezogenen Daten unrichtig verarbeitet wurden, haben Sie gemäß Artikel 16 EU-DSGVO das Recht unverzüglich die Berichtigung dieser Daten zu verlangen.</p>
+
+          <h3>Recht auf Einschränkung der Verarbeitung</h3>
+          <p>Unter der Voraussetzung des Artikels 18 EU-DSGVO haben Sie das Recht die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.</p>
+
+          <h3>Recht auf Datenübertragbarkeit</h3>
+          <p>Ihnen steht gemäß Artikel 20 EU-DSGVO das Recht zu, von Ihnen bereitgestellte personenbezogene Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</p>
+
+          <p>Für Anfragen, Rückfragen, Erklärungen und um Ihre Rechte geltend zu machen, steht Ihnen unser Datenschutzbeauftragter Jan Heldt (<a href="mailto:datenschutz@foerdeshow.de">datenschutz@foerdeshow.de</a>) gerne zur Verfügung.</p>
+        </div>
+      </section>
+
+      <!-- Beschwerderecht -->
+      <section class="ds-section">
+        <p class="ds-section-title">Beschwerderecht</p>
+        <div class="ds-prose">
+          <p>Ihnen steht ein Beschwerderecht hinsichtlich unseres Umgangs mit Ihren Daten bei einer Aufsichtsbehörde zu. Sofern Sie dieses Recht wahrnehmen wollen, wenden Sie sich bitte an:</p>
+          <p>
+            ULD – Unabhängiges Landeszentrum für Datenschutz Schleswig-Holstein<br/>
+            Holstenstraße 98, 24103 Kiel<br/>
+            Tel. <a href="tel:+494319881200">0431 988-1200</a><br/>
+            <a href="mailto:mail@datenschutzzentrum.de">mail@datenschutzzentrum.de</a><br/>
+            <a href="https://www.datenschutzzentrum.de" target="_blank" rel="noopener">www.datenschutzzentrum.de</a>
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="ds-footer">
+      <span>© 2026 DOCK50 Eventlocation · <a href="./index.html">Startseite</a> · <a href="./impressum.html">Impressum</a></span>
+    </footer>
+
+  </body>
+</html>
